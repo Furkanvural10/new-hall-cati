@@ -1,0 +1,624 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		04B268E22B3D7DAD0096CB0C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B268E12B3D7DAD0096CB0C /* AppDelegate.swift */; };
+		04B268E42B3D7DAD0096CB0C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B268E32B3D7DAD0096CB0C /* SceneDelegate.swift */; };
+		04B268E62B3D7DAD0096CB0C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B268E52B3D7DAD0096CB0C /* ViewController.swift */; };
+		04B268E92B3D7DAD0096CB0C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04B268E72B3D7DAD0096CB0C /* Main.storyboard */; };
+		04B268EC2B3D7DAD0096CB0C /* New_Hall_Cati.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 04B268EA2B3D7DAD0096CB0C /* New_Hall_Cati.xcdatamodeld */; };
+		04B268EE2B3D7DAE0096CB0C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04B268ED2B3D7DAE0096CB0C /* Assets.xcassets */; };
+		04B268F12B3D7DAE0096CB0C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04B268EF2B3D7DAE0096CB0C /* LaunchScreen.storyboard */; };
+		04B268FC2B3D7DAE0096CB0C /* New_Hall_CatiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B268FB2B3D7DAE0096CB0C /* New_Hall_CatiTests.swift */; };
+		04B269062B3D7DAE0096CB0C /* New_Hall_CatiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B269052B3D7DAE0096CB0C /* New_Hall_CatiUITests.swift */; };
+		04B269082B3D7DAE0096CB0C /* New_Hall_CatiUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B269072B3D7DAE0096CB0C /* New_Hall_CatiUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		04B268F82B3D7DAE0096CB0C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 04B268D62B3D7DAD0096CB0C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 04B268DD2B3D7DAD0096CB0C;
+			remoteInfo = "New Hall Cati";
+		};
+		04B269022B3D7DAE0096CB0C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 04B268D62B3D7DAD0096CB0C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 04B268DD2B3D7DAD0096CB0C;
+			remoteInfo = "New Hall Cati";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		04B268DE2B3D7DAD0096CB0C /* New Hall Cati.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "New Hall Cati.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		04B268E12B3D7DAD0096CB0C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		04B268E32B3D7DAD0096CB0C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		04B268E52B3D7DAD0096CB0C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		04B268E82B3D7DAD0096CB0C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		04B268EB2B3D7DAD0096CB0C /* New_Hall_Cati.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = New_Hall_Cati.xcdatamodel; sourceTree = "<group>"; };
+		04B268ED2B3D7DAE0096CB0C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		04B268F02B3D7DAE0096CB0C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		04B268F22B3D7DAE0096CB0C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		04B268F72B3D7DAE0096CB0C /* New Hall CatiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "New Hall CatiTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		04B268FB2B3D7DAE0096CB0C /* New_Hall_CatiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = New_Hall_CatiTests.swift; sourceTree = "<group>"; };
+		04B269012B3D7DAE0096CB0C /* New Hall CatiUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "New Hall CatiUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		04B269052B3D7DAE0096CB0C /* New_Hall_CatiUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = New_Hall_CatiUITests.swift; sourceTree = "<group>"; };
+		04B269072B3D7DAE0096CB0C /* New_Hall_CatiUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = New_Hall_CatiUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		04B268DB2B3D7DAD0096CB0C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		04B268F42B3D7DAE0096CB0C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		04B268FE2B3D7DAE0096CB0C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		04B268D52B3D7DAD0096CB0C = {
+			isa = PBXGroup;
+			children = (
+				04B268E02B3D7DAD0096CB0C /* New Hall Cati */,
+				04B268FA2B3D7DAE0096CB0C /* New Hall CatiTests */,
+				04B269042B3D7DAE0096CB0C /* New Hall CatiUITests */,
+				04B268DF2B3D7DAD0096CB0C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		04B268DF2B3D7DAD0096CB0C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				04B268DE2B3D7DAD0096CB0C /* New Hall Cati.app */,
+				04B268F72B3D7DAE0096CB0C /* New Hall CatiTests.xctest */,
+				04B269012B3D7DAE0096CB0C /* New Hall CatiUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		04B268E02B3D7DAD0096CB0C /* New Hall Cati */ = {
+			isa = PBXGroup;
+			children = (
+				04B268E12B3D7DAD0096CB0C /* AppDelegate.swift */,
+				04B268E32B3D7DAD0096CB0C /* SceneDelegate.swift */,
+				04B268E52B3D7DAD0096CB0C /* ViewController.swift */,
+				04B268E72B3D7DAD0096CB0C /* Main.storyboard */,
+				04B268ED2B3D7DAE0096CB0C /* Assets.xcassets */,
+				04B268EF2B3D7DAE0096CB0C /* LaunchScreen.storyboard */,
+				04B268F22B3D7DAE0096CB0C /* Info.plist */,
+				04B268EA2B3D7DAD0096CB0C /* New_Hall_Cati.xcdatamodeld */,
+			);
+			path = "New Hall Cati";
+			sourceTree = "<group>";
+		};
+		04B268FA2B3D7DAE0096CB0C /* New Hall CatiTests */ = {
+			isa = PBXGroup;
+			children = (
+				04B268FB2B3D7DAE0096CB0C /* New_Hall_CatiTests.swift */,
+			);
+			path = "New Hall CatiTests";
+			sourceTree = "<group>";
+		};
+		04B269042B3D7DAE0096CB0C /* New Hall CatiUITests */ = {
+			isa = PBXGroup;
+			children = (
+				04B269052B3D7DAE0096CB0C /* New_Hall_CatiUITests.swift */,
+				04B269072B3D7DAE0096CB0C /* New_Hall_CatiUITestsLaunchTests.swift */,
+			);
+			path = "New Hall CatiUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		04B268DD2B3D7DAD0096CB0C /* New Hall Cati */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 04B2690B2B3D7DAE0096CB0C /* Build configuration list for PBXNativeTarget "New Hall Cati" */;
+			buildPhases = (
+				04B268DA2B3D7DAD0096CB0C /* Sources */,
+				04B268DB2B3D7DAD0096CB0C /* Frameworks */,
+				04B268DC2B3D7DAD0096CB0C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "New Hall Cati";
+			productName = "New Hall Cati";
+			productReference = 04B268DE2B3D7DAD0096CB0C /* New Hall Cati.app */;
+			productType = "com.apple.product-type.application";
+		};
+		04B268F62B3D7DAE0096CB0C /* New Hall CatiTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 04B2690E2B3D7DAE0096CB0C /* Build configuration list for PBXNativeTarget "New Hall CatiTests" */;
+			buildPhases = (
+				04B268F32B3D7DAE0096CB0C /* Sources */,
+				04B268F42B3D7DAE0096CB0C /* Frameworks */,
+				04B268F52B3D7DAE0096CB0C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				04B268F92B3D7DAE0096CB0C /* PBXTargetDependency */,
+			);
+			name = "New Hall CatiTests";
+			productName = "New Hall CatiTests";
+			productReference = 04B268F72B3D7DAE0096CB0C /* New Hall CatiTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		04B269002B3D7DAE0096CB0C /* New Hall CatiUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 04B269112B3D7DAE0096CB0C /* Build configuration list for PBXNativeTarget "New Hall CatiUITests" */;
+			buildPhases = (
+				04B268FD2B3D7DAE0096CB0C /* Sources */,
+				04B268FE2B3D7DAE0096CB0C /* Frameworks */,
+				04B268FF2B3D7DAE0096CB0C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				04B269032B3D7DAE0096CB0C /* PBXTargetDependency */,
+			);
+			name = "New Hall CatiUITests";
+			productName = "New Hall CatiUITests";
+			productReference = 04B269012B3D7DAE0096CB0C /* New Hall CatiUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		04B268D62B3D7DAD0096CB0C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1430;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					04B268DD2B3D7DAD0096CB0C = {
+						CreatedOnToolsVersion = 14.3.1;
+					};
+					04B268F62B3D7DAE0096CB0C = {
+						CreatedOnToolsVersion = 14.3.1;
+						TestTargetID = 04B268DD2B3D7DAD0096CB0C;
+					};
+					04B269002B3D7DAE0096CB0C = {
+						CreatedOnToolsVersion = 14.3.1;
+						TestTargetID = 04B268DD2B3D7DAD0096CB0C;
+					};
+				};
+			};
+			buildConfigurationList = 04B268D92B3D7DAD0096CB0C /* Build configuration list for PBXProject "New Hall Cati" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 04B268D52B3D7DAD0096CB0C;
+			productRefGroup = 04B268DF2B3D7DAD0096CB0C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				04B268DD2B3D7DAD0096CB0C /* New Hall Cati */,
+				04B268F62B3D7DAE0096CB0C /* New Hall CatiTests */,
+				04B269002B3D7DAE0096CB0C /* New Hall CatiUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		04B268DC2B3D7DAD0096CB0C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04B268F12B3D7DAE0096CB0C /* LaunchScreen.storyboard in Resources */,
+				04B268EE2B3D7DAE0096CB0C /* Assets.xcassets in Resources */,
+				04B268E92B3D7DAD0096CB0C /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		04B268F52B3D7DAE0096CB0C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		04B268FF2B3D7DAE0096CB0C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		04B268DA2B3D7DAD0096CB0C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04B268EC2B3D7DAD0096CB0C /* New_Hall_Cati.xcdatamodeld in Sources */,
+				04B268E62B3D7DAD0096CB0C /* ViewController.swift in Sources */,
+				04B268E22B3D7DAD0096CB0C /* AppDelegate.swift in Sources */,
+				04B268E42B3D7DAD0096CB0C /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		04B268F32B3D7DAE0096CB0C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04B268FC2B3D7DAE0096CB0C /* New_Hall_CatiTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		04B268FD2B3D7DAE0096CB0C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04B269062B3D7DAE0096CB0C /* New_Hall_CatiUITests.swift in Sources */,
+				04B269082B3D7DAE0096CB0C /* New_Hall_CatiUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		04B268F92B3D7DAE0096CB0C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 04B268DD2B3D7DAD0096CB0C /* New Hall Cati */;
+			targetProxy = 04B268F82B3D7DAE0096CB0C /* PBXContainerItemProxy */;
+		};
+		04B269032B3D7DAE0096CB0C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 04B268DD2B3D7DAD0096CB0C /* New Hall Cati */;
+			targetProxy = 04B269022B3D7DAE0096CB0C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		04B268E72B3D7DAD0096CB0C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				04B268E82B3D7DAD0096CB0C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		04B268EF2B3D7DAE0096CB0C /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				04B268F02B3D7DAE0096CB0C /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		04B269092B3D7DAE0096CB0C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		04B2690A2B3D7DAE0096CB0C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		04B2690C2B3D7DAE0096CB0C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = PM64LP239P;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "New Hall Cati/Info.plist";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.furkanvural.New-Hall-Cati";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		04B2690D2B3D7DAE0096CB0C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = PM64LP239P;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "New Hall Cati/Info.plist";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.furkanvural.New-Hall-Cati";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		04B2690F2B3D7DAE0096CB0C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = PM64LP239P;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.furkanvural.New-Hall-CatiTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/New Hall Cati.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/New Hall Cati";
+			};
+			name = Debug;
+		};
+		04B269102B3D7DAE0096CB0C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = PM64LP239P;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.furkanvural.New-Hall-CatiTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/New Hall Cati.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/New Hall Cati";
+			};
+			name = Release;
+		};
+		04B269122B3D7DAE0096CB0C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = PM64LP239P;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.furkanvural.New-Hall-CatiUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "New Hall Cati";
+			};
+			name = Debug;
+		};
+		04B269132B3D7DAE0096CB0C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = PM64LP239P;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.furkanvural.New-Hall-CatiUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "New Hall Cati";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		04B268D92B3D7DAD0096CB0C /* Build configuration list for PBXProject "New Hall Cati" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04B269092B3D7DAE0096CB0C /* Debug */,
+				04B2690A2B3D7DAE0096CB0C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		04B2690B2B3D7DAE0096CB0C /* Build configuration list for PBXNativeTarget "New Hall Cati" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04B2690C2B3D7DAE0096CB0C /* Debug */,
+				04B2690D2B3D7DAE0096CB0C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		04B2690E2B3D7DAE0096CB0C /* Build configuration list for PBXNativeTarget "New Hall CatiTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04B2690F2B3D7DAE0096CB0C /* Debug */,
+				04B269102B3D7DAE0096CB0C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		04B269112B3D7DAE0096CB0C /* Build configuration list for PBXNativeTarget "New Hall CatiUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04B269122B3D7DAE0096CB0C /* Debug */,
+				04B269132B3D7DAE0096CB0C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		04B268EA2B3D7DAD0096CB0C /* New_Hall_Cati.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				04B268EB2B3D7DAD0096CB0C /* New_Hall_Cati.xcdatamodel */,
+			);
+			currentVersion = 04B268EB2B3D7DAD0096CB0C /* New_Hall_Cati.xcdatamodel */;
+			path = New_Hall_Cati.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 04B268D62B3D7DAD0096CB0C /* Project object */;
+}
