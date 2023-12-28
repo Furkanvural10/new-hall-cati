@@ -2,7 +2,8 @@ import UIKit
 
 final class OnboardingVC: UIViewController {
     
-    private let viewModel = OnboardingViewModel()
+    private var viewModel = OnboardingViewModel()
+    
     var welcomeTextLabel: UILabel!
     private let padding: CGFloat = 20
     private let fontSize: CGFloat = 35
@@ -11,9 +12,10 @@ final class OnboardingVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.delegate = self
         setupUI()
         configureWelcomeTextLabel()
-        startAnimation()
+        viewModel.startAnimation(for: welcomeTextLabel)
     }
     
     private func setupUI() { view.backgroundColor = .systemBackground }
@@ -23,7 +25,7 @@ final class OnboardingVC: UIViewController {
         welcomeTextLabel = UILabel(frame: .zero)
         view.addSubview(welcomeTextLabel)
         welcomeTextLabel.alpha = 0
-        welcomeTextLabel.font = UIFont.systemFont(ofSize: fontSize)
+        welcomeTextLabel.font = .pacificoRegular(size: fontSize)
         welcomeTextLabel.minimumScaleFactor = minimumScaleFactor
         welcomeTextLabel.contentMode = .center
         welcomeTextLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -34,17 +36,10 @@ final class OnboardingVC: UIViewController {
             welcomeTextLabel.heightAnchor.constraint(equalToConstant: textLabelHeight),
         ])
     }
-    
-    
-    private func startAnimation() {
+}
 
-        UIView.animate(withDuration: 4, delay: 0, options: .curveEaseOut) {
-            self.welcomeTextLabel.alpha = 0
-        } completion: { _ in
-            self.welcomeTextLabel.text = Constant.welcomeText
-            UIView.animate(withDuration: 5, delay: 0, options: .curveEaseOut) {
-                self.welcomeTextLabel.alpha = 1
-            }
-        }
+extension OnboardingVC: OnboardingViewModelDelegate {
+    func welcomeTextDidChanged(to newText: String) {
+        welcomeTextLabel.text = newText
     }
 }
