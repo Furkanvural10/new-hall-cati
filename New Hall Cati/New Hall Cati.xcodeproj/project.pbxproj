@@ -9,14 +9,15 @@
 /* Begin PBXBuildFile section */
 		04B268E22B3D7DAD0096CB0C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B268E12B3D7DAD0096CB0C /* AppDelegate.swift */; };
 		04B268E42B3D7DAD0096CB0C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B268E32B3D7DAD0096CB0C /* SceneDelegate.swift */; };
-		04B268E62B3D7DAD0096CB0C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B268E52B3D7DAD0096CB0C /* ViewController.swift */; };
-		04B268E92B3D7DAD0096CB0C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04B268E72B3D7DAD0096CB0C /* Main.storyboard */; };
+		04B268E62B3D7DAD0096CB0C /* OnboardingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B268E52B3D7DAD0096CB0C /* OnboardingVC.swift */; };
 		04B268EC2B3D7DAD0096CB0C /* New_Hall_Cati.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 04B268EA2B3D7DAD0096CB0C /* New_Hall_Cati.xcdatamodeld */; };
 		04B268EE2B3D7DAE0096CB0C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04B268ED2B3D7DAE0096CB0C /* Assets.xcassets */; };
 		04B268F12B3D7DAE0096CB0C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04B268EF2B3D7DAE0096CB0C /* LaunchScreen.storyboard */; };
 		04B268FC2B3D7DAE0096CB0C /* New_Hall_CatiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B268FB2B3D7DAE0096CB0C /* New_Hall_CatiTests.swift */; };
 		04B269062B3D7DAE0096CB0C /* New_Hall_CatiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B269052B3D7DAE0096CB0C /* New_Hall_CatiUITests.swift */; };
 		04B269082B3D7DAE0096CB0C /* New_Hall_CatiUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B269072B3D7DAE0096CB0C /* New_Hall_CatiUITestsLaunchTests.swift */; };
+		04B269192B3D84FC0096CB0C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B269182B3D84FC0096CB0C /* Constants.swift */; };
+		04B2691B2B3D86680096CB0C /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B2691A2B3D86680096CB0C /* OnboardingViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,8 +41,7 @@
 		04B268DE2B3D7DAD0096CB0C /* New Hall Cati.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "New Hall Cati.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		04B268E12B3D7DAD0096CB0C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04B268E32B3D7DAD0096CB0C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		04B268E52B3D7DAD0096CB0C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		04B268E82B3D7DAD0096CB0C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		04B268E52B3D7DAD0096CB0C /* OnboardingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingVC.swift; sourceTree = "<group>"; };
 		04B268EB2B3D7DAD0096CB0C /* New_Hall_Cati.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = New_Hall_Cati.xcdatamodel; sourceTree = "<group>"; };
 		04B268ED2B3D7DAE0096CB0C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		04B268F02B3D7DAE0096CB0C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -51,6 +51,8 @@
 		04B269012B3D7DAE0096CB0C /* New Hall CatiUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "New Hall CatiUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		04B269052B3D7DAE0096CB0C /* New_Hall_CatiUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = New_Hall_CatiUITests.swift; sourceTree = "<group>"; };
 		04B269072B3D7DAE0096CB0C /* New_Hall_CatiUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = New_Hall_CatiUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		04B269182B3D84FC0096CB0C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		04B2691A2B3D86680096CB0C /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,11 +103,9 @@
 		04B268E02B3D7DAD0096CB0C /* New Hall Cati */ = {
 			isa = PBXGroup;
 			children = (
-				04B268E12B3D7DAD0096CB0C /* AppDelegate.swift */,
-				04B268E32B3D7DAD0096CB0C /* SceneDelegate.swift */,
-				04B268E52B3D7DAD0096CB0C /* ViewController.swift */,
-				04B268E72B3D7DAD0096CB0C /* Main.storyboard */,
-				04B268ED2B3D7DAE0096CB0C /* Assets.xcassets */,
+				04B269172B3D84EC0096CB0C /* Utilities */,
+				04B269162B3D849C0096CB0C /* Screens */,
+				04B269142B3D80AA0096CB0C /* Support */,
 				04B268EF2B3D7DAE0096CB0C /* LaunchScreen.storyboard */,
 				04B268F22B3D7DAE0096CB0C /* Info.plist */,
 				04B268EA2B3D7DAD0096CB0C /* New_Hall_Cati.xcdatamodeld */,
@@ -128,6 +128,41 @@
 				04B269072B3D7DAE0096CB0C /* New_Hall_CatiUITestsLaunchTests.swift */,
 			);
 			path = "New Hall CatiUITests";
+			sourceTree = "<group>";
+		};
+		04B269142B3D80AA0096CB0C /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				04B268ED2B3D7DAE0096CB0C /* Assets.xcassets */,
+				04B268E12B3D7DAD0096CB0C /* AppDelegate.swift */,
+				04B268E32B3D7DAD0096CB0C /* SceneDelegate.swift */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		04B269152B3D848C0096CB0C /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				04B268E52B3D7DAD0096CB0C /* OnboardingVC.swift */,
+				04B2691A2B3D86680096CB0C /* OnboardingViewModel.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		04B269162B3D849C0096CB0C /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				04B269152B3D848C0096CB0C /* Onboarding */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		04B269172B3D84EC0096CB0C /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				04B269182B3D84FC0096CB0C /* Constants.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -236,7 +271,6 @@
 			files = (
 				04B268F12B3D7DAE0096CB0C /* LaunchScreen.storyboard in Resources */,
 				04B268EE2B3D7DAE0096CB0C /* Assets.xcassets in Resources */,
-				04B268E92B3D7DAD0096CB0C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,8 +295,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04B269192B3D84FC0096CB0C /* Constants.swift in Sources */,
+				04B2691B2B3D86680096CB0C /* OnboardingViewModel.swift in Sources */,
 				04B268EC2B3D7DAD0096CB0C /* New_Hall_Cati.xcdatamodeld in Sources */,
-				04B268E62B3D7DAD0096CB0C /* ViewController.swift in Sources */,
+				04B268E62B3D7DAD0096CB0C /* OnboardingVC.swift in Sources */,
 				04B268E22B3D7DAD0096CB0C /* AppDelegate.swift in Sources */,
 				04B268E42B3D7DAD0096CB0C /* SceneDelegate.swift in Sources */,
 			);
@@ -301,14 +337,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		04B268E72B3D7DAD0096CB0C /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				04B268E82B3D7DAD0096CB0C /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		04B268EF2B3D7DAE0096CB0C /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -446,7 +474,6 @@
 				INFOPLIST_FILE = "New Hall Cati/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -474,7 +501,6 @@
 				INFOPLIST_FILE = "New Hall Cati/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
