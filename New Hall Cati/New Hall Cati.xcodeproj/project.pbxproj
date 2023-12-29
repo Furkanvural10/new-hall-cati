@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		046692FA2B3EF2CA000DED64 /* MainPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046692F92B3EF2CA000DED64 /* MainPageVC.swift */; };
+		046692FC2B3F021A000DED64 /* MainPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046692FB2B3F021A000DED64 /* MainPageViewModel.swift */; };
 		04B268E22B3D7DAD0096CB0C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B268E12B3D7DAD0096CB0C /* AppDelegate.swift */; };
 		04B268E42B3D7DAD0096CB0C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B268E32B3D7DAD0096CB0C /* SceneDelegate.swift */; };
 		04B268E62B3D7DAD0096CB0C /* OnboardingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B268E52B3D7DAD0096CB0C /* OnboardingVC.swift */; };
@@ -42,6 +43,7 @@
 
 /* Begin PBXFileReference section */
 		046692F92B3EF2CA000DED64 /* MainPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageVC.swift; sourceTree = "<group>"; };
+		046692FB2B3F021A000DED64 /* MainPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewModel.swift; sourceTree = "<group>"; };
 		04B268DE2B3D7DAD0096CB0C /* New Hall Cati.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "New Hall Cati.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		04B268E12B3D7DAD0096CB0C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04B268E32B3D7DAD0096CB0C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				046692F92B3EF2CA000DED64 /* MainPageVC.swift */,
+				046692FB2B3F021A000DED64 /* MainPageViewModel.swift */,
 			);
 			path = MainPage;
 			sourceTree = "<group>";
@@ -335,6 +338,7 @@
 				04B268E62B3D7DAD0096CB0C /* OnboardingVC.swift in Sources */,
 				04B268E22B3D7DAD0096CB0C /* AppDelegate.swift in Sources */,
 				04B269212B3DA07D0096CB0C /* Font+Extension.swift in Sources */,
+				046692FC2B3F021A000DED64 /* MainPageViewModel.swift in Sources */,
 				046692FA2B3EF2CA000DED64 /* MainPageVC.swift in Sources */,
 				04B268E42B3D7DAD0096CB0C /* SceneDelegate.swift in Sources */,
 			);
