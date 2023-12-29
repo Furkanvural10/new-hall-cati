@@ -10,6 +10,7 @@ import UIKit
 
 protocol OnboardingViewModelDelegate: AnyObject {
     func welcomeTextDidChanged(to newText: String)
+    func nextPage()
 }
 
 struct OnboardingViewModel {
@@ -18,15 +19,19 @@ struct OnboardingViewModel {
     let welcomeText = Constant.welcomeText
     
     func startAnimation(for label: UILabel) {
-        UIView.animate(withDuration: 5, delay: 0, options: .curveEaseOut) {
+        UIView.animate(withDuration: 3, delay: 0, options: .curveEaseOut) {
             label.textColor = .white
             label.alpha = 0
         } completion: { _ in
             self.delegate?.welcomeTextDidChanged(to: self.welcomeText)
-            UIView.animate(withDuration: 5, delay: 0, options: .curveEaseOut) {
+            UIView.animate(withDuration: 3, delay: 0, options: .curveEaseOut) {
                 label.alpha = 1
+            } completion: { _ in
+                self.delegate?.nextPage()
             }
         }
+        
+        
     }
     
     

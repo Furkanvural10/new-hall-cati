@@ -42,4 +42,10 @@ extension OnboardingVC: OnboardingViewModelDelegate {
     func welcomeTextDidChanged(to newText: String) {
         welcomeTextLabel.text = newText
     }
+    
+    func nextPage() {
+        let mainPage = MainPageVC()
+        navigationController?.viewControllers = [mainPage]
+
+    }
 }

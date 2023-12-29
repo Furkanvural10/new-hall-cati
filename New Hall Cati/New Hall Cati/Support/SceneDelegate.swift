@@ -17,9 +17,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        window?.rootViewController = OnboardingVC()
+        window?.rootViewController = createOnboardingVC()
         window?.makeKeyAndVisible()
     }
+    
+    func createMainPageVC() -> UIViewController {
+        let mainPageVC = MainPageVC()
+        return UINavigationController(rootViewController: mainPageVC)
+    }
+    
+    func createOnboardingVC() -> UIViewController {
+        let onboardingVC = OnboardingVC()
+        return UINavigationController(rootViewController: onboardingVC)
+    }
+    
 
     func sceneDidDisconnect(_ scene: UIScene) {
         
