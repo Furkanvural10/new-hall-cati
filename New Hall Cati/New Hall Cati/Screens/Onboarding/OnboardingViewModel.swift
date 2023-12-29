@@ -19,6 +19,7 @@ struct OnboardingViewModel {
     
     func startAnimation(for label: UILabel) {
         UIView.animate(withDuration: 5, delay: 0, options: .curveEaseOut) {
+            label.textColor = .white
             label.alpha = 0
         } completion: { _ in
             self.delegate?.welcomeTextDidChanged(to: self.welcomeText)

@@ -18,7 +18,7 @@ final class OnboardingVC: UIViewController {
         viewModel.startAnimation(for: welcomeTextLabel)
     }
     
-    private func setupUI() { view.backgroundColor = .systemBackground }
+    private func setupUI() { view.backgroundColor = .black }
     
     private func configureWelcomeTextLabel() {
         
