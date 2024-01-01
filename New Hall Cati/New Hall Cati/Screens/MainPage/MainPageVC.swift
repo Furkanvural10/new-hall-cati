@@ -12,16 +12,22 @@ final class MainPageVC: UIViewController {
     private let viewModel = MainPageViewModel()
     private enum ProductType: String, CaseIterable {
         case dish = "Ana Yemek"
-        case drink = "İçecekler"
-        case dessert = "Tatlılar"
+        case drink = "Tatlılar"
+        case dessert = "İçecekler"
     }
     private var productTitleList: [ProductType] = [.dish, .drink, .dessert]
+    private var isAdmin: Bool = true
     
     private var dateTitleLabel: UILabel!
     private var workingTitleLabel: UILabel!
     private var workingHourLabel: UILabel!
     private var workingDetailView: UIView!
     private var header: TableViewHeader!
+    
+    // MARK: - Mock Data
+    let foods = ["Patlıcan Musakka", "Fırın Tavuk", "Bezelye", "Pirinç Pilavı", "Izgara Köfte", "Ispanak Greten"]
+    let drinks = ["Cola", "Fanta", "Ice Tea", "Sade Sode", "Limonlu Soda", "Kahve", "Çay", "Su", "Ayran",]
+    let desserts = ["Tiramisu", "Kabak Tatlısı", "Sütlaç", "Pudding"]
     
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
@@ -36,7 +42,7 @@ final class MainPageVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // MARK: - Delegates
         viewModel.delegate = self
         tableView.delegate = self
@@ -50,8 +56,19 @@ final class MainPageVC: UIViewController {
         configureHourLabel()
         configureWorkingDetailView()
         configureTableView()
-//        configureTableViewHeader()
+        configureAdminButton()
         
+    }
+    
+    private func configureAdminButton() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Admin", style: .done, target: self, action: #selector(openAdminPage))
+        navigationItem.rightBarButtonItem?.tintColor = .black
+        print("Worked here")
+        
+    }
+    
+    @objc func openAdminPage() {
+        print("Admin Sayfasını aç")
     }
     
     private func configureUI() { view.backgroundColor = .white }
@@ -63,7 +80,6 @@ final class MainPageVC: UIViewController {
         titleLabel.textColor = .label
         
         self.navigationItem.titleView = titleLabel
-        
     }
     
     private func configureDateTitle() {
@@ -109,7 +125,6 @@ final class MainPageVC: UIViewController {
             workingTitleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15),
             workingTitleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
         ])
-        
     }
     
     private func configureHourLabel() {
@@ -143,16 +158,13 @@ final class MainPageVC: UIViewController {
             workingDetailView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -21),
             workingDetailView.heightAnchor.constraint(equalTo: workingHourLabel.heightAnchor, multiplier: 2.55),
             workingDetailView.widthAnchor.constraint(equalTo: workingHourLabel.widthAnchor, multiplier: 1.27)
-            
         ])
     }
-    
 }
 
 extension MainPageVC: MainPageViewModelProtocol {
     
     func setTitle(dateString: String) {
-        
         dateTitleLabel.text = dateString
         dateTitleLabel.font = .systemFont(ofSize: 25)
     }
@@ -160,13 +172,18 @@ extension MainPageVC: MainPageViewModelProtocol {
 
 extension MainPageVC: UITableViewDelegate, UITableViewDataSource {
     
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         return ProductType.allCases.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        if section == 0 {
+            return foods.count
+        } else if section == 1 {
+            return desserts.count
+        } else {
+            return drinks.count
+        }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -181,7 +198,18 @@ extension MainPageVC: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MainTableViewCell.identifier, for: indexPath) as? MainTableViewCell else {
             fatalError("Could not dequeue cell with identifier: \(MainTableViewCell.identifier)")
         }
-        cell.set()
+
+        switch indexPath.section {
+        case 0:
+            cell.set(with: Product(name: foods[indexPath.row], price: "12", image: ""))
+        case 1:
+            cell.set(with: Product(name: desserts[indexPath.row], price: "12", image: ""))
+        case 2:
+            cell.set(with: Product(name: drinks[indexPath.row], price: "12", image: ""))
+        default:
+            fatalError("Unexpected section")
+        }
+        
         return cell
     }
     
@@ -190,6 +218,6 @@ extension MainPageVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 45
+        return 40
     }
 }
