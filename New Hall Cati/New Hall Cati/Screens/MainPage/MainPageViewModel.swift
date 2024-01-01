@@ -19,7 +19,7 @@ class MainPageViewModel {
         let today = Date()
         let formatter = DateFormatter()
         
-        formatter.dateFormat = "EEEE, MMM d, yyyy"
+        formatter.dateFormat = "EEEE, MMM d"
         formatter.locale = Locale(identifier: "tr_TR")
         let dateString = formatter.string(from: today)
         

@@ -9,7 +9,7 @@ import UIKit
 
 class CustomImageView: UIImageView {
     
-    let placeholderImage = UIImage(systemName: "folder")
+    let placeholderImage = UIImage(named: "hamburger")
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -24,6 +24,7 @@ class CustomImageView: UIImageView {
         layer.cornerRadius = 10
         clipsToBounds = true
         image = placeholderImage
+        contentMode = .scaleAspectFit
         translatesAutoresizingMaskIntoConstraints = false
     }
     
