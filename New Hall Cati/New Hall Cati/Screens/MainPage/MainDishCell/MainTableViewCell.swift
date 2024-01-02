@@ -35,11 +35,15 @@ class MainTableViewCell: UITableViewCell {
     
     func set(with product: Dessert) {
         
-        image.image = UIImage(systemName: "car")
+        image.image = UIImage(systemName: "fork.knife.circle.fill")
         image.layer.cornerRadius = 10
         image.clipsToBounds = true
         nameLabel.text = product.name
         priceLabel.text = product.price + "₺"
+        
+        nameLabel.textColor = product.isSold ? .black.withAlphaComponent(0.5) : .black
+        priceLabel.textColor = product.isSold ? .black.withAlphaComponent(0.5) : .black
+        image.tintColor = product.isSold ? .black.withAlphaComponent(0.1) : nil
         
         nameLabel.adjustsFontSizeToFitWidth = true
         priceLabel.adjustsFontSizeToFitWidth = true

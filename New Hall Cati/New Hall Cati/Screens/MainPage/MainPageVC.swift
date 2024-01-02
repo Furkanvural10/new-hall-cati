@@ -119,9 +119,8 @@ final class MainPageVC: UIViewController, MainPageProtocol {
     }
     
     @objc func openAdminPage() {
-        print("Admin Sayfasını aç")
-        //        let adminPageVC = AdminPageVC()
-        //        navigationController?.pushViewController(adminPageVC, animated: true)
+//        let adminPageVC = AdminPageVC()
+//        navigationController?.pushViewController(adminPageVC, animated: true)
     }
     
     
@@ -192,12 +191,10 @@ final class MainPageVC: UIViewController, MainPageProtocol {
     @objc private func changedSegmentedControl() {
         switch segmentedController.selectedSegmentIndex {
         case 0:
-            print("Ana yemekleri getir")
             showingList.removeAll()
             showingList = foods
             tableView.reloadData()
         case 1:
-            print("Tatlıları getir")
             showingList.removeAll()
             showingList = desserts
             tableView.reloadData()
@@ -249,7 +246,7 @@ extension MainPageVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let foodEnding = UIContextualAction(style: .normal, title: Constant.soldText) { action, view, bool in
-            print("Ürün tükendi")
+            
         }
         
         foodEnding.backgroundColor = .red
@@ -273,23 +270,25 @@ extension MainPageVC: UITableViewDelegate, UITableViewDataSource {
     //    MARK: - Alert View
     private func showEditAlertView() {
         
-        let alertAction = UIAlertController(title: "Düzenle", message: "Gerekli bilgileri giriniz", preferredStyle: .alert)
+        let alertAction = UIAlertController(title: "Placeholder Title", message: "Placeholder alert message text", preferredStyle: .alert)
+        
         alertAction.addTextField { text in
             text.placeholder = "Ücreti yazınız"
+            text.keyboardType = .numberPad
         }
         
         
         let save = UIAlertAction(title: Constant.save, style: .default) { action in
             if let textfield = alertAction.textFields?.first {
+                textfield.keyboardType = .numberPad
                 if let text = textfield.text {
-                    print("View Modelden DB gönder verileri")
+                    
                     DispatchQueue.main.async {
-                        // table view reload et
+                        self.tableView.reloadData()
                     }
                 }
             }
         }
-        
         
         let cancel = UIAlertAction(title: Constant.cancel, style: .cancel)
         
