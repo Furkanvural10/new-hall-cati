@@ -69,6 +69,8 @@ final class MainPageVC: UIViewController {
     
     @objc func openAdminPage() {
         print("Admin Sayfasını aç")
+//        let adminPageVC = AdminPageVC()
+//        navigationController?.pushViewController(adminPageVC, animated: true)
     }
     
     private func configureUI() { view.backgroundColor = .white }
@@ -177,16 +179,19 @@ extension MainPageVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
+        
+        switch section {
+        case 0:
             return foods.count
-        } else if section == 1 {
+        case 1:
             return desserts.count
-        } else {
+        default:
             return drinks.count
         }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
         guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "CellHeader") as? CellHeader else { fatalError("main header fail") }
         let headerTitle = productTitleList[section].rawValue
         header.setTitle(with: headerTitle)
@@ -213,6 +218,24 @@ extension MainPageVC: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+//    MARK: Cell Edit
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        // TODO: Admin Check
+        let edit = UIContextualAction(style: .normal, title: "Düzenle") { action, view, bool in
+            print("Show view for editing")
+        }
+        
+        edit.backgroundColor = .systemOrange
+        
+        return UISwipeActionsConfiguration(actions: [edit])
+    }
+    
+//    MARK: - TableView Height Layout
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 72
     }

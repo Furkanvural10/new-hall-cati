@@ -34,7 +34,10 @@ class MainTableViewCell: UITableViewCell {
     }
     
     func set(with product: Product) {
-        image.image = UIImage(named: "hamburger")
+        
+        image.image = UIImage(systemName: "car")
+        image.layer.cornerRadius = 10
+        image.clipsToBounds = true
         nameLabel.text = product.name
         priceLabel.text = product.price + "₺"
         

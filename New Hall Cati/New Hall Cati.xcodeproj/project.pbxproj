@@ -16,6 +16,7 @@
 		046693092B418AC2000DED64 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046693082B418AC2000DED64 /* Product.swift */; };
 		0466930E2B41A042000DED64 /* TableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0466930D2B41A042000DED64 /* TableViewHeader.swift */; };
 		046693102B41DC32000DED64 /* CellHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0466930F2B41DC32000DED64 /* CellHeader.swift */; };
+		046693152B430A41000DED64 /* Drink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046693142B430A41000DED64 /* Drink.swift */; };
 		04B268E22B3D7DAD0096CB0C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B268E12B3D7DAD0096CB0C /* AppDelegate.swift */; };
 		04B268E42B3D7DAD0096CB0C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B268E32B3D7DAD0096CB0C /* SceneDelegate.swift */; };
 		04B268E62B3D7DAD0096CB0C /* OnboardingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B268E52B3D7DAD0096CB0C /* OnboardingVC.swift */; };
@@ -58,6 +59,7 @@
 		046693082B418AC2000DED64 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		0466930D2B41A042000DED64 /* TableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewHeader.swift; sourceTree = "<group>"; };
 		0466930F2B41DC32000DED64 /* CellHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellHeader.swift; sourceTree = "<group>"; };
+		046693142B430A41000DED64 /* Drink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Drink.swift; sourceTree = "<group>"; };
 		04B268DE2B3D7DAD0096CB0C /* New Hall Cati.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "New Hall Cati.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		04B268E12B3D7DAD0096CB0C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04B268E32B3D7DAD0096CB0C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 			children = (
 				046693042B3F50EA000DED64 /* Dish.swift */,
 				046693082B418AC2000DED64 /* Product.swift */,
+				046693142B430A41000DED64 /* Drink.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -399,6 +402,7 @@
 				046693052B3F50EA000DED64 /* Dish.swift in Sources */,
 				046692FA2B3EF2CA000DED64 /* MainPageVC.swift in Sources */,
 				0466930E2B41A042000DED64 /* TableViewHeader.swift in Sources */,
+				046693152B430A41000DED64 /* Drink.swift in Sources */,
 				04B268E42B3D7DAD0096CB0C /* SceneDelegate.swift in Sources */,
 				046693092B418AC2000DED64 /* Product.swift in Sources */,
 			);
