@@ -25,9 +25,9 @@ final class MainPageVC: UIViewController {
     private var header: TableViewHeader!
     
     // MARK: - Mock Data
-    let foods = ["Patlıcan Musakka", "Fırın Tavuk", "Bezelye", "Pirinç Pilavı", "Izgara Köfte", "Ispanak Greten"]
-    let drinks = ["Cola", "Fanta", "Ice Tea", "Sade Sode", "Limonlu Soda", "Kahve", "Çay", "Su", "Ayran",]
-    let desserts = ["Tiramisu", "Kabak Tatlısı", "Sütlaç", "Pudding"]
+    var foods = ["Patlıcan Musakka", "Fırın Tavuk", "Bezelye", "Pirinç Pilavı", "Izgara Köfte", "Ispanak Greten"]
+    var drinks = ["Cola", "Fanta", "Ice Tea", "Sade Sode", "Limonlu Soda", "Kahve", "Çay", "Su", "Ayran",]
+    var desserts = ["Tiramisu", "Kabak Tatlısı", "Sütlaç", "Pudding"]
     
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
@@ -223,16 +223,56 @@ extension MainPageVC: UITableViewDelegate, UITableViewDataSource {
         return true
     }
     
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let foodEnding = UIContextualAction(style: .normal, title: "Tükendi") { action, view, bool in
+            print("Ürün tükendi")
+        }
+        
+        foodEnding.backgroundColor = .red
+
+        return UISwipeActionsConfiguration(actions: [foodEnding])
+    }
+    
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         // TODO: Admin Check
         let edit = UIContextualAction(style: .normal, title: "Düzenle") { action, view, bool in
-            print("Show view for editing")
+            self.showEditAlertView()
         }
         
         edit.backgroundColor = .systemOrange
         
         return UISwipeActionsConfiguration(actions: [edit])
+    }
+    
+    private func showEditAlertView() {
+        
+        let alertAction = UIAlertController(title: "Düzenle", message: "Gerekli bilgileri giriniz", preferredStyle: .alert)
+        alertAction.addTextField { text in
+            text.placeholder = "Ücreti yazınız"
+        }
+        
+        
+        let save = UIAlertAction(title: "Kaydet", style: .default) { action in
+            if let textfield = alertAction.textFields?.first {
+                if let text = textfield.text {
+                    print("View Modelden DB gönder verileri")
+                    DispatchQueue.main.async {
+                        // table view reload et
+                    }
+                }
+            }
+        }
+        
+        
+        let cancel = UIAlertAction(title: "İptal", style: .cancel)
+        
+        alertAction.addAction(save)
+        alertAction.addAction(cancel)
+        
+        self.present(alertAction, animated: true)
+        
     }
     
 //    MARK: - TableView Height Layout
