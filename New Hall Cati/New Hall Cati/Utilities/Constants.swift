@@ -9,4 +9,10 @@ import Foundation
 
 struct Constant {
     static let welcomeText = "New Hall Çatı"
+    static let openClosedText = "Açılış-Kapanış"
+    static let adminText = "Admin"
+    static let soldText = "Tükendi"
+    static let editText = "Düzenle"
+    static let cancel = "İptal"
+    static let save = "Kaydet"
 }

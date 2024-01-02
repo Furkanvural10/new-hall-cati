@@ -9,10 +9,10 @@ import UIKit
 
 struct Dish {
     
-    let id = UUID()
     let name: String
     let price: String
     let image: UIImage
+    let isSold: Bool
     
     
 }

@@ -33,7 +33,7 @@ class MainTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func set(with product: Product) {
+    func set(with product: Dessert) {
         
         image.image = UIImage(systemName: "car")
         image.layer.cornerRadius = 10

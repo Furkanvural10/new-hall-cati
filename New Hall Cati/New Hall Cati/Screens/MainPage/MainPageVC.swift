@@ -1,33 +1,46 @@
-//
-//  MainPageVC.swift
-//  New Hall Cati
-//
-//  Created by furkan vural on 29.12.2023.
-//
-
 import UIKit
 
-final class MainPageVC: UIViewController {
+protocol MainPageProtocol {
     
-    private let viewModel = MainPageViewModel()
+    func configureBackground()
+    func configureTitle()
+    func configureDateTitle()
+    func configureWorkingLabel()
+    func configureHourLabel()
+    func configureWorkingDetailView()
+    func configureTableView()
+    func configureAdminButton()
+    func configureSegmentedController()
+    
+    var viewModel: MainPageViewModel { get }
+    var isAdmin: Bool { get }
+}
+
+final class MainPageVC: UIViewController, MainPageProtocol {
+
+    var viewModel = MainPageViewModel()
+    
     private enum ProductType: String, CaseIterable {
         case dish = "Ana Yemek"
         case drink = "Tatlılar"
         case dessert = "İçecekler"
     }
     private var productTitleList: [ProductType] = [.dish, .drink, .dessert]
-    private var isAdmin: Bool = true
+    var isAdmin: Bool = true
     
     private var dateTitleLabel: UILabel!
     private var workingTitleLabel: UILabel!
     private var workingHourLabel: UILabel!
     private var workingDetailView: UIView!
+    private var segmentedController: UISegmentedControl!
     private var header: TableViewHeader!
     
     // MARK: - Mock Data
     var foods = ["Patlıcan Musakka", "Fırın Tavuk", "Bezelye", "Pirinç Pilavı", "Izgara Köfte", "Ispanak Greten"]
     var drinks = ["Cola", "Fanta", "Ice Tea", "Sade Sode", "Limonlu Soda", "Kahve", "Çay", "Su", "Ayran",]
     var desserts = ["Tiramisu", "Kabak Tatlısı", "Sütlaç", "Pudding"]
+    
+    var showingList = [String]()
     
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
@@ -42,49 +55,41 @@ final class MainPageVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        showingList = foods
+        
         // MARK: - Delegates
         viewModel.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
         
         // MARK: - SetupUI
-        configureUI()
+        
+        configureBackground()
         configureTitle()
         configureDateTitle()
         configureWorkingLabel()
         configureHourLabel()
-        configureWorkingDetailView()
+        configureSegmentedController()
         configureTableView()
+        configureWorkingDetailView()
         configureAdminButton()
-        
     }
     
-    private func configureAdminButton() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Admin", style: .done, target: self, action: #selector(openAdminPage))
-        navigationItem.rightBarButtonItem?.tintColor = .black
-        print("Worked here")
-        
-    }
+
     
-    @objc func openAdminPage() {
-        print("Admin Sayfasını aç")
-//        let adminPageVC = AdminPageVC()
-//        navigationController?.pushViewController(adminPageVC, animated: true)
-    }
+    func configureBackground() { view.backgroundColor = .white }
     
-    private func configureUI() { view.backgroundColor = .white }
-    
-    private func configureTitle() {
+    func configureTitle() {
         let titleLabel = UILabel()
-        titleLabel.text = "New Hall Çatı"
+        titleLabel.text = Constant.welcomeText
         titleLabel.font = UIFont.pacificoRegular(size: 20)
         titleLabel.textColor = .label
         
         self.navigationItem.titleView = titleLabel
     }
     
-    private func configureDateTitle() {
+    func configureDateTitle() {
         dateTitleLabel = UILabel()
         view.addSubview(dateTitleLabel)
         dateTitleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -96,29 +101,34 @@ final class MainPageVC: UIViewController {
         viewModel.setTitle()
     }
     
-    private func configureTableView() {
+    func configureTableView() {
         self.view.addSubview(self.tableView)
         self.tableView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            self.tableView.topAnchor.constraint(equalTo: self.workingDetailView.bottomAnchor, constant: 20),
+            self.tableView.topAnchor.constraint(equalTo: self.segmentedController.bottomAnchor, constant: 5),
             self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
             self.tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             self.tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
     
-    private func configureTableViewHeader() {
-        header = TableViewHeader(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 200))
-        tableView.tableHeaderView = header
-        tableView.tableHeaderView?.backgroundColor = .yellow
-        if #available(iOS 15.0, *) { tableView.sectionHeaderTopPadding = 0.0 }
+    func configureAdminButton() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: Constant.adminText, style: .done, target: self, action: #selector(openAdminPage))
+        navigationItem.rightBarButtonItem?.tintColor = .black
     }
     
-    private func configureWorkingLabel() {
+    @objc func openAdminPage() {
+        print("Admin Sayfasını aç")
+        //        let adminPageVC = AdminPageVC()
+        //        navigationController?.pushViewController(adminPageVC, animated: true)
+    }
+    
+    
+    func configureWorkingLabel() {
         workingTitleLabel = UILabel()
         workingTitleLabel.font = UIFont.boldSystemFont(ofSize: 13)
-        workingTitleLabel.text = "Açılış-Kapanış"
+        workingTitleLabel.text = Constant.openClosedText
         
         view.addSubview(workingTitleLabel)
         workingTitleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -129,7 +139,7 @@ final class MainPageVC: UIViewController {
         ])
     }
     
-    private func configureHourLabel() {
+    func configureHourLabel() {
         workingHourLabel = UILabel()
         workingHourLabel.font = UIFont.systemFont(ofSize: 13)
         workingHourLabel.text = "09:00 - 15:00"
@@ -143,7 +153,7 @@ final class MainPageVC: UIViewController {
         ])
     }
     
-    private func configureWorkingDetailView() {
+    func configureWorkingDetailView() {
         
         workingDetailView = UIView()
         workingDetailView.backgroundColor = .systemGray5
@@ -162,6 +172,43 @@ final class MainPageVC: UIViewController {
             workingDetailView.widthAnchor.constraint(equalTo: workingHourLabel.widthAnchor, multiplier: 1.27)
         ])
     }
+    
+    func configureSegmentedController() {
+        segmentedController = UISegmentedControl(items: ["Ana Yemekler","Tatlılar","İçecekler"])
+        self.view.addSubview(segmentedController)
+        segmentedController.translatesAutoresizingMaskIntoConstraints = false
+        segmentedController.selectedSegmentIndex = 0
+        
+        segmentedController.addTarget(self, action: #selector(changedSegmentedControl), for: .valueChanged)
+        
+        NSLayoutConstraint.activate([
+            segmentedController.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 80),
+            segmentedController.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            segmentedController.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            
+        ])
+    }
+    
+    @objc private func changedSegmentedControl() {
+        switch segmentedController.selectedSegmentIndex {
+        case 0:
+            print("Ana yemekleri getir")
+            showingList.removeAll()
+            showingList = foods
+            tableView.reloadData()
+        case 1:
+            print("Tatlıları getir")
+            showingList.removeAll()
+            showingList = desserts
+            tableView.reloadData()
+        case 2:
+            showingList.removeAll()
+            showingList = drinks
+            tableView.reloadData()
+        default:
+            fatalError("Hataaa")
+        }
+    }
 }
 
 extension MainPageVC: MainPageViewModelProtocol {
@@ -175,28 +222,13 @@ extension MainPageVC: MainPageViewModelProtocol {
 extension MainPageVC: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return ProductType.allCases.count
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        switch section {
-        case 0:
-            return foods.count
-        case 1:
-            return desserts.count
-        default:
-            return drinks.count
-        }
+        return showingList.count
     }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
-        guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "CellHeader") as? CellHeader else { fatalError("main header fail") }
-        let headerTitle = productTitleList[section].rawValue
-        header.setTitle(with: headerTitle)
-        return header
-    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -204,40 +236,32 @@ extension MainPageVC: UITableViewDelegate, UITableViewDataSource {
             fatalError("Could not dequeue cell with identifier: \(MainTableViewCell.identifier)")
         }
 
-        switch indexPath.section {
-        case 0:
-            cell.set(with: Product(name: foods[indexPath.row], price: "12", image: ""))
-        case 1:
-            cell.set(with: Product(name: desserts[indexPath.row], price: "12", image: ""))
-        case 2:
-            cell.set(with: Product(name: drinks[indexPath.row], price: "12", image: ""))
-        default:
-            fatalError("Unexpected section")
-        }
-        
+        cell.set(with: Dessert(name: showingList[indexPath.row], price: "12", image: "", isSold: false))
         return cell
     }
     
-//    MARK: Cell Edit
+    //    MARK: Cell Edit
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     
+    //    MARK: Leading Swipe Action
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        let foodEnding = UIContextualAction(style: .normal, title: "Tükendi") { action, view, bool in
+        let foodEnding = UIContextualAction(style: .normal, title: Constant.soldText) { action, view, bool in
             print("Ürün tükendi")
         }
         
         foodEnding.backgroundColor = .red
-
+        
         return UISwipeActionsConfiguration(actions: [foodEnding])
     }
     
+    //    MARK: Trailing Swipe Action
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         // TODO: Admin Check
-        let edit = UIContextualAction(style: .normal, title: "Düzenle") { action, view, bool in
+        let edit = UIContextualAction(style: .normal, title: Constant.editText) { action, view, bool in
             self.showEditAlertView()
         }
         
@@ -246,6 +270,7 @@ extension MainPageVC: UITableViewDelegate, UITableViewDataSource {
         return UISwipeActionsConfiguration(actions: [edit])
     }
     
+    //    MARK: - Alert View
     private func showEditAlertView() {
         
         let alertAction = UIAlertController(title: "Düzenle", message: "Gerekli bilgileri giriniz", preferredStyle: .alert)
@@ -254,7 +279,7 @@ extension MainPageVC: UITableViewDelegate, UITableViewDataSource {
         }
         
         
-        let save = UIAlertAction(title: "Kaydet", style: .default) { action in
+        let save = UIAlertAction(title: Constant.save, style: .default) { action in
             if let textfield = alertAction.textFields?.first {
                 if let text = textfield.text {
                     print("View Modelden DB gönder verileri")
@@ -266,7 +291,7 @@ extension MainPageVC: UITableViewDelegate, UITableViewDataSource {
         }
         
         
-        let cancel = UIAlertAction(title: "İptal", style: .cancel)
+        let cancel = UIAlertAction(title: Constant.cancel, style: .cancel)
         
         alertAction.addAction(save)
         alertAction.addAction(cancel)
@@ -275,7 +300,7 @@ extension MainPageVC: UITableViewDelegate, UITableViewDataSource {
         
     }
     
-//    MARK: - TableView Height Layout
+    //    MARK: - TableView Height Layout
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 72
     }

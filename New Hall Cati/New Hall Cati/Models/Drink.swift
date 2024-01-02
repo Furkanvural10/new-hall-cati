@@ -9,7 +9,9 @@ import Foundation
 import UIKit
 
 struct Drink {
+    
     let name: String
     let price: String
     let image: UIImage
+    let isSold: Bool
 }
