@@ -20,6 +20,7 @@
 		046693182B454B78000DED64 /* AdminPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046693172B454B78000DED64 /* AdminPageVC.swift */; };
 		0466931A2B454BAF000DED64 /* AdminPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046693192B454BAF000DED64 /* AdminPageViewModel.swift */; };
 		0466931C2B454D17000DED64 /* CustomSegmentedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0466931B2B454D17000DED64 /* CustomSegmentedController.swift */; };
+		0466931F2B45748A000DED64 /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0466931E2B45748A000DED64 /* CellView.swift */; };
 		04B268E22B3D7DAD0096CB0C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B268E12B3D7DAD0096CB0C /* AppDelegate.swift */; };
 		04B268E42B3D7DAD0096CB0C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B268E32B3D7DAD0096CB0C /* SceneDelegate.swift */; };
 		04B268E62B3D7DAD0096CB0C /* OnboardingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B268E52B3D7DAD0096CB0C /* OnboardingVC.swift */; };
@@ -66,6 +67,7 @@
 		046693172B454B78000DED64 /* AdminPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminPageVC.swift; sourceTree = "<group>"; };
 		046693192B454BAF000DED64 /* AdminPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminPageViewModel.swift; sourceTree = "<group>"; };
 		0466931B2B454D17000DED64 /* CustomSegmentedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedController.swift; sourceTree = "<group>"; };
+		0466931E2B45748A000DED64 /* CellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
 		04B268DE2B3D7DAD0096CB0C /* New Hall Cati.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "New Hall Cati.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		04B268E12B3D7DAD0096CB0C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04B268E32B3D7DAD0096CB0C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -161,10 +163,19 @@
 		046693162B454B53000DED64 /* AdmingPage */ = {
 			isa = PBXGroup;
 			children = (
+				0466931D2B457459000DED64 /* TableViewCell */,
 				046693172B454B78000DED64 /* AdminPageVC.swift */,
 				046693192B454BAF000DED64 /* AdminPageViewModel.swift */,
 			);
 			path = AdmingPage;
+			sourceTree = "<group>";
+		};
+		0466931D2B457459000DED64 /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				0466931E2B45748A000DED64 /* CellView.swift */,
+			);
+			path = TableViewCell;
 			sourceTree = "<group>";
 		};
 		04B268D52B3D7DAD0096CB0C = {
@@ -425,6 +436,7 @@
 				04B268E42B3D7DAD0096CB0C /* SceneDelegate.swift in Sources */,
 				046693092B418AC2000DED64 /* Dessert.swift in Sources */,
 				0466931A2B454BAF000DED64 /* AdminPageViewModel.swift in Sources */,
+				0466931F2B45748A000DED64 /* CellView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
