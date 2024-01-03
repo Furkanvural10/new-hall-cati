@@ -119,8 +119,8 @@ final class MainPageVC: UIViewController, MainPageProtocol {
     }
     
     @objc func openAdminPage() {
-//        let adminPageVC = AdminPageVC()
-//        navigationController?.pushViewController(adminPageVC, animated: true)
+        let adminPageVC = AdminPageVC()
+        navigationController?.pushViewController(adminPageVC, animated: true)
     }
     
     
