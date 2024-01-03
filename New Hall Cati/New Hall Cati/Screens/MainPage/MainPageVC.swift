@@ -203,7 +203,7 @@ final class MainPageVC: UIViewController, MainPageProtocol {
             showingList = drinks
             tableView.reloadData()
         default:
-            fatalError("Hataaa")
+            fatalError("Fatal Error")
         }
     }
 }

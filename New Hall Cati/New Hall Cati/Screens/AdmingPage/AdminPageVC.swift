@@ -6,6 +6,7 @@ protocol AdminPageProtocol {
     var allDessertList: [String] { get }
     var allDrinkList: [String] { get }
     var viewModel: AdminPageViewModel { get }
+    var showingList: [String] { get }
     
     func configureSegmentedController()
     func configureTableView()
@@ -30,9 +31,11 @@ final class AdminPageVC: UIViewController, AdminPageProtocol {
     var drink = ["1Dr", "2Dr", "3Dr", "4Dr"]
     
     var selectedMenu: Set<String> = []
+    var showingList: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        showingList = food
         view.backgroundColor = .systemBackground
         configureSegmentedController()
         configureTableView()
@@ -47,12 +50,32 @@ final class AdminPageVC: UIViewController, AdminPageProtocol {
         segmentedController.setItems(items, startingIndex: 0)
         
         view.addSubview(segmentedController)
+         segmentedController.addTarget(self, action: #selector(changedSegmentedControl), for: .valueChanged)
         
         NSLayoutConstraint.activate([
             segmentedController.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 5),
             segmentedController.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5),
             segmentedController.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5)
         ])
+    }
+    
+    @objc func changedSegmentedControl() {
+        switch segmentedController.selectedSegmentIndex {
+        case 0:
+            showingList.removeAll()
+            showingList = food
+            tableView.reloadData()
+        case 1:
+            showingList.removeAll()
+            showingList = dessert
+            tableView.reloadData()
+        case 2:
+            showingList.removeAll()
+            showingList = drink
+            tableView.reloadData()
+        default:
+            fatalError("Fatal error")
+        }
     }
     
     func configureTableView() {
@@ -89,7 +112,7 @@ extension AdminPageVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return food.count
+        return showingList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -97,7 +120,7 @@ extension AdminPageVC: UITableViewDelegate, UITableViewDataSource {
             fatalError("Could not dequeue cell with identifier: \(CellView.identifier)")
         }
 
-        cell.set(with: food[indexPath.row])
+        cell.set(with: showingList[indexPath.row])
         return cell
     }
     
