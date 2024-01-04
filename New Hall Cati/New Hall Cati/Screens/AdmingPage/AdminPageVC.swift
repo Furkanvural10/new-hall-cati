@@ -100,7 +100,6 @@ final class AdminPageVC: UIViewController, AdminPageProtocol {
             tableView.topAnchor.constraint(equalTo: segmentedController.bottomAnchor, constant: 10),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-//            tableView.heightAnchor.constraint(equalTo: view.heightAnchor)
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -80)
         ])
     }

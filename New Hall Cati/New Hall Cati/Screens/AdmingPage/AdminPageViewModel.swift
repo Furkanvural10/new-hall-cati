@@ -8,9 +8,16 @@
 import Foundation
 
 protocol AdminPageViewModelProtocol {
-    
+    func saveNewMenu()
 }
 
 class AdminPageViewModel {
     
+}
+
+extension AdminPageViewModel: AdminPageViewModelProtocol {
+    
+    func saveNewMenu() {
+//        TODO: save db admin adding new daily menu
+    }
 }
