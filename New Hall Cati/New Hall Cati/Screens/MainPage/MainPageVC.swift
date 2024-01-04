@@ -173,7 +173,7 @@ final class MainPageVC: UIViewController, MainPageProtocol {
     }
     
     func configureSegmentedController() {
-        segmentedController = UISegmentedControl(items: ["Ana Yemekler","Tatlılar","İçecekler"])
+        segmentedController = UISegmentedControl(items: Constant.segmentedItems)
         self.view.addSubview(segmentedController)
         segmentedController.translatesAutoresizingMaskIntoConstraints = false
         segmentedController.selectedSegmentIndex = 0

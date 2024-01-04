@@ -8,6 +8,7 @@ protocol AdminPageProtocol {
     var viewModel: AdminPageViewModel { get }
     var selectedMenu: Set<String> { get }
     var showingList: [String] { get }
+    var items: [String] { get }
     
     func configureSegmentedController()
     func configureTableView()
@@ -32,7 +33,7 @@ final class AdminPageVC: UIViewController, AdminPageProtocol {
     var food = ["1F", "2F", "3F", "4F","5F", "6F", "7F", "8F","9F", "10F", "11F", "12F",]
     var dessert = ["1D", "2D", "3D", "4D"]
     var drink = ["1Dr", "2Dr", "3Dr", "4Dr"]
-    let items = ["Ana Yemek", "Tatlılar", "İçecekler"]
+    var items: [String] = Constant.segmentedItems
     
     var selectedMenu: Set<String> = []
     var showingList: [String] = []
@@ -52,7 +53,7 @@ final class AdminPageVC: UIViewController, AdminPageProtocol {
     
      func configureSegmentedController() {
 
-         let items = ["Ana Yemekler", "Tatlılar", "İçecekler"]
+         
          segmentedController = UISegmentedControl(items: items)
          segmentedController.translatesAutoresizingMaskIntoConstraints = false
          view.addSubview(segmentedController)

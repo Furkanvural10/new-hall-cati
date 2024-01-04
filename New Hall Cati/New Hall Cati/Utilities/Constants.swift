@@ -15,4 +15,7 @@ struct Constant {
     static let editText = "Düzenle"
     static let cancel = "İptal"
     static let save = "Kaydet"
+    
+    
+    static let segmentedItems = ["Ana Yemek", "Tatlılar", "İçecekler"]
 }
