@@ -119,15 +119,14 @@ final class AdminPageVC: UIViewController, AdminPageProtocol {
         addButton.translatesAutoresizingMaskIntoConstraints = false
         
         addButton.setTitle("Yeni Ürün Ekle", for: .normal)
-        addButton.backgroundColor = .red
-        addButton.tintColor = .blue
+        addButton.backgroundColor = .black.withAlphaComponent(0.9)
+        addButton.layer.cornerRadius = 10
+        
         NSLayoutConstraint.activate([
             addButton.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 5),
             addButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             addButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-//            addButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.15)
-            
-            
+            addButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.045)
         ])
     }
 }
