@@ -19,7 +19,6 @@
 		046693152B430A41000DED64 /* Drink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046693142B430A41000DED64 /* Drink.swift */; };
 		046693182B454B78000DED64 /* AdminPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046693172B454B78000DED64 /* AdminPageVC.swift */; };
 		0466931A2B454BAF000DED64 /* AdminPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046693192B454BAF000DED64 /* AdminPageViewModel.swift */; };
-		0466931C2B454D17000DED64 /* CustomSegmentedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0466931B2B454D17000DED64 /* CustomSegmentedController.swift */; };
 		0466931F2B45748A000DED64 /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0466931E2B45748A000DED64 /* CellView.swift */; };
 		04B268E22B3D7DAD0096CB0C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B268E12B3D7DAD0096CB0C /* AppDelegate.swift */; };
 		04B268E42B3D7DAD0096CB0C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B268E32B3D7DAD0096CB0C /* SceneDelegate.swift */; };
@@ -66,7 +65,6 @@
 		046693142B430A41000DED64 /* Drink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Drink.swift; sourceTree = "<group>"; };
 		046693172B454B78000DED64 /* AdminPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminPageVC.swift; sourceTree = "<group>"; };
 		046693192B454BAF000DED64 /* AdminPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminPageViewModel.swift; sourceTree = "<group>"; };
-		0466931B2B454D17000DED64 /* CustomSegmentedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedController.swift; sourceTree = "<group>"; };
 		0466931E2B45748A000DED64 /* CellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
 		04B268DE2B3D7DAD0096CB0C /* New Hall Cati.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "New Hall Cati.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		04B268E12B3D7DAD0096CB0C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -137,7 +135,6 @@
 			isa = PBXGroup;
 			children = (
 				046693012B3F415E000DED64 /* CustomImageView.swift */,
-				0466931B2B454D17000DED64 /* CustomSegmentedController.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -421,7 +418,6 @@
 				04B269192B3D84FC0096CB0C /* Constants.swift in Sources */,
 				04B2691B2B3D86680096CB0C /* OnboardingViewModel.swift in Sources */,
 				046693102B41DC32000DED64 /* CellHeader.swift in Sources */,
-				0466931C2B454D17000DED64 /* CustomSegmentedController.swift in Sources */,
 				04B268EC2B3D7DAD0096CB0C /* New_Hall_Cati.xcdatamodeld in Sources */,
 				04B268E62B3D7DAD0096CB0C /* OnboardingVC.swift in Sources */,
 				04B268E22B3D7DAD0096CB0C /* AppDelegate.swift in Sources */,

@@ -6,11 +6,13 @@ protocol AdminPageProtocol {
     var allDessertList: [String] { get }
     var allDrinkList: [String] { get }
     var viewModel: AdminPageViewModel { get }
+    var selectedMenu: Set<String> { get }
     var showingList: [String] { get }
     
     func configureSegmentedController()
     func configureTableView()
     func configureNavigationSaveButton()
+    func configureAddButton()
 }
 
 final class AdminPageVC: UIViewController, AdminPageProtocol {
@@ -22,34 +24,40 @@ final class AdminPageVC: UIViewController, AdminPageProtocol {
     var viewModel = AdminPageViewModel()
 
 //    MARK: - UI Elements
-    private var segmentedController: CustomSegmentedController!
+    private var segmentedController = UISegmentedControl(frame: .zero)
     private var tableView: UITableView!
+    private var addButton: UIButton!
     
 //    MARK: - Mock Data
-    var food = ["1F", "2F", "3F", "4F"]
+    var food = ["1F", "2F", "3F", "4F","5F", "6F", "7F", "8F","9F", "10F", "11F", "12F",]
     var dessert = ["1D", "2D", "3D", "4D"]
     var drink = ["1Dr", "2Dr", "3Dr", "4Dr"]
+    let items = ["Ana Yemek", "Tatlılar", "İçecekler"]
     
     var selectedMenu: Set<String> = []
     var showingList: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureSegmentedController()
         showingList = food
         view.backgroundColor = .systemBackground
-        configureSegmentedController()
+        
         configureTableView()
         configureNavigationSaveButton()
+        configureAddButton()
         
         
     }
     
      func configureSegmentedController() {
-        segmentedController = CustomSegmentedController(frame: .zero)
-        let items = ["Ana Yemek", "Tatlılar", "İçecekler"]
-        segmentedController.setItems(items, startingIndex: 0)
-        
-        view.addSubview(segmentedController)
+
+         let items = ["Ana Yemekler", "Tatlılar", "İçecekler"]
+         segmentedController = UISegmentedControl(items: items)
+         segmentedController.translatesAutoresizingMaskIntoConstraints = false
+         view.addSubview(segmentedController)
+         segmentedController.selectedSegmentIndex = 0
+         segmentedController.translatesAutoresizingMaskIntoConstraints = false
          segmentedController.addTarget(self, action: #selector(changedSegmentedControl), for: .valueChanged)
         
         NSLayoutConstraint.activate([
@@ -87,12 +95,13 @@ final class AdminPageVC: UIViewController, AdminPageProtocol {
         
         view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        
+
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: segmentedController.bottomAnchor, constant: 10),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.heightAnchor.constraint(equalTo: view.heightAnchor)
+//            tableView.heightAnchor.constraint(equalTo: view.heightAnchor)
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -80)
         ])
     }
     
@@ -102,6 +111,24 @@ final class AdminPageVC: UIViewController, AdminPageProtocol {
     
     @objc func saveNewMenu() {
         print("Save new menu item \(selectedMenu)")
+    }
+    
+    func configureAddButton() {
+        addButton = UIButton()
+        view.addSubview(addButton)
+        addButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        addButton.setTitle("Yeni Ürün Ekle", for: .normal)
+        addButton.backgroundColor = .red
+        addButton.tintColor = .blue
+        NSLayoutConstraint.activate([
+            addButton.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 5),
+            addButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            addButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+//            addButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.15)
+            
+            
+        ])
     }
 }
 
@@ -142,8 +169,8 @@ extension AdminPageVC: UITableViewDelegate, UITableViewDataSource {
             
         } else {
             cell?.accessoryType = .checkmark
-            print(food[indexPath.row])
-            selectedMenu.insert(food[indexPath.row])
+            print(showingList[indexPath.row])
+            selectedMenu.insert(showingList[indexPath.row])
             print(selectedMenu)
         }
         
