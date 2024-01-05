@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct Dish {
+struct Dish: Hashable {
     
     let name: String
     let price: String

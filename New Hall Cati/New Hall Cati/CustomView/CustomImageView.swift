@@ -13,6 +13,7 @@ class CustomImageView: UIImageView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        configure()
     }
     
     required init?(coder: NSCoder) {
@@ -21,7 +22,7 @@ class CustomImageView: UIImageView {
     
     
     private func configure() {
-        layer.cornerRadius = 10
+        layer.cornerRadius = 16
         clipsToBounds = true
         image = placeholderImage
         contentMode = .scaleAspectFit
