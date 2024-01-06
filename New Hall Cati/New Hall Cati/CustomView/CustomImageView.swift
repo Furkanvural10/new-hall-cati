@@ -9,7 +9,7 @@ import UIKit
 
 class CustomImageView: UIImageView {
     
-    let placeholderImage = UIImage(named: "hamburger")
+    let placeholderImage = UIImage(named: "menu-placeholder")
 
     override init(frame: CGRect) {
         super.init(frame: frame)

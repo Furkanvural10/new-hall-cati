@@ -16,6 +16,7 @@ class MainPageViewModel {
     weak var delegate: MainPageViewModelProtocol?
     
     func setTitle() {
+        print("Tetiklendi 1")
         let today = Date()
         let formatter = DateFormatter()
         

@@ -1,5 +1,3 @@
-
-
 import UIKit
 
 class DishCell: UICollectionViewCell {
@@ -9,7 +7,6 @@ class DishCell: UICollectionViewCell {
     let dishImageView = CustomImageView(frame: .zero)
     let dishNameLabel = UILabel()
     let dishPriceLabel = UILabel()
-    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -27,6 +24,7 @@ class DishCell: UICollectionViewCell {
     }
     
     private func configure() {
+        
         addSubview(dishImageView)
         addSubview(dishNameLabel)
         addSubview(dishPriceLabel)
@@ -35,21 +33,36 @@ class DishCell: UICollectionViewCell {
         dishNameLabel.translatesAutoresizingMaskIntoConstraints = false
         dishPriceLabel.translatesAutoresizingMaskIntoConstraints = false
         
+        dishNameLabel.adjustsFontSizeToFitWidth = true
+        dishNameLabel.textAlignment = .center
+        dishNameLabel.minimumScaleFactor = 0.9
+        dishNameLabel.lineBreakMode = .byTruncatingTail
+        
+        dishPriceLabel.adjustsFontSizeToFitWidth = true
+        dishPriceLabel.textAlignment = .center
+        dishPriceLabel.minimumScaleFactor = 0.9
+        dishPriceLabel.lineBreakMode = .byTruncatingTail
+        
         NSLayoutConstraint.activate([
-            dishImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
-            dishImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
-            dishImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
+            dishImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+            dishImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
+            dishImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
             dishImageView.heightAnchor.constraint(equalTo: dishImageView.widthAnchor),
             
+            
             dishNameLabel.topAnchor.constraint(equalTo: dishImageView.bottomAnchor, constant: 8),
-            dishNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
-            dishNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
+            dishNameLabel.centerXAnchor.constraint(equalTo: dishImageView.centerXAnchor),
+            dishNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
+            dishNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
             dishNameLabel.heightAnchor.constraint(equalToConstant: 20),
             
-            dishPriceLabel.topAnchor.constraint(equalTo: dishNameLabel.bottomAnchor, constant: 12),
-            dishPriceLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
-            dishPriceLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
-            dishPriceLabel.heightAnchor.constraint(equalToConstant: 20),
+            
+            dishPriceLabel.topAnchor.constraint(equalTo: dishNameLabel.bottomAnchor, constant: 5),
+            dishPriceLabel.centerXAnchor.constraint(equalTo: dishImageView.centerXAnchor),
+            dishPriceLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
+            dishPriceLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
+            dishPriceLabel.heightAnchor.constraint(equalToConstant: 20)
+            
         ])
     }
 }
