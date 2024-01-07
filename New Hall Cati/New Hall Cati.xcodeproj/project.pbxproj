@@ -12,15 +12,11 @@
 		046692FF2B3F3BF5000DED64 /* DishCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046692FE2B3F3BF5000DED64 /* DishCell.swift */; };
 		046693022B3F415E000DED64 /* CustomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046693012B3F415E000DED64 /* CustomImageView.swift */; };
 		046693052B3F50EA000DED64 /* Dish.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046693042B3F50EA000DED64 /* Dish.swift */; };
-		046693072B4189C9000DED64 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046693062B4189C9000DED64 /* MainTableViewCell.swift */; };
 		046693092B418AC2000DED64 /* Dessert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046693082B418AC2000DED64 /* Dessert.swift */; };
-		0466930E2B41A042000DED64 /* TableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0466930D2B41A042000DED64 /* TableViewHeader.swift */; };
-		046693102B41DC32000DED64 /* CellHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0466930F2B41DC32000DED64 /* CellHeader.swift */; };
 		046693152B430A41000DED64 /* Drink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046693142B430A41000DED64 /* Drink.swift */; };
 		046693182B454B78000DED64 /* AdminPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046693172B454B78000DED64 /* AdminPageVC.swift */; };
 		0466931A2B454BAF000DED64 /* AdminPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046693192B454BAF000DED64 /* AdminPageViewModel.swift */; };
 		0466931F2B45748A000DED64 /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0466931E2B45748A000DED64 /* CellView.swift */; };
-		046693222B4811CE000DED64 /* SecondMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046693212B4811CE000DED64 /* SecondMainViewController.swift */; };
 		04B268E22B3D7DAD0096CB0C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B268E12B3D7DAD0096CB0C /* AppDelegate.swift */; };
 		04B268E42B3D7DAD0096CB0C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B268E32B3D7DAD0096CB0C /* SceneDelegate.swift */; };
 		04B268E62B3D7DAD0096CB0C /* OnboardingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B268E52B3D7DAD0096CB0C /* OnboardingVC.swift */; };
@@ -59,15 +55,11 @@
 		046692FE2B3F3BF5000DED64 /* DishCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishCell.swift; sourceTree = "<group>"; };
 		046693012B3F415E000DED64 /* CustomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageView.swift; sourceTree = "<group>"; };
 		046693042B3F50EA000DED64 /* Dish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dish.swift; sourceTree = "<group>"; };
-		046693062B4189C9000DED64 /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
 		046693082B418AC2000DED64 /* Dessert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dessert.swift; sourceTree = "<group>"; };
-		0466930D2B41A042000DED64 /* TableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewHeader.swift; sourceTree = "<group>"; };
-		0466930F2B41DC32000DED64 /* CellHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellHeader.swift; sourceTree = "<group>"; };
 		046693142B430A41000DED64 /* Drink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Drink.swift; sourceTree = "<group>"; };
 		046693172B454B78000DED64 /* AdminPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminPageVC.swift; sourceTree = "<group>"; };
 		046693192B454BAF000DED64 /* AdminPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminPageViewModel.swift; sourceTree = "<group>"; };
 		0466931E2B45748A000DED64 /* CellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
-		046693212B4811CE000DED64 /* SecondMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondMainViewController.swift; sourceTree = "<group>"; };
 		04B268DE2B3D7DAD0096CB0C /* New Hall Cati.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "New Hall Cati.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		04B268E12B3D7DAD0096CB0C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04B268E32B3D7DAD0096CB0C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -115,11 +107,9 @@
 		046692F82B3EF2A2000DED64 /* MainPage */ = {
 			isa = PBXGroup;
 			children = (
+				046693242B4AAB9C000DED64 /* ViewController */,
 				046693202B480E1E000DED64 /* ViewModel */,
-				0466930C2B41A02C000DED64 /* Header */,
 				046692FD2B3F3BC0000DED64 /* MainDishCell */,
-				046692F92B3EF2CA000DED64 /* MainPageVC.swift */,
-				046693212B4811CE000DED64 /* SecondMainViewController.swift */,
 			);
 			path = MainPage;
 			sourceTree = "<group>";
@@ -128,8 +118,6 @@
 			isa = PBXGroup;
 			children = (
 				046692FE2B3F3BF5000DED64 /* DishCell.swift */,
-				046693062B4189C9000DED64 /* MainTableViewCell.swift */,
-				0466930F2B41DC32000DED64 /* CellHeader.swift */,
 			);
 			path = MainDishCell;
 			sourceTree = "<group>";
@@ -152,20 +140,12 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		0466930C2B41A02C000DED64 /* Header */ = {
-			isa = PBXGroup;
-			children = (
-				0466930D2B41A042000DED64 /* TableViewHeader.swift */,
-			);
-			path = Header;
-			sourceTree = "<group>";
-		};
 		046693162B454B53000DED64 /* AdmingPage */ = {
 			isa = PBXGroup;
 			children = (
+				046693272B4AABDF000DED64 /* ViewController */,
+				046693232B4AAB83000DED64 /* ViewModel */,
 				0466931D2B457459000DED64 /* TableViewCell */,
-				046693172B454B78000DED64 /* AdminPageVC.swift */,
-				046693192B454BAF000DED64 /* AdminPageViewModel.swift */,
 			);
 			path = AdmingPage;
 			sourceTree = "<group>";
@@ -184,6 +164,46 @@
 				046692FB2B3F021A000DED64 /* MainPageViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		046693232B4AAB83000DED64 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				046693192B454BAF000DED64 /* AdminPageViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		046693242B4AAB9C000DED64 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				046692F92B3EF2CA000DED64 /* MainPageVC.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		046693252B4AABAA000DED64 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				04B2691A2B3D86680096CB0C /* OnboardingViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		046693262B4AABB3000DED64 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				04B268E52B3D7DAD0096CB0C /* OnboardingVC.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		046693272B4AABDF000DED64 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				046693172B454B78000DED64 /* AdminPageVC.swift */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		04B268D52B3D7DAD0096CB0C = {
@@ -216,7 +236,6 @@
 				04B269172B3D84EC0096CB0C /* Utilities */,
 				04B269162B3D849C0096CB0C /* Screens */,
 				04B269142B3D80AA0096CB0C /* Support */,
-				04B268EF2B3D7DAE0096CB0C /* LaunchScreen.storyboard */,
 				04B268F22B3D7DAE0096CB0C /* Info.plist */,
 				04B268EA2B3D7DAD0096CB0C /* New_Hall_Cati.xcdatamodeld */,
 			);
@@ -243,6 +262,7 @@
 		04B269142B3D80AA0096CB0C /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				04B268EF2B3D7DAE0096CB0C /* LaunchScreen.storyboard */,
 				04B268ED2B3D7DAE0096CB0C /* Assets.xcassets */,
 				04B268E12B3D7DAD0096CB0C /* AppDelegate.swift */,
 				04B268E32B3D7DAD0096CB0C /* SceneDelegate.swift */,
@@ -253,8 +273,8 @@
 		04B269152B3D848C0096CB0C /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				04B268E52B3D7DAD0096CB0C /* OnboardingVC.swift */,
-				04B2691A2B3D86680096CB0C /* OnboardingViewModel.swift */,
+				046693262B4AABB3000DED64 /* ViewController */,
+				046693252B4AABAA000DED64 /* ViewModel */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -424,14 +444,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				046693072B4189C9000DED64 /* MainTableViewCell.swift in Sources */,
 				046692FF2B3F3BF5000DED64 /* DishCell.swift in Sources */,
 				04B269192B3D84FC0096CB0C /* Constants.swift in Sources */,
 				04B2691B2B3D86680096CB0C /* OnboardingViewModel.swift in Sources */,
-				046693102B41DC32000DED64 /* CellHeader.swift in Sources */,
 				04B268EC2B3D7DAD0096CB0C /* New_Hall_Cati.xcdatamodeld in Sources */,
 				04B268E62B3D7DAD0096CB0C /* OnboardingVC.swift in Sources */,
-				046693222B4811CE000DED64 /* SecondMainViewController.swift in Sources */,
 				04B268E22B3D7DAD0096CB0C /* AppDelegate.swift in Sources */,
 				04B269212B3DA07D0096CB0C /* Font+Extension.swift in Sources */,
 				046693022B3F415E000DED64 /* CustomImageView.swift in Sources */,
@@ -439,7 +456,6 @@
 				046693182B454B78000DED64 /* AdminPageVC.swift in Sources */,
 				046693052B3F50EA000DED64 /* Dish.swift in Sources */,
 				046692FA2B3EF2CA000DED64 /* MainPageVC.swift in Sources */,
-				0466930E2B41A042000DED64 /* TableViewHeader.swift in Sources */,
 				046693152B430A41000DED64 /* Drink.swift in Sources */,
 				04B268E42B3D7DAD0096CB0C /* SceneDelegate.swift in Sources */,
 				046693092B418AC2000DED64 /* Dessert.swift in Sources */,

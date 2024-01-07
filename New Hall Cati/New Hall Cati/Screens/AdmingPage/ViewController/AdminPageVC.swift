@@ -110,7 +110,7 @@ final class AdminPageVC: UIViewController, AdminPageProtocol {
     }
     
     @objc func saveNewMenu() {
-        print("Save new menu item \(selectedMenu)")
+        
     }
     
     func configureAddButton() {
@@ -163,14 +163,14 @@ extension AdminPageVC: UITableViewDelegate, UITableViewDataSource {
             cell?.accessoryType = .none
             if selectedMenu.contains(selectedItem) {
                 selectedMenu.remove(selectedItem)
-                print(selectedMenu)
+                
             }
             
         } else {
             cell?.accessoryType = .checkmark
-            print(showingList[indexPath.row])
+            
             selectedMenu.insert(showingList[indexPath.row])
-            print(selectedMenu)
+            
         }
         
     }

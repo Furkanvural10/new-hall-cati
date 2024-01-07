@@ -47,15 +47,13 @@ class DishCell: UICollectionViewCell {
             dishImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
             dishImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
             dishImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
-            dishImageView.heightAnchor.constraint(equalTo: dishImageView.widthAnchor),
-            
+            dishImageView.heightAnchor.constraint(equalToConstant: 85),
             
             dishNameLabel.topAnchor.constraint(equalTo: dishImageView.bottomAnchor, constant: 8),
             dishNameLabel.centerXAnchor.constraint(equalTo: dishImageView.centerXAnchor),
             dishNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
             dishNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
             dishNameLabel.heightAnchor.constraint(equalToConstant: 20),
-            
             
             dishPriceLabel.topAnchor.constraint(equalTo: dishNameLabel.bottomAnchor, constant: 5),
             dishPriceLabel.centerXAnchor.constraint(equalTo: dishImageView.centerXAnchor),

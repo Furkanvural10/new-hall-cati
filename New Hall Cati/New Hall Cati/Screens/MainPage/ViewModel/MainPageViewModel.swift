@@ -1,10 +1,3 @@
-//
-//  MainPageViewModel.swift
-//  New Hall Cati
-//
-//  Created by furkan vural on 29.12.2023.
-//
-
 import Foundation
 
 protocol MainPageViewModelProtocol: AnyObject {
@@ -16,7 +9,6 @@ class MainPageViewModel {
     weak var delegate: MainPageViewModelProtocol?
     
     func setTitle() {
-        print("Tetiklendi 1")
         let today = Date()
         let formatter = DateFormatter()
         
@@ -26,5 +18,4 @@ class MainPageViewModel {
         
         delegate?.setTitle(dateString: dateString)
     }
-    
 }
