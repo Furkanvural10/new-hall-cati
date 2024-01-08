@@ -163,15 +163,10 @@ extension AdminPageVC: UITableViewDelegate, UITableViewDataSource {
             cell?.accessoryType = .none
             if selectedMenu.contains(selectedItem) {
                 selectedMenu.remove(selectedItem)
-                
             }
-            
         } else {
             cell?.accessoryType = .checkmark
-            
             selectedMenu.insert(showingList[indexPath.row])
-            
         }
-        
     }
 }

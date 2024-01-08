@@ -15,6 +15,7 @@ final class OnboardingVC: UIViewController {
         viewModel.delegate = self
         setupUI()
         configureWelcomeTextLabel()
+        viewModel.createUser()
         viewModel.startAnimation(for: welcomeTextLabel)
     }
     

@@ -30,9 +30,13 @@ struct OnboardingViewModel {
                 self.delegate?.nextPage()
             }
         }
-        
-        
     }
+    
+    func createUser() {
+        FirebaseManager.shared.createAnonymousUser()
+    }
+    
+    
     
     
 }
