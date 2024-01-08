@@ -15,7 +15,6 @@ final class OnboardingVC: UIViewController {
         viewModel.delegate = self
         setupUI()
         configureWelcomeTextLabel()
-        viewModel.createUser()
         viewModel.startAnimation(for: welcomeTextLabel)
     }
     
@@ -47,6 +46,12 @@ extension OnboardingVC: OnboardingViewModelDelegate {
     func nextPage() {
         let mainPage = MainPageVC()
         navigationController?.viewControllers = [mainPage]
-
+    }
+    
+    func showAlertMessage() {
+        let alertController = UIAlertController(title: "Hata", message: "Beklenmedik bir hata oluştu. Lütfen tekrar deneyin", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .default)
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true)
     }
 }

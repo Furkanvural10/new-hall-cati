@@ -9,9 +9,10 @@ import Foundation
 import FirebaseAuth
 
 protocol FirebaseManagerProtocol {
-    func createAnonymousUser()
+    func createAnonymousUser(completion: @escaping ((Result<User, NetworkError>) -> Void))
     func getData()
 }
+
 
 final class FirebaseManager: FirebaseManagerProtocol {
     
@@ -19,13 +20,20 @@ final class FirebaseManager: FirebaseManagerProtocol {
     
     private init() {}
     
-    func createAnonymousUser() {
-//      TODO: Create anon user
+    func createAnonymousUser(completion: @escaping (Result<User, NetworkError>) -> Void) {
+        
         Auth.auth().signInAnonymously { result, error in
-            guard error == nil else { return }
-            guard let result = result else { return }
+            guard error == nil else {
+                completion(.failure(.authError))
+                return
+            }
+            guard let result = result else {
+                completion(.failure(.authResultError))
+                return
+            }
             
-            print("BAŞARILI \(result.user.uid)")
+            let user = User(userID: result.user.uid)
+            completion(.success(user))
         }
     }
     

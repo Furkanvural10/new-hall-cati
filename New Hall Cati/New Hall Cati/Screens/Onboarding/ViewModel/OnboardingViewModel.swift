@@ -11,6 +11,7 @@ import UIKit
 protocol OnboardingViewModelDelegate: AnyObject {
     func welcomeTextDidChanged(to newText: String)
     func nextPage()
+    func showAlertMessage()
 }
 
 struct OnboardingViewModel {
@@ -27,13 +28,21 @@ struct OnboardingViewModel {
             UIView.animate(withDuration: 1, delay: 0, options: .curveEaseOut) {
                 label.alpha = 1
             } completion: { _ in
-                self.delegate?.nextPage()
+                createUser()
+                
             }
         }
     }
     
     func createUser() {
-        FirebaseManager.shared.createAnonymousUser()
+        FirebaseManager.shared.createAnonymousUser { result in
+            switch result {
+            case .success(let success):
+                self.delegate?.nextPage()
+            case .failure(let failure):
+                self.delegate?.showAlertMessage()
+            }
+        }
     }
     
     
