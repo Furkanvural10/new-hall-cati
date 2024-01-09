@@ -18,7 +18,6 @@ class DishCell: UICollectionViewCell {
     }
     
     func set(dish: Dish) {
-        dishImageView.image = dish.image
         dishNameLabel.text = dish.name
         dishPriceLabel.text = dish.price
     }

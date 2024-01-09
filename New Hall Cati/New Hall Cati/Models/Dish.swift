@@ -7,12 +7,13 @@
 
 import UIKit
 
-struct Dish: Hashable {
+struct Dish: Hashable, Identifiable, Codable {
     
+    let id = UUID()
     let name: String
     let price: String
-    let image: UIImage
-    let isSold: Bool
+    let image: String
+    
     
     
 }

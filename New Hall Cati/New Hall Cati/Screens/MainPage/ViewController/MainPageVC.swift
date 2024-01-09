@@ -1,4 +1,5 @@
 import UIKit
+import FirebaseFirestore
 
 protocol MainPageProtocol {
     
@@ -20,35 +21,6 @@ import Foundation
 
 final class MainPageVC: UIViewController {
 
-    let mockDishData: [Dish] =
-    [
-        Dish(name: "Pilav", price: "12₺", image: UIImage(named: "menu-placeholder")!, isSold: false),
-        Dish(name: "Makarna", price: "22₺", image: UIImage(named: "menu-placeholder")!, isSold: false),
-        Dish(name: "Patlıcan Yemeği", price: "32₺", image: UIImage(named: "menu-placeholder")!, isSold: false),
-        Dish(name: "Tavuk Sote Tavuk Sote", price: "42₺", image: UIImage(named: "menu-placeholder")!, isSold: false),
-        Dish(name: "Et Sote", price: "52₺", image: UIImage(named: "menu-placeholder")!, isSold: false),
-        Dish(name: "Patates Kızartması", price: "62₺", image: UIImage(named: "menu-placeholder")!, isSold: false),
-        Dish(name: "Su Böreği", price: "42₺", image: UIImage(named: "menu-placeholder")!, isSold: false),
-        Dish(name: "Kereviz", price: "52₺", image: UIImage(named: "menu-placeholder")!, isSold: false),
-        Dish(name: "Domates Çorbası", price: "62₺", image: UIImage(named: "menu-placeholder")!, isSold: false),
-        Dish(name: "Un Çorbası", price: "62₺", image: UIImage(named: "menu-placeholder")!, isSold: false),
-        Dish(name: "Bezelye", price: "62₺", image: UIImage(named: "menu-placeholder")!, isSold: false),
-    ]
-    
-    let mockDessertData: [Dish] = [
-        Dish(name: "Tiramisu", price: "12₺", image: UIImage(named: "menu-placeholder")!, isSold: false),
-        Dish(name: "Muhallebi", price: "22₺", image: UIImage(named: "menu-placeholder")!, isSold: false),
-        Dish(name: "Pudding", price: "32₺", image: UIImage(named: "menu-placeholder")!, isSold: false),
-        Dish(name: "Kazan Dibi", price: "42₺", image: UIImage(named: "menu-placeholder")!, isSold: false),
-    ]
-    
-    let mockDrinkingData: [Dish] = [
-        Dish(name: "Su", price: "12₺", image: UIImage(named: "menu-placeholder")!, isSold: false),
-        Dish(name: "Ice Tea", price: "22₺", image: UIImage(named: "menu-placeholder")!, isSold: false),
-        Dish(name: "Şalgam (Acısız)", price: "32₺", image: UIImage(named: "menu-placeholder")!, isSold: false),
-        Dish(name: "Fuse Tea Çeşitleri", price: "42₺", image: UIImage(named: "menu-placeholder")!, isSold: false),
-    
-    ]
     
     var showingData: [Dish] = []
     
@@ -74,12 +46,19 @@ final class MainPageVC: UIViewController {
     var viewModel = MainPageViewModel()
     
 
+    
+    
+
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
-        showingData = mockDishData
+        
+//        showingData = mockDishData
         viewModel.delegate = self
+        
+        //    Move VM
+        getDataFromFirestore()
         
         configureBackground()
         configureNavigationBar()
@@ -90,7 +69,15 @@ final class MainPageVC: UIViewController {
         configureCollectionView()
         configureDataSource()
         configureDateTitle()
-        self.updateData()
+//        self.updateData()
+        
+    }
+    
+    func getDataFromFirestore() {
+        
+        viewModel.getData(child: "DailyMainDish")
+
+        
         
     }
     
@@ -152,6 +139,12 @@ extension MainPageVC: MainPageViewModelProtocol {
         dateTitleLabel.text = dateString
         dateTitleLabel.font = .systemFont(ofSize: 25)
         dateTitleLabel.textColor = .black
+    }
+    
+    func getData(dish: [Dish]) {
+        print("basarılı sekilde calıstı")
+        self.showingData = dish
+        self.updateData()
     }
 }
 
@@ -254,15 +247,12 @@ extension MainPageVC: MainPageProtocol {
         switch segmentedController.selectedSegmentIndex {
         case 0:
             
-            showingData = mockDishData
             self.updateData()
         case 1:
             
-            showingData = mockDessertData
             self.updateData()
         case 2:
             
-            showingData = mockDrinkingData
             self.updateData()
         default:
             fatalError("Fatal Error")

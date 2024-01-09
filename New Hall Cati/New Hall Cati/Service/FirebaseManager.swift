@@ -1,16 +1,10 @@
-//
-//  FirebaseManager.swift
-//  New Hall Cati
-//
-//  Created by furkan vural on 8.01.2024.
-//
-
 import Foundation
 import FirebaseAuth
+import FirebaseFirestore
 
 protocol FirebaseManagerProtocol {
     func createAnonymousUser(completion: @escaping ((Result<User, NetworkError>) -> Void))
-    func getData()
+    func getData<T: Codable>(child: String, completion: @escaping ((Result<[T], NetworkError>) -> Void))
 }
 
 
@@ -37,7 +31,31 @@ final class FirebaseManager: FirebaseManagerProtocol {
         }
     }
     
-    func getData() {
-//      TODO: Get data from firebase
+    func getData<T: Codable>(child: String, completion: @escaping ((Result<[T], NetworkError>) -> Void)) {
+        
+        let database = Firestore.firestore()
+        database.collection(child).addSnapshotListener { snapshot, error in
+            guard error == nil else {
+                completion(.failure(.dataError))
+                return
+            }
+            
+            guard let snapshot = snapshot else {
+                completion(.failure(.snapshotError))
+                return
+            }
+            var products = [T]()
+            for document in snapshot.documents {
+                do {
+                    let product = try document.data(as: T.self)
+                    products.append(product)
+                }
+                catch {
+                    completion(.failure(.decodeError))
+                    return
+                }
+            }
+            completion(.success(products))
+        }
     }
 }

@@ -25,7 +25,7 @@ struct OnboardingViewModel {
             label.alpha = 0
         } completion: { _ in
             self.delegate?.welcomeTextDidChanged(to: self.welcomeText)
-            UIView.animate(withDuration: 1, delay: 0, options: .curveEaseOut) {
+            UIView.animate(withDuration: 2, delay: 0, options: .curveEaseOut) {
                 label.alpha = 1
             } completion: { _ in
                 createUser()

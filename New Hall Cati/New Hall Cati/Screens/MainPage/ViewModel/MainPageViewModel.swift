@@ -2,6 +2,7 @@ import Foundation
 
 protocol MainPageViewModelProtocol: AnyObject {
     func setTitle(dateString: String)
+    func getData(dish: [Dish])
 }
 
 class MainPageViewModel {
@@ -17,5 +18,17 @@ class MainPageViewModel {
         let dateString = formatter.string(from: today)
         
         delegate?.setTitle(dateString: dateString)
+    }
+    
+    func getData(child: String) {
+        FirebaseManager.shared.getData(child: "DailyMainDish") { (result: Result<[Dish], NetworkError>) in
+            switch result {
+            case .success(let success):
+                self.delegate?.getData(dish: success)
+            case .failure(let failure):
+                // TODO: - Show alert messages
+                print("Show alert message")
+            }
+        }
     }
 }

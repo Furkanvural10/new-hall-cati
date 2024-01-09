@@ -8,3 +8,10 @@ struct Dessert {
     let image: String
     let isSold: Bool
 }
+
+struct Product: Codable, Identifiable {
+    var id = UUID()
+    var name: String
+    var price: String
+    var imageURL: String
+}

@@ -5,7 +5,7 @@ protocol AdminPageProtocol {
     var allFoodList: [String] { get }
     var allDessertList: [String] { get }
     var allDrinkList: [String] { get }
-    var viewModel: AdminPageViewModel { get }
+    
     var selectedMenu: Set<String> { get }
     var showingList: [String] { get }
     var items: [String] { get }
@@ -22,7 +22,7 @@ final class AdminPageVC: UIViewController, AdminPageProtocol {
     lazy var allFoodList = [String]()
     lazy var allDessertList = [String]()
     lazy var allDrinkList = [String]()
-    var viewModel = AdminPageViewModel()
+    private var viewModel = AdminPageViewModel()
 
 //    MARK: - UI Elements
     private var segmentedController = UISegmentedControl(frame: .zero)
