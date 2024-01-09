@@ -43,6 +43,8 @@
 		046699562B4C80180053C1BD /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046699552B4C80180053C1BD /* FirebaseManager.swift */; };
 		046699582B4C8A260053C1BD /* FirebaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046699572B4C8A260053C1BD /* FirebaseHelper.swift */; };
 		0466995A2B4C91FC0053C1BD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046699592B4C91FC0053C1BD /* User.swift */; };
+		0466995E2B4DF46B0053C1BD /* GetMainDish.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0466995D2B4DF46B0053C1BD /* GetMainDish.swift */; };
+		046699602B4DF6CB0053C1BD /* FirebaseConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0466995F2B4DF6CB0053C1BD /* FirebaseConstants.swift */; };
 		04B268E22B3D7DAD0096CB0C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B268E12B3D7DAD0096CB0C /* AppDelegate.swift */; };
 		04B268E42B3D7DAD0096CB0C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B268E32B3D7DAD0096CB0C /* SceneDelegate.swift */; };
 		04B268E62B3D7DAD0096CB0C /* OnboardingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B268E52B3D7DAD0096CB0C /* OnboardingVC.swift */; };
@@ -90,6 +92,8 @@
 		046699552B4C80180053C1BD /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		046699572B4C8A260053C1BD /* FirebaseHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseHelper.swift; sourceTree = "<group>"; };
 		046699592B4C91FC0053C1BD /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		0466995D2B4DF46B0053C1BD /* GetMainDish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMainDish.swift; sourceTree = "<group>"; };
+		0466995F2B4DF6CB0053C1BD /* FirebaseConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseConstants.swift; sourceTree = "<group>"; };
 		04B268DE2B3D7DAD0096CB0C /* New Hall Cati.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "New Hall Cati.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		04B268E12B3D7DAD0096CB0C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04B268E32B3D7DAD0096CB0C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -262,10 +266,27 @@
 		046699542B4C7FF50053C1BD /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				0466995B2B4DF4170053C1BD /* Manager */,
+				0466995C2B4DF44A0053C1BD /* Layer */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		0466995B2B4DF4170053C1BD /* Manager */ = {
+			isa = PBXGroup;
+			children = (
 				046699552B4C80180053C1BD /* FirebaseManager.swift */,
 				046699572B4C8A260053C1BD /* FirebaseHelper.swift */,
 			);
-			path = Service;
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		0466995C2B4DF44A0053C1BD /* Layer */ = {
+			isa = PBXGroup;
+			children = (
+				0466995D2B4DF46B0053C1BD /* GetMainDish.swift */,
+			);
+			path = Layer;
 			sourceTree = "<group>";
 		};
 		04B268D52B3D7DAD0096CB0C = {
@@ -357,6 +378,7 @@
 			isa = PBXGroup;
 			children = (
 				04B269182B3D84FC0096CB0C /* Constants.swift */,
+				0466995F2B4DF6CB0053C1BD /* FirebaseConstants.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -538,6 +560,7 @@
 			files = (
 				046692FF2B3F3BF5000DED64 /* DishCell.swift in Sources */,
 				04B269192B3D84FC0096CB0C /* Constants.swift in Sources */,
+				0466995E2B4DF46B0053C1BD /* GetMainDish.swift in Sources */,
 				046699582B4C8A260053C1BD /* FirebaseHelper.swift in Sources */,
 				04B2691B2B3D86680096CB0C /* OnboardingViewModel.swift in Sources */,
 				04B268EC2B3D7DAD0096CB0C /* New_Hall_Cati.xcdatamodeld in Sources */,
@@ -555,6 +578,7 @@
 				04B268E42B3D7DAD0096CB0C /* SceneDelegate.swift in Sources */,
 				046693092B418AC2000DED64 /* Dessert.swift in Sources */,
 				0466931A2B454BAF000DED64 /* AdminPageViewModel.swift in Sources */,
+				046699602B4DF6CB0053C1BD /* FirebaseConstants.swift in Sources */,
 				0466931F2B45748A000DED64 /* CellView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

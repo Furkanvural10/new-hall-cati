@@ -21,12 +21,11 @@ class MainPageViewModel {
     }
     
     func getData(child: String) {
-        FirebaseManager.shared.getData(child: "DailyMainDish") { (result: Result<[Dish], NetworkError>) in
+        GetMainDish.shared.getMainDish(child: "DailyMainDish") { result in
             switch result {
             case .success(let success):
                 self.delegate?.getData(dish: success)
             case .failure(let failure):
-                // TODO: - Show alert messages
                 print("Show alert message")
             }
         }
