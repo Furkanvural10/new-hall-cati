@@ -17,9 +17,9 @@ class DishCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func set(dish: Dish) {
-        dishNameLabel.text = dish.name
-        dishPriceLabel.text = dish.price
+    func set(product: Product) {
+        dishNameLabel.text = product.name
+        dishPriceLabel.text = product.price
     }
     
     private func configure() {

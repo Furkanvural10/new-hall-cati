@@ -36,11 +36,13 @@ final class FirebaseManager: FirebaseManagerProtocol {
         let database = Firestore.firestore()
         database.collection(child).addSnapshotListener { snapshot, error in
             guard error == nil else {
+                print("Data error")
                 completion(.failure(.dataError))
                 return
             }
             
             guard let snapshot = snapshot else {
+                print("Snapshot error")
                 completion(.failure(.snapshotError))
                 return
             }
@@ -51,6 +53,7 @@ final class FirebaseManager: FirebaseManagerProtocol {
                     products.append(product)
                 }
                 catch {
+                    print("decode error")
                     completion(.failure(.decodeError))
                     return
                 }

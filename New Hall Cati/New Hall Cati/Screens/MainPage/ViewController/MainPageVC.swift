@@ -22,7 +22,11 @@ import Foundation
 final class MainPageVC: UIViewController {
 
     
-    var showingData: [Dish] = []
+    var dailyMainDish: [Product] = []
+    var dailyDessert: [Product] = []
+    var dailyNut: [Product] = []
+    var allDrink: [Product] = []
+    var showingData: Array<Product>!
     
     enum Section {
         case main
@@ -41,25 +45,15 @@ final class MainPageVC: UIViewController {
     private var workingDetailView: UIView!
     private var segmentedController: UISegmentedControl!
     var collectionView: UICollectionView!
-    var dataSource: UICollectionViewDiffableDataSource<Section, Dish>!
+    var dataSource: UICollectionViewDiffableDataSource<Section, Product>!
     
     var viewModel = MainPageViewModel()
-    
-
-    
-    
 
     override func viewDidLoad() {
-        
         super.viewDidLoad()
-        
-        
-//        showingData = mockDishData
+        showingData = [Product]()
         viewModel.delegate = self
-        
-        //    Move VM
         getDataFromFirestore()
-        
         configureBackground()
         configureNavigationBar()
         configureWorkingLabel()
@@ -69,16 +63,12 @@ final class MainPageVC: UIViewController {
         configureCollectionView()
         configureDataSource()
         configureDateTitle()
-//        self.updateData()
-        
     }
     
     func getDataFromFirestore() {
-        
-        viewModel.getData(child: "DailyMainDish")
-
-        
-        
+        viewModel.getDailyMainDish()
+        viewModel.getDailyDessert()
+        viewModel.getAllDrink()
     }
     
     func configureHourLabel() {
@@ -96,10 +86,8 @@ final class MainPageVC: UIViewController {
     }
     
 
-    
-    
-    
     func createThreeColumnFlowLayout() -> UICollectionViewFlowLayout {
+     
         let width = view.bounds.width
         let padding: CGFloat = 12
         let minimumItemSpacing: CGFloat = 10
@@ -114,15 +102,17 @@ final class MainPageVC: UIViewController {
     }
     
     func configureDataSource() {
-        dataSource = UICollectionViewDiffableDataSource<Section, Dish>(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
+        dataSource = UICollectionViewDiffableDataSource<Section, Product>(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DishCell.reusedID, for: indexPath) as! DishCell
-            cell.set(dish: self.showingData[indexPath.row])
+            cell.set(product: self.showingData[indexPath.row])
             return cell
         })
+        
+
     }
     
     func updateData() {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, Dish>()
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Product>()
         snapshot.appendSections([.main])
         snapshot.appendItems(showingData)
         DispatchQueue.main.async {
@@ -141,10 +131,21 @@ extension MainPageVC: MainPageViewModelProtocol {
         dateTitleLabel.textColor = .black
     }
     
-    func getData(dish: [Dish]) {
-        print("basarılı sekilde calıstı")
-        self.showingData = dish
+    
+    func getDailyMainDish(dish: [Product]) {
+        dailyMainDish = dish
+        self.showingData = dailyMainDish
         self.updateData()
+    }
+    
+    func getDailyDessert(dessert: [Product]) {
+        self.dailyDessert = dessert
+        print("Dessert \(dailyDessert)")
+    }
+    
+    func getDrink(drink: [Product]) {
+        self.allDrink = drink
+        print("Drink \(drink)")
     }
 }
 
@@ -246,13 +247,13 @@ extension MainPageVC: MainPageProtocol {
     @objc private func changedSegmentedControl() {
         switch segmentedController.selectedSegmentIndex {
         case 0:
-            
+            showingData = dailyMainDish
             self.updateData()
         case 1:
-            
+            showingData = dailyDessert
             self.updateData()
         case 2:
-            
+            showingData = allDrink
             self.updateData()
         default:
             fatalError("Fatal Error")

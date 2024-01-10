@@ -2,7 +2,9 @@ import Foundation
 
 protocol MainPageViewModelProtocol: AnyObject {
     func setTitle(dateString: String)
-    func getData(dish: [Dish])
+    func getDailyMainDish(dish: [Product])
+    func getDailyDessert(dessert: [Product])
+    func getDrink(drink: [Product])
 }
 
 class MainPageViewModel {
@@ -20,14 +22,37 @@ class MainPageViewModel {
         delegate?.setTitle(dateString: dateString)
     }
     
-    func getData(child: String) {
-        GetMainDish.shared.getMainDish(child: "DailyMainDish") { result in
+    func getDailyMainDish() {
+        GetMainDish.shared.getMainDish(child: FirebaseConstants.dailyMainDishChildText) { result in
             switch result {
             case .success(let success):
-                self.delegate?.getData(dish: success)
+                self.delegate?.getDailyMainDish(dish: success)
             case .failure(let failure):
-                print("Show alert message")
+                print("Show alert message \(failure.localizedDescription)")
             }
         }
     }
+    
+    func getDailyDessert() {
+        GetDailyDessert.shared.getDailyDessert(child: FirebaseConstants.dailyDessertChildText) { result in
+            switch result {
+            case .success(let success):
+                self.delegate?.getDailyDessert(dessert: success )
+            case .failure(let failure):
+                print("Failure dessert")
+            }
+        }
+    }
+    
+    func getAllDrink() {
+        GetAllDrink.shared.getAllDrink(child: FirebaseConstants.allDrinkChildText) { result in
+            switch result {
+            case .success(let success):
+                self.delegate?.getDrink(drink: success)
+            case .failure(let failure):
+                print("Failure drink")
+            }
+        }
+    }
+    
 }
