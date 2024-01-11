@@ -42,6 +42,7 @@ final class AdminPageVC: UIViewController, AdminPageProtocol {
         super.viewDidLoad()
         configureSegmentedController()
         showingList = food
+        getDataFromFirestore()
         view.backgroundColor = .systemBackground
         
         configureTableView()
@@ -49,6 +50,10 @@ final class AdminPageVC: UIViewController, AdminPageProtocol {
         configureAddButton()
         
         
+    }
+    
+    func getDataFromFirestore() {
+        viewModel.getAllMainDish()
     }
     
      func configureSegmentedController() {
