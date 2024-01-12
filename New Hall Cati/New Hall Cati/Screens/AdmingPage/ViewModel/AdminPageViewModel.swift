@@ -8,15 +8,18 @@
 import Foundation
 
 protocol AdminPageViewModelProtocol {
+    
     func saveNewMenu()
     func getAllMainDish()
 }
 
 class AdminPageViewModel {
-    
+    var allMainDish: [Product]!
 }
 
 extension AdminPageViewModel: AdminPageViewModelProtocol {
+    
+    
     
     func saveNewMenu() {
 //        TODO: save db admin adding new daily menu
@@ -27,8 +30,9 @@ extension AdminPageViewModel: AdminPageViewModelProtocol {
             switch result {
             case .success(let success):
                 print("Success \(success)")
+                self.allMainDish = success
             case .failure(let failure):
-                print("failure all main")
+                print("failure all main \(failure)")
             }
         }
     }

@@ -32,9 +32,9 @@ class CellView: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func set(with product: String) {
-        nameLabel.text = product
-        priceLabel.text = product
+    func set(with product: Product) {
+        nameLabel.text = product.name
+        priceLabel.text = product.price
     }
     
     private func configure() {

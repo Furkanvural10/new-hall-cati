@@ -6,8 +6,8 @@ protocol AdminPageProtocol {
     var allDessertList: [String] { get }
     var allDrinkList: [String] { get }
     
-    var selectedMenu: Set<String> { get }
-    var showingList: [String] { get }
+    var selectedMenu: Set<Product> { get }
+    var showingList: [Product] { get }
     var items: [String] { get }
     
     func configureSegmentedController()
@@ -35,13 +35,13 @@ final class AdminPageVC: UIViewController, AdminPageProtocol {
     var drink = ["1Dr", "2Dr", "3Dr", "4Dr"]
     var items: [String] = Constant.segmentedItems
     
-    var selectedMenu: Set<String> = []
-    var showingList: [String] = []
+    var selectedMenu: Set<Product> = []
+    var showingList: [Product] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureSegmentedController()
-        showingList = food
+        
         getDataFromFirestore()
         view.backgroundColor = .systemBackground
         
@@ -55,6 +55,8 @@ final class AdminPageVC: UIViewController, AdminPageProtocol {
     func getDataFromFirestore() {
         viewModel.getAllMainDish()
     }
+    
+    
     
      func configureSegmentedController() {
 
@@ -76,16 +78,15 @@ final class AdminPageVC: UIViewController, AdminPageProtocol {
     @objc func changedSegmentedControl() {
         switch segmentedController.selectedSegmentIndex {
         case 0:
-            showingList.removeAll()
-            showingList = food
             tableView.reloadData()
         case 1:
             showingList.removeAll()
-            showingList = dessert
+            showingList = viewModel.allMainDish
+//            showingList = dessert
             tableView.reloadData()
         case 2:
             showingList.removeAll()
-            showingList = drink
+            
             tableView.reloadData()
         default:
             fatalError("Fatal error")
@@ -161,17 +162,18 @@ extension AdminPageVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        let cell = tableView.cellForRow(at: indexPath)
-        let selectedItem = food[indexPath.row]
-        
-        if cell?.accessoryType == .checkmark {
-            cell?.accessoryType = .none
-            if selectedMenu.contains(selectedItem) {
-                selectedMenu.remove(selectedItem)
-            }
-        } else {
-            cell?.accessoryType = .checkmark
-            selectedMenu.insert(showingList[indexPath.row])
-        }
+//        let cell = tableView.cellForRow(at: indexPath)
+//        let selectedItem = food[indexPath.row]
+//        
+//        if cell?.accessoryType == .checkmark {
+//            cell?.accessoryType = .none
+//            if selectedMenu.contains(selectedItem) {
+//                selectedMenu.remove(selectedItem)
+//            }
+//        } else {
+//            cell?.accessoryType = .checkmark
+//            selectedMenu.insert(showingList[indexPath.row])
+//            
+//        }
     }
 }
