@@ -24,7 +24,7 @@ final class MainPageVC: UIViewController {
     
     var dailyMainDish: [Product] = []
     var dailyDessert: [Product] = []
-    var dailyNut: [Product] = []
+    var dailySnack: [Product] = []
     var allDrink: [Product] = []
     var showingData: Array<Product>!
     
@@ -69,6 +69,7 @@ final class MainPageVC: UIViewController {
         viewModel.getDailyMainDish()
         viewModel.getDailyDessert()
         viewModel.getAllDrink()
+        viewModel.getAllSnack()
     }
     
     func configureHourLabel() {
@@ -146,6 +147,10 @@ extension MainPageVC: MainPageViewModelProtocol {
     func getDrink(drink: [Product]) {
         self.allDrink = drink
         print("Drink \(drink)")
+    }
+    
+    func getDailySnack(snack: [Product]) {
+        self.dailySnack = snack
     }
 }
 
@@ -250,13 +255,14 @@ extension MainPageVC: MainPageProtocol {
             showingData = dailyMainDish
             self.updateData()
         case 1:
-            showingData = dailyDessert
+            showingData = dailySnack
             self.updateData()
         case 2:
-            showingData = allDrink
+            showingData = dailyDessert
             self.updateData()
         default:
-            fatalError("Fatal Error")
+            showingData = allDrink
+            self.updateData()
         }
     }
 }

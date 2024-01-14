@@ -28,11 +28,7 @@ final class AdminPageVC: UIViewController, AdminPageProtocol {
     private var segmentedController = UISegmentedControl(frame: .zero)
     private var tableView: UITableView!
     private var addButton: UIButton!
-    
-//    MARK: - Mock Data
-    var food = ["1F", "2F", "3F", "4F","5F", "6F", "7F", "8F","9F", "10F", "11F", "12F",]
-    var dessert = ["1D", "2D", "3D", "4D"]
-    var drink = ["1Dr", "2Dr", "3Dr", "4Dr"]
+        
     var items: [String] = Constant.segmentedItems
     
     var selectedMenu: Set<Product> = []
@@ -54,13 +50,13 @@ final class AdminPageVC: UIViewController, AdminPageProtocol {
     
     func getDataFromFirestore() {
         viewModel.getAllMainDish()
+        viewModel.getAllDessert()
+        viewModel.getAllDrink()
     }
     
     
     
      func configureSegmentedController() {
-
-         
          segmentedController = UISegmentedControl(items: items)
          segmentedController.translatesAutoresizingMaskIntoConstraints = false
          view.addSubview(segmentedController)
@@ -78,15 +74,15 @@ final class AdminPageVC: UIViewController, AdminPageProtocol {
     @objc func changedSegmentedControl() {
         switch segmentedController.selectedSegmentIndex {
         case 0:
+            showingList = viewModel.allMainDish
             tableView.reloadData()
         case 1:
             showingList.removeAll()
-            showingList = viewModel.allMainDish
-//            showingList = dessert
+            showingList = viewModel.allDessert
             tableView.reloadData()
         case 2:
             showingList.removeAll()
-            
+            showingList = viewModel.allDrink
             tableView.reloadData()
         default:
             fatalError("Fatal error")

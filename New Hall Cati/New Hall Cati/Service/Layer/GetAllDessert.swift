@@ -6,3 +6,17 @@
 //
 
 import Foundation
+
+protocol GetAllDessertProtocol {
+    func getAllDessert(child: String, completion: @escaping (Result<[Product], NetworkError>) -> Void)
+}
+
+final class GetAllDessert: GetAllDessertProtocol {
+    
+    static let shared = GetAllDessert()
+    private init() {}
+    
+    func getAllDessert(child: String, completion: @escaping (Result<[Product], NetworkError>) -> Void) {
+        FirebaseManager.shared.getData(child: child, completion: completion)
+    }
+}

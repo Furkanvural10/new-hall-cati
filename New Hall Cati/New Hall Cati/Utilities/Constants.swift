@@ -17,5 +17,5 @@ struct Constant {
     static let save = "Kaydet"
     
     
-    static let segmentedItems = ["Ana Yemek", "Tatlılar", "İçecekler"]
+    static let segmentedItems = ["Ana Yemek", "Mezeler", "Tatlılar", "İçecekler"]
 }

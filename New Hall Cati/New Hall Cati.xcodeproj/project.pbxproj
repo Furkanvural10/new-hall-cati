@@ -47,8 +47,8 @@
 		0466996B2B4EC0170053C1BD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0466996A2B4EC0170053C1BD /* User.swift */; };
 		0466998A2B50825A0053C1BD /* GetAllMainDish.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046699892B50825A0053C1BD /* GetAllMainDish.swift */; };
 		0466998C2B5082660053C1BD /* GetAllDessert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0466998B2B5082660053C1BD /* GetAllDessert.swift */; };
-		0466998E2B5082700053C1BD /* GetAllNut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0466998D2B5082700053C1BD /* GetAllNut.swift */; };
-		046699902B50827A0053C1BD /* GetDailyNut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0466998F2B50827A0053C1BD /* GetDailyNut.swift */; };
+		0466998E2B5082700053C1BD /* GetAllSnack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0466998D2B5082700053C1BD /* GetAllSnack.swift */; };
+		046699902B50827A0053C1BD /* GetDailySnack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0466998F2B50827A0053C1BD /* GetDailySnack.swift */; };
 		04B268E22B3D7DAD0096CB0C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B268E12B3D7DAD0096CB0C /* AppDelegate.swift */; };
 		04B268E42B3D7DAD0096CB0C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B268E32B3D7DAD0096CB0C /* SceneDelegate.swift */; };
 		04B268E62B3D7DAD0096CB0C /* OnboardingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B268E52B3D7DAD0096CB0C /* OnboardingVC.swift */; };
@@ -100,8 +100,8 @@
 		0466996A2B4EC0170053C1BD /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		046699892B50825A0053C1BD /* GetAllMainDish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAllMainDish.swift; sourceTree = "<group>"; };
 		0466998B2B5082660053C1BD /* GetAllDessert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAllDessert.swift; sourceTree = "<group>"; };
-		0466998D2B5082700053C1BD /* GetAllNut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAllNut.swift; sourceTree = "<group>"; };
-		0466998F2B50827A0053C1BD /* GetDailyNut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetDailyNut.swift; sourceTree = "<group>"; };
+		0466998D2B5082700053C1BD /* GetAllSnack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAllSnack.swift; sourceTree = "<group>"; };
+		0466998F2B50827A0053C1BD /* GetDailySnack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetDailySnack.swift; sourceTree = "<group>"; };
 		04B268DE2B3D7DAD0096CB0C /* New Hall Cati.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "New Hall Cati.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		04B268E12B3D7DAD0096CB0C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04B268E32B3D7DAD0096CB0C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -295,8 +295,8 @@
 				046699682B4EAF4F0053C1BD /* GetAllDrink.swift */,
 				046699892B50825A0053C1BD /* GetAllMainDish.swift */,
 				0466998B2B5082660053C1BD /* GetAllDessert.swift */,
-				0466998D2B5082700053C1BD /* GetAllNut.swift */,
-				0466998F2B50827A0053C1BD /* GetDailyNut.swift */,
+				0466998D2B5082700053C1BD /* GetAllSnack.swift */,
+				0466998F2B50827A0053C1BD /* GetDailySnack.swift */,
 			);
 			path = Layer;
 			sourceTree = "<group>";
@@ -587,7 +587,7 @@
 				04B268E62B3D7DAD0096CB0C /* OnboardingVC.swift in Sources */,
 				04B268E22B3D7DAD0096CB0C /* AppDelegate.swift in Sources */,
 				046699622B4E98CD0053C1BD /* GetDailyDessert.swift in Sources */,
-				0466998E2B5082700053C1BD /* GetAllNut.swift in Sources */,
+				0466998E2B5082700053C1BD /* GetAllSnack.swift in Sources */,
 				0466998C2B5082660053C1BD /* GetAllDessert.swift in Sources */,
 				04B269212B3DA07D0096CB0C /* UIFont+Extension.swift in Sources */,
 				0466996B2B4EC0170053C1BD /* User.swift in Sources */,
@@ -602,7 +602,7 @@
 				04B268E42B3D7DAD0096CB0C /* SceneDelegate.swift in Sources */,
 				0466931A2B454BAF000DED64 /* AdminPageViewModel.swift in Sources */,
 				046699602B4DF6CB0053C1BD /* FirebaseConstants.swift in Sources */,
-				046699902B50827A0053C1BD /* GetDailyNut.swift in Sources */,
+				046699902B50827A0053C1BD /* GetDailySnack.swift in Sources */,
 				0466931F2B45748A000DED64 /* CellView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

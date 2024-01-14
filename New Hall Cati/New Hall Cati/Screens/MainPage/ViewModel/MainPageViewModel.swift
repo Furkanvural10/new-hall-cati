@@ -5,6 +5,7 @@ protocol MainPageViewModelProtocol: AnyObject {
     func getDailyMainDish(dish: [Product])
     func getDailyDessert(dessert: [Product])
     func getDrink(drink: [Product])
+    func getDailySnack(snack: [Product])
 }
 
 class MainPageViewModel {
@@ -51,6 +52,17 @@ class MainPageViewModel {
                 self.delegate?.getDrink(drink: success)
             case .failure(let failure):
                 print("Failure drink")
+            }
+        }
+    }
+    
+    func getAllSnack() {
+        GetAllSnack.shared.getAllSnack(child: FirebaseConstants.dailySnackChildText) { result in
+            switch result {
+            case .success(let success):
+                self.delegate?.getDailySnack(snack: success)
+            case .failure(let failure):
+                print("Failure snack")
             }
         }
     }

@@ -11,7 +11,7 @@ struct FirebaseConstants {
     
     static let dailyMainDishChildText = "DailyMainDish"
     static let dailyDessertChildText = "DailyDessert"
-    static let dailyNutsChildText = "DailyNuts"
+    static let dailySnackChildText = "DailySnack"
     
     
     static let allMainDishChildText = "AllMainDish"
