@@ -49,6 +49,7 @@
 		0466998C2B5082660053C1BD /* GetAllDessert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0466998B2B5082660053C1BD /* GetAllDessert.swift */; };
 		0466998E2B5082700053C1BD /* GetAllSnack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0466998D2B5082700053C1BD /* GetAllSnack.swift */; };
 		046699902B50827A0053C1BD /* GetDailySnack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0466998F2B50827A0053C1BD /* GetDailySnack.swift */; };
+		047EA7F62B552EB000B3DDC7 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 047EA7F52B552EB000B3DDC7 /* SDWebImage */; };
 		04B268E22B3D7DAD0096CB0C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B268E12B3D7DAD0096CB0C /* AppDelegate.swift */; };
 		04B268E42B3D7DAD0096CB0C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B268E32B3D7DAD0096CB0C /* SceneDelegate.swift */; };
 		04B268E62B3D7DAD0096CB0C /* OnboardingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B268E52B3D7DAD0096CB0C /* OnboardingVC.swift */; };
@@ -138,6 +139,7 @@
 				0466933A2B4AC5A5000DED64 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				046699672B4EA0920053C1BD /* FirebaseAppCheck in Frameworks */,
 				046693402B4AC5A5000DED64 /* FirebaseAuth in Frameworks */,
+				047EA7F62B552EB000B3DDC7 /* SDWebImage in Frameworks */,
 				046693442B4AC5A5000DED64 /* FirebaseCrashlytics in Frameworks */,
 				046693482B4AC5A5000DED64 /* FirebaseDatabaseSwift in Frameworks */,
 				046693522B4AC5A5000DED64 /* FirebaseInstallations in Frameworks */,
@@ -458,6 +460,7 @@
 				0466935B2B4AC5A5000DED64 /* FirebaseRemoteConfigSwift */,
 				0466935D2B4AC5A5000DED64 /* FirebaseStorage */,
 				046699662B4EA0920053C1BD /* FirebaseAppCheck */,
+				047EA7F52B552EB000B3DDC7 /* SDWebImage */,
 			);
 			productName = "New Hall Cati";
 			productReference = 04B268DE2B3D7DAD0096CB0C /* New Hall Cati.app */;
@@ -533,6 +536,7 @@
 			mainGroup = 04B268D52B3D7DAD0096CB0C;
 			packageReferences = (
 				046693322B4AC5A5000DED64 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				047EA7F42B552EB000B3DDC7 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 			);
 			productRefGroup = 04B268DF2B3D7DAD0096CB0C /* Products */;
 			projectDirPath = "";
@@ -945,6 +949,14 @@
 				minimumVersion = 10.19.1;
 			};
 		};
+		047EA7F42B552EB000B3DDC7 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.18.10;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1057,6 +1069,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 046693322B4AC5A5000DED64 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAppCheck;
+		};
+		047EA7F52B552EB000B3DDC7 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 047EA7F42B552EB000B3DDC7 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
 		};
 /* End XCSwiftPackageProductDependency section */
 

@@ -1,4 +1,5 @@
 import UIKit
+import SDWebImage
 
 class DishCell: UICollectionViewCell {
     
@@ -18,8 +19,10 @@ class DishCell: UICollectionViewCell {
     }
     
     func set(product: Product) {
+        let url = URL(string: product.image)
         dishNameLabel.text = product.name
         dishPriceLabel.text = product.price
+        dishImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "menu-placeholder"))
     }
     
     private func configure() {
@@ -41,7 +44,7 @@ class DishCell: UICollectionViewCell {
         dishPriceLabel.textAlignment = .center
         dishPriceLabel.minimumScaleFactor = 0.9
         dishPriceLabel.lineBreakMode = .byTruncatingTail
-        
+                
         NSLayoutConstraint.activate([
             dishImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
             dishImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),

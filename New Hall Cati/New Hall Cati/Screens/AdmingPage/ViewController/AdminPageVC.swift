@@ -1,10 +1,6 @@
 import UIKit
 
-protocol AdminPageProtocol {
-    
-    var allFoodList: [String] { get }
-    var allDessertList: [String] { get }
-    var allDrinkList: [String] { get }
+protocol AdminPageProtocol: AnyObject {
     
     var selectedMenu: Set<Product> { get }
     var showingList: [Product] { get }
@@ -14,14 +10,12 @@ protocol AdminPageProtocol {
     func configureTableView()
     func configureNavigationSaveButton()
     func configureAddButton()
+    func fetchDish(product: [Product])
 }
 
 final class AdminPageVC: UIViewController, AdminPageProtocol {
     
     
-    lazy var allFoodList = [String]()
-    lazy var allDessertList = [String]()
-    lazy var allDrinkList = [String]()
     private var viewModel = AdminPageViewModel()
 
 //    MARK: - UI Elements
@@ -36,9 +30,10 @@ final class AdminPageVC: UIViewController, AdminPageProtocol {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureSegmentedController()
+        viewModel.delegate = self
         
         getDataFromFirestore()
+        configureSegmentedController()
         view.backgroundColor = .systemBackground
         
         configureTableView()
@@ -52,6 +47,7 @@ final class AdminPageVC: UIViewController, AdminPageProtocol {
         viewModel.getAllMainDish()
         viewModel.getAllDessert()
         viewModel.getAllDrink()
+        viewModel.getAllSnack()
     }
     
     
@@ -72,20 +68,23 @@ final class AdminPageVC: UIViewController, AdminPageProtocol {
     }
     
     @objc func changedSegmentedControl() {
+        showingList.removeAll()
         switch segmentedController.selectedSegmentIndex {
         case 0:
             showingList = viewModel.allMainDish
             tableView.reloadData()
         case 1:
-            showingList.removeAll()
-            showingList = viewModel.allDessert
+            
+            showingList = viewModel.allSnack
             tableView.reloadData()
         case 2:
-            showingList.removeAll()
-            showingList = viewModel.allDrink
+            
+            showingList = viewModel.allDessert
             tableView.reloadData()
         default:
-            fatalError("Fatal error")
+            
+            showingList = viewModel.allDrink
+            tableView.reloadData()
         }
     }
     
@@ -130,6 +129,11 @@ final class AdminPageVC: UIViewController, AdminPageProtocol {
             addButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             addButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.045)
         ])
+    }
+    
+    func fetchDish(product: [Product]) {
+        showingList = product
+        tableView.reloadData()
     }
 }
 

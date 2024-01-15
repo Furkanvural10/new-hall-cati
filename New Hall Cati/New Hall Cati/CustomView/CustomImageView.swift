@@ -25,7 +25,7 @@ class CustomImageView: UIImageView {
         layer.cornerRadius = 16
         clipsToBounds = true
         image = placeholderImage
-        contentMode = .scaleAspectFit
+        contentMode = .scaleAspectFill
         translatesAutoresizingMaskIntoConstraints = false
     }
     

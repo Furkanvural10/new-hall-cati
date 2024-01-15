@@ -21,6 +21,8 @@ class AdminPageViewModel {
     var allDrink: [Product]!
     var allSnack: [Product]!
     var allDessert: [Product]!
+    
+    weak var delegate: AdminPageProtocol?
 }
 
 extension AdminPageViewModel: AdminPageViewModelProtocol {
@@ -35,8 +37,8 @@ extension AdminPageViewModel: AdminPageViewModelProtocol {
         GetAllMainDish.shared.getAllDish(child: "AllMainDish") { result in
             switch result {
             case .success(let success):
-                print("Success \(success)")
                 self.allMainDish = success
+                self.delegate?.fetchDish(product: success)
             case .failure(let failure):
                 print("failure all main \(failure)")
             }

@@ -256,6 +256,7 @@ extension MainPageVC: MainPageProtocol {
             self.updateData()
         case 1:
             showingData = dailySnack
+            
             self.updateData()
         case 2:
             showingData = dailyDessert
