@@ -256,14 +256,37 @@ extension MainPageVC: MainPageProtocol {
             self.updateData()
         case 1:
             showingData = dailySnack
-            
             self.updateData()
         case 2:
             showingData = dailyDessert
             self.updateData()
         default:
-            showingData = allDrink
+            showDrinkOptionView()
             self.updateData()
         }
+    }
+    
+    private func showDrinkOptionView() {
+        
+        let controller = UIAlertController(title: "İçecek Türü", message: "Görmek istediğiniz içecek türünü seçiniz.", preferredStyle: .actionSheet)
+        
+        let coldDrinkOption = UIAlertAction(title: "Soğuk", style: .default) { _ in
+            self.showingData = self.allDrink
+            self.updateData()
+        }
+        
+        let hotDrinkOption = UIAlertAction(title: "Sıcak", style: .destructive) { _ in
+            self.showingData = self.dailySnack
+            self.updateData()
+        }
+        
+        let cancel = UIAlertAction(title: "İptal", style: .cancel) { _ in
+            self.segmentedController.selectedSegmentIndex = 0
+        }
+        
+        controller.addAction(coldDrinkOption)
+        controller.addAction(hotDrinkOption)
+        controller.addAction(cancel)
+        self.present(controller, animated: true)
     }
 }
