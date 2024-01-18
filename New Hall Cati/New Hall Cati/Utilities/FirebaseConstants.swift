@@ -17,5 +17,6 @@ struct FirebaseConstants {
     static let allMainDishChildText = "AllMainDish"
     static let allDessertChildText = "AllDessert"
     static let allNutsChildText = "AllNut"
-    static let allDrinkChildText = "AllDrink"
+    static let allColdDrinkChildText = "AllDrink"
+    static let allHotDrinkChildText = "AllHotDrink"
 }

@@ -25,7 +25,8 @@ final class MainPageVC: UIViewController {
     var dailyMainDish: [Product] = []
     var dailyDessert: [Product] = []
     var dailySnack: [Product] = []
-    var allDrink: [Product] = []
+    var allColdDrink: [Product] = []
+    var allHotDrink: [Product] = []
     var showingData: Array<Product>!
     
     enum Section {
@@ -68,7 +69,8 @@ final class MainPageVC: UIViewController {
     func getDataFromFirestore() {
         viewModel.getDailyMainDish()
         viewModel.getDailyDessert()
-        viewModel.getAllDrink()
+        viewModel.getAllColdDrink()
+        viewModel.getAllHotDrink()
         viewModel.getAllSnack()
     }
     
@@ -144,9 +146,13 @@ extension MainPageVC: MainPageViewModelProtocol {
         print("Dessert \(dailyDessert)")
     }
     
-    func getDrink(drink: [Product]) {
-        self.allDrink = drink
-        print("Drink \(drink)")
+    func getColdDrink(coldDrink: [Product]) {
+        self.allColdDrink = coldDrink
+        print("Drink \(coldDrink)")
+    }
+    
+    func getHotDrink(hotDrink: [Product]) {
+        self.allHotDrink = hotDrink
     }
     
     func getDailySnack(snack: [Product]) {
@@ -261,6 +267,7 @@ extension MainPageVC: MainPageProtocol {
             showingData = dailyDessert
             self.updateData()
         default:
+            print("Clicked drink item")
             showDrinkOptionView()
             self.updateData()
         }
@@ -271,12 +278,12 @@ extension MainPageVC: MainPageProtocol {
         let controller = UIAlertController(title: "İçecek Türü", message: "Görmek istediğiniz içecek türünü seçiniz.", preferredStyle: .actionSheet)
         
         let coldDrinkOption = UIAlertAction(title: "Soğuk", style: .default) { _ in
-            self.showingData = self.allDrink
+            self.showingData = self.allColdDrink
             self.updateData()
         }
         
         let hotDrinkOption = UIAlertAction(title: "Sıcak", style: .destructive) { _ in
-            self.showingData = self.dailySnack
+            self.showingData = self.allHotDrink
             self.updateData()
         }
         

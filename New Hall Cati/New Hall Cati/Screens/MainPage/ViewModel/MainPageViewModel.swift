@@ -4,7 +4,8 @@ protocol MainPageViewModelProtocol: AnyObject {
     func setTitle(dateString: String)
     func getDailyMainDish(dish: [Product])
     func getDailyDessert(dessert: [Product])
-    func getDrink(drink: [Product])
+    func getColdDrink(coldDrink: [Product])
+    func getHotDrink(hotDrink: [Product])
     func getDailySnack(snack: [Product])
 }
 
@@ -45,13 +46,24 @@ class MainPageViewModel {
         }
     }
     
-    func getAllDrink() {
-        GetAllDrink.shared.getAllDrink(child: FirebaseConstants.allDrinkChildText) { result in
+    func getAllColdDrink() {
+        GetAllDrink.shared.getAllDrink(child: FirebaseConstants.allColdDrinkChildText) { result in
             switch result {
             case .success(let success):
-                self.delegate?.getDrink(drink: success)
+                self.delegate?.getColdDrink(coldDrink: success)
             case .failure(let failure):
-                print("Failure drink")
+                print("Failure cold drink")
+            }
+        }
+    }
+    
+    func getAllHotDrink() {
+        GetAllDrink.shared.getAllDrink(child: FirebaseConstants.allHotDrinkChildText) { result in
+            switch result {
+            case .success(let success):
+                self.delegate?.getHotDrink(hotDrink: success)
+            case .failure(let failure):
+                print("Failure hot drink")
             }
         }
     }
@@ -66,5 +78,7 @@ class MainPageViewModel {
             }
         }
     }
+    
+    
     
 }
