@@ -1,5 +1,7 @@
 import UIKit
 import FirebaseFirestore
+#warning("Dont forget functions order")
+
 
 protocol MainPageProtocol {
     
@@ -143,12 +145,10 @@ extension MainPageVC: MainPageViewModelProtocol {
     
     func getDailyDessert(dessert: [Product]) {
         self.dailyDessert = dessert
-        print("Dessert \(dailyDessert)")
     }
     
     func getColdDrink(coldDrink: [Product]) {
         self.allColdDrink = coldDrink
-        print("Drink \(coldDrink)")
     }
     
     func getHotDrink(hotDrink: [Product]) {
@@ -206,6 +206,14 @@ extension MainPageVC: MainPageProtocol {
             workingDetailView.heightAnchor.constraint(equalToConstant: 50)
         ])
         
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(editWorkingHour))
+        workingDetailView.addGestureRecognizer(gestureRecognizer)
+        
+        
+    }
+    
+    @objc private func editWorkingHour() {
+        presentDatePickerViewOnMainThread()
     }
     
     
@@ -267,7 +275,6 @@ extension MainPageVC: MainPageProtocol {
             showingData = dailyDessert
             self.updateData()
         default:
-            print("Clicked drink item")
             showDrinkOptionView()
             self.updateData()
         }
@@ -289,6 +296,8 @@ extension MainPageVC: MainPageProtocol {
         
         let cancel = UIAlertAction(title: "İptal", style: .cancel) { _ in
             self.segmentedController.selectedSegmentIndex = 0
+            self.showingData = self.dailyMainDish
+            self.updateData()
         }
         
         controller.addAction(coldDrinkOption)

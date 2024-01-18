@@ -79,6 +79,11 @@ class MainPageViewModel {
         }
     }
     
+    func saveWorkingHour(openingTime: String, closingTime: String) {
+        // Save to db
+        print("Database kaydet")
+    }
+    
     
     
 }
