@@ -8,7 +8,6 @@ protocol AdminPageProtocol: AnyObject {
     
     func configureSegmentedController()
     func configureTableView()
-    func configureNavigationSaveButton()
     func configureAddButton()
     func fetchDish(product: [Product])
 }
@@ -37,7 +36,6 @@ final class AdminPageVC: UIViewController, AdminPageProtocol {
         view.backgroundColor = .systemBackground
         
         configureTableView()
-        configureNavigationSaveButton()
         configureAddButton()
         
         
@@ -106,12 +104,9 @@ final class AdminPageVC: UIViewController, AdminPageProtocol {
         ])
     }
     
-    func configureNavigationSaveButton() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveNewMenu))
-    }
     
     @objc func saveNewMenu() {
-        
+        #warning("Update daily menu")
     }
     
     func configureAddButton() {
@@ -119,7 +114,7 @@ final class AdminPageVC: UIViewController, AdminPageProtocol {
         view.addSubview(addButton)
         addButton.translatesAutoresizingMaskIntoConstraints = false
         
-        addButton.setTitle("Yeni Ürün Ekle", for: .normal)
+        addButton.setTitle("Kaydet", for: .normal)
         addButton.backgroundColor = .black.withAlphaComponent(0.9)
         addButton.layer.cornerRadius = 10
         
@@ -129,6 +124,8 @@ final class AdminPageVC: UIViewController, AdminPageProtocol {
             addButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             addButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.045)
         ])
+        
+        addButton.addTarget(self, action: #selector(saveNewMenu), for: .touchUpInside)
     }
     
     func fetchDish(product: [Product]) {
@@ -162,18 +159,18 @@ extension AdminPageVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-//        let cell = tableView.cellForRow(at: indexPath)
-//        let selectedItem = food[indexPath.row]
-//        
-//        if cell?.accessoryType == .checkmark {
-//            cell?.accessoryType = .none
-//            if selectedMenu.contains(selectedItem) {
-//                selectedMenu.remove(selectedItem)
-//            }
-//        } else {
-//            cell?.accessoryType = .checkmark
-//            selectedMenu.insert(showingList[indexPath.row])
-//            
-//        }
+        let cell = tableView.cellForRow(at: indexPath)
+        let selectedItem = showingList[indexPath.row]
+        
+        if cell?.accessoryType == .checkmark {
+            cell?.accessoryType = .none
+            if selectedMenu.contains(selectedItem) {
+                selectedMenu.remove(selectedItem)
+            }
+        } else {
+            cell?.accessoryType = .checkmark
+            selectedMenu.insert(showingList[indexPath.row])
+            
+        }
     }
 }

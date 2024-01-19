@@ -1,6 +1,7 @@
 {
   "images" : [
     {
+      "filename" : "menu-placeholder.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
