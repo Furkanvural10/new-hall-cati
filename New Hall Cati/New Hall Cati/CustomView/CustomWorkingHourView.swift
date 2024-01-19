@@ -8,14 +8,14 @@
 import Foundation
 import UIKit
 
-class DatePickerView: UIViewController {
+class CustomWorkingHourView: UIViewController {
     
     let containerView = UIView()
     let firstTextField: UITextField = {
         var firstTextField = UITextField()
         firstTextField.borderStyle = .roundedRect
         firstTextField.placeholder = "Açılış: 08.00"
-        firstTextField.keyboardType = .numberPad
+        firstTextField.keyboardType = .decimalPad
         return firstTextField
     }()
     
@@ -23,13 +23,13 @@ class DatePickerView: UIViewController {
         var secondTextField = UITextField()
         secondTextField.placeholder = "Kapanış: 19.00"
         secondTextField.borderStyle = .roundedRect
-        secondTextField.keyboardType = .numberPad
+        secondTextField.keyboardType = .decimalPad
         return secondTextField
     }()
     
     let saveButton: UIButton = {
         var saveButton = UIButton()
-        saveButton.setTitle("Save", for: .normal)
+        saveButton.setTitle("Kaydet", for: .normal)
         saveButton.backgroundColor = .black
         saveButton.layer.cornerRadius = 10
         return saveButton
@@ -37,7 +37,7 @@ class DatePickerView: UIViewController {
     
     let cancelButton: UIButton = {
         var cancelButton = UIButton()
-        cancelButton.setTitle("Cancel", for: .normal)
+        cancelButton.setTitle("İptal", for: .normal)
         cancelButton.backgroundColor = .red
         cancelButton.layer.cornerRadius = 10
         return cancelButton
@@ -73,8 +73,8 @@ class DatePickerView: UIViewController {
         NSLayoutConstraint.activate([
             containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             containerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            containerView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
-            containerView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.25)
+            containerView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7),
+            containerView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.23)
         ])
         
     }
@@ -129,6 +129,11 @@ class DatePickerView: UIViewController {
     }
     
     @objc private func saveWorkingHour() {
+        guard firstTextField.text != "",
+              secondTextField.text != "" else {
+            self.dismiss(animated: true)
+            return
+        }
         let mainPageViewModel = MainPageViewModel()
         mainPageViewModel.saveWorkingHour(openingTime: firstTextField.text!, closingTime: secondTextField.text!)
         self.dismiss(animated: true)

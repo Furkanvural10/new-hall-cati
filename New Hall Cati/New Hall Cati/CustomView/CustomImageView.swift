@@ -22,7 +22,7 @@ class CustomImageView: UIImageView {
     
     
     private func configure() {
-        layer.cornerRadius = 16
+        layer.cornerRadius = 14
         clipsToBounds = true
         image = placeholderImage
         contentMode = .scaleAspectFill

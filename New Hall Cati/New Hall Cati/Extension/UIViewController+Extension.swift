@@ -11,7 +11,7 @@ extension UIViewController {
     
     func presentDatePickerViewOnMainThread() {
         DispatchQueue.main.async {
-            let datePicker = DatePickerView(alertTitle: "Saat Seçiniz")
+            let datePicker = CustomWorkingHourView(alertTitle: "Saat Seçiniz")
             datePicker.modalPresentationStyle = .overFullScreen
             datePicker.modalTransitionStyle = .crossDissolve
             self.present(datePicker, animated: true)

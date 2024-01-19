@@ -79,6 +79,7 @@ final class MainPageVC: UIViewController {
     func configureHourLabel() {
         workingHourLabel = UILabel()
         workingHourLabel.font = UIFont.systemFont(ofSize: 13)
+        workingHourLabel.textColor = .white
         workingHourLabel.text = "09:00 - 15:00"
         
         view.addSubview(workingHourLabel)
@@ -133,7 +134,7 @@ extension MainPageVC: MainPageViewModelProtocol {
     func setTitle(dateString: String) {
         dateTitleLabel.text = dateString
         dateTitleLabel.font = .systemFont(ofSize: 25)
-        dateTitleLabel.textColor = .black
+        dateTitleLabel.textColor = .white
     }
     
     
@@ -163,13 +164,14 @@ extension MainPageVC: MainPageViewModelProtocol {
 extension MainPageVC: MainPageProtocol {
     
     func configureBackground() {
-        view.backgroundColor = .white
+        view.backgroundColor = .black
     }
     
     func configureDateTitle() {
         dateTitleLabel = UILabel()
         view.addSubview(dateTitleLabel)
         dateTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        dateTitleLabel.textColor = .white
         
         NSLayoutConstraint.activate([
             dateTitleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15),
@@ -182,6 +184,7 @@ extension MainPageVC: MainPageProtocol {
         workingTitleLabel = UILabel()
         workingTitleLabel.font = UIFont.boldSystemFont(ofSize: 13)
         workingTitleLabel.text = Constant.openClosedText
+        workingTitleLabel.textColor = .white
         
         view.addSubview(workingTitleLabel)
         workingTitleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -195,7 +198,7 @@ extension MainPageVC: MainPageProtocol {
     func configureWorkingDetailView() {
         workingDetailView = UIView()
         view.addSubview(workingDetailView)
-        workingDetailView.backgroundColor = .gray.withAlphaComponent(0.2)
+        workingDetailView.backgroundColor = .white.withAlphaComponent(0.2)
         workingDetailView.layer.cornerRadius = 8
         workingDetailView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -222,7 +225,7 @@ extension MainPageVC: MainPageProtocol {
         let titleLabel = UILabel()
         titleLabel.text = Constant.welcomeText
         titleLabel.font = UIFont.pacificoRegular(size: 20)
-        titleLabel.textColor = .label
+        titleLabel.textColor = .white
         
         self.navigationItem.titleView = titleLabel
         
@@ -238,6 +241,7 @@ extension MainPageVC: MainPageProtocol {
         view.addSubview(collectionView)
         collectionView.register(DishCell.self, forCellWithReuseIdentifier: DishCell.reusedID)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.backgroundColor = .black
         
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: segmentedController.bottomAnchor, constant: 8),
@@ -252,6 +256,16 @@ extension MainPageVC: MainPageProtocol {
         self.view.addSubview(segmentedController)
         segmentedController.translatesAutoresizingMaskIntoConstraints = false
         segmentedController.selectedSegmentIndex = 0
+        segmentedController.selectedSegmentTintColor = .systemOrange
+        
+        let selectedAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+        
+        segmentedController.setTitleTextAttributes(selectedAttributes, for: .selected)
+        
+        let unselectedAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.9)]
+        segmentedController.setTitleTextAttributes(unselectedAttributes, for: .normal)
+        
+        
         
         segmentedController.addTarget(self, action: #selector(changedSegmentedControl), for: .valueChanged)
         
