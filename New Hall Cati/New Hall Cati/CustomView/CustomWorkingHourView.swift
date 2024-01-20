@@ -30,7 +30,7 @@ class CustomWorkingHourView: UIViewController {
     let saveButton: UIButton = {
         var saveButton = UIButton()
         saveButton.setTitle("Kaydet", for: .normal)
-        saveButton.backgroundColor = .black
+        saveButton.backgroundColor = .systemBlue
         saveButton.layer.cornerRadius = 10
         return saveButton
     }()
@@ -38,7 +38,7 @@ class CustomWorkingHourView: UIViewController {
     let cancelButton: UIButton = {
         var cancelButton = UIButton()
         cancelButton.setTitle("İptal", for: .normal)
-        cancelButton.backgroundColor = .red
+        cancelButton.backgroundColor = .systemRed
         cancelButton.layer.cornerRadius = 10
         return cancelButton
     }()
@@ -66,7 +66,7 @@ class CustomWorkingHourView: UIViewController {
     
     func configureContainer() {
         view.addSubview(containerView)
-        containerView.backgroundColor = .systemBackground
+        containerView.backgroundColor = .black
         containerView.layer.cornerRadius = 10
         containerView.translatesAutoresizingMaskIntoConstraints = false
         

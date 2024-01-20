@@ -115,7 +115,8 @@ final class AdminPageVC: UIViewController, AdminPageProtocol {
         addButton.translatesAutoresizingMaskIntoConstraints = false
         
         addButton.setTitle("Kaydet", for: .normal)
-        addButton.backgroundColor = .black.withAlphaComponent(0.9)
+        addButton.setTitleColor(.black, for: .normal)
+        addButton.backgroundColor = .white
         addButton.layer.cornerRadius = 10
         
         NSLayoutConstraint.activate([
