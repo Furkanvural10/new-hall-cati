@@ -2,7 +2,9 @@ import UIKit
 
 protocol AdminPageProtocol: AnyObject {
     
-    var selectedMenu: Set<Product> { get }
+    var selectedMainMenu: Set<Product> { get }
+    var selectedSnackMenu: Set<Product> { get }
+    var selectedDessertMenu: Set<Product> { get }
     var showingList: [Product] { get }
     var items: [String] { get }
     
@@ -24,7 +26,9 @@ final class AdminPageVC: UIViewController, AdminPageProtocol {
         
     var items: [String] = Constant.segmentedItems
     
-    var selectedMenu: Set<Product> = []
+    var selectedMainMenu: Set<Product> = []
+    var selectedSnackMenu: Set<Product> = []
+    var selectedDessertMenu: Set<Product> = []
     var showingList: [Product] = []
     
     override func viewDidLoad() {
@@ -37,8 +41,6 @@ final class AdminPageVC: UIViewController, AdminPageProtocol {
         
         configureTableView()
         configureAddButton()
-        
-        
     }
     
     func getDataFromFirestore() {
@@ -48,22 +50,20 @@ final class AdminPageVC: UIViewController, AdminPageProtocol {
         viewModel.getAllSnack()
     }
     
+    func configureSegmentedController() {
+        segmentedController = UISegmentedControl(items: items)
+        segmentedController.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(segmentedController)
+        segmentedController.selectedSegmentIndex = 0
+        segmentedController.translatesAutoresizingMaskIntoConstraints = false
+        segmentedController.addTarget(self, action: #selector(changedSegmentedControl), for: .valueChanged)
     
-    
-     func configureSegmentedController() {
-         segmentedController = UISegmentedControl(items: items)
-         segmentedController.translatesAutoresizingMaskIntoConstraints = false
-         view.addSubview(segmentedController)
-         segmentedController.selectedSegmentIndex = 0
-         segmentedController.translatesAutoresizingMaskIntoConstraints = false
-         segmentedController.addTarget(self, action: #selector(changedSegmentedControl), for: .valueChanged)
-        
-        NSLayoutConstraint.activate([
-            segmentedController.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 5),
-            segmentedController.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5),
-            segmentedController.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5)
-        ])
-    }
+    NSLayoutConstraint.activate([
+        segmentedController.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 5),
+        segmentedController.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5),
+        segmentedController.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5)
+    ])
+}
     
     @objc func changedSegmentedControl() {
         showingList.removeAll()
@@ -103,7 +103,6 @@ final class AdminPageVC: UIViewController, AdminPageProtocol {
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -80)
         ])
     }
-    
     
     @objc func saveNewMenu() {
         #warning("Update daily menu")
@@ -165,13 +164,15 @@ extension AdminPageVC: UITableViewDelegate, UITableViewDataSource {
         
         if cell?.accessoryType == .checkmark {
             cell?.accessoryType = .none
-            if selectedMenu.contains(selectedItem) {
-                selectedMenu.remove(selectedItem)
-            }
+            #warning("Remove from menu")
+            
+//            if selectedMenu.contains(selectedItem) {
+//                selectedMenu.remove(selectedItem)
+//            }
         } else {
             cell?.accessoryType = .checkmark
-            selectedMenu.insert(showingList[indexPath.row])
-            
+//            selectedMenu.insert(showingList[indexPath.row])
+            #warning("Add menu with control")
         }
     }
 }

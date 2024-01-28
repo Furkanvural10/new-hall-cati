@@ -13,8 +13,8 @@ struct Constant {
     static let adminText = "Admin"
     static let soldText = "Tükendi"
     static let editText = "Düzenle"
-    static let cancel = "İptal"
-    static let save = "Kaydet"
+    static let cancelText = "İptal"
+    static let saveText = "Kaydet"
     
     
     static let segmentedItems = ["Ana Yemek", "Mezeler", "Tatlılar", "İçecekler"]
