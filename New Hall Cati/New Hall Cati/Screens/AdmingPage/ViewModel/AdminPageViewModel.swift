@@ -7,10 +7,10 @@
 
 import Foundation
 
-protocol AdminPageViewModelProtocol {
+protocol AdminPageViewModelProtocol: AnyObject {
     
     func saveNewMenu()
-    func getAllMainDish()
+    func getAllMainDish(product: String)
     func getAllDessert()
     func getAllDrink()
     func getAllSnack()
@@ -33,8 +33,10 @@ extension AdminPageViewModel: AdminPageViewModelProtocol {
 //        TODO: save db admin adding new daily menu
     }
     
-    func getAllMainDish() {
-        GetAllMainDish.shared.getAllDish(child: "AllMainDish") { result in
+    
+    func getAllMainDish(product: String) {
+        
+        GetAllMainDish.shared.getAllDish(child: product) { result in
             switch result {
             case .success(let success):
                 self.allMainDish = success

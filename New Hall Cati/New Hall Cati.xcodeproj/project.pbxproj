@@ -65,6 +65,8 @@
 		04B2691B2B3D86680096CB0C /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B2691A2B3D86680096CB0C /* OnboardingViewModel.swift */; };
 		04B2691E2B3D9FE60096CB0C /* Pacifico-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04B2691D2B3D9FE60096CB0C /* Pacifico-Regular.ttf */; };
 		04B269212B3DA07D0096CB0C /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B269202B3DA07D0096CB0C /* UIFont+Extension.swift */; };
+		04EC24E72BF5F3DF00BDF80E /* NewProductVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EC24E62BF5F3DF00BDF80E /* NewProductVC.swift */; };
+		04EC24EA2BF6495100BDF80E /* UpdateProductVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EC24E92BF6495100BDF80E /* UpdateProductVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -124,6 +126,8 @@
 		04B2691A2B3D86680096CB0C /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		04B2691D2B3D9FE60096CB0C /* Pacifico-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pacifico-Regular.ttf"; sourceTree = "<group>"; };
 		04B269202B3DA07D0096CB0C /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
+		04EC24E62BF5F3DF00BDF80E /* NewProductVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProductVC.swift; sourceTree = "<group>"; };
+		04EC24E92BF6495100BDF80E /* UpdateProductVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProductVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -394,6 +398,8 @@
 		04B269162B3D849C0096CB0C /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				04EC24E82BF6494100BDF80E /* UpdateProductPage */,
+				04EC24E52BF5F3C600BDF80E /* NewProductPage */,
 				046693162B454B53000DED64 /* AdmingPage */,
 				046692F82B3EF2A2000DED64 /* MainPage */,
 				04B269152B3D848C0096CB0C /* Onboarding */,
@@ -425,6 +431,22 @@
 				047EA7F92B59A53600B3DDC7 /* UIViewController+Extension.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		04EC24E52BF5F3C600BDF80E /* NewProductPage */ = {
+			isa = PBXGroup;
+			children = (
+				04EC24E62BF5F3DF00BDF80E /* NewProductVC.swift */,
+			);
+			path = NewProductPage;
+			sourceTree = "<group>";
+		};
+		04EC24E82BF6494100BDF80E /* UpdateProductPage */ = {
+			isa = PBXGroup;
+			children = (
+				04EC24E92BF6495100BDF80E /* UpdateProductVC.swift */,
+			);
+			path = UpdateProductPage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -591,6 +613,7 @@
 				046692FF2B3F3BF5000DED64 /* DishCell.swift in Sources */,
 				04B269192B3D84FC0096CB0C /* Constants.swift in Sources */,
 				0466995E2B4DF46B0053C1BD /* GetDailyMainDish.swift in Sources */,
+				04EC24E72BF5F3DF00BDF80E /* NewProductVC.swift in Sources */,
 				046699582B4C8A260053C1BD /* FirebaseHelper.swift in Sources */,
 				047EA7FA2B59A53600B3DDC7 /* UIViewController+Extension.swift in Sources */,
 				04B2691B2B3D86680096CB0C /* OnboardingViewModel.swift in Sources */,
@@ -602,6 +625,7 @@
 				0466998C2B5082660053C1BD /* GetAllDessert.swift in Sources */,
 				04B269212B3DA07D0096CB0C /* UIFont+Extension.swift in Sources */,
 				0466996B2B4EC0170053C1BD /* User.swift in Sources */,
+				04EC24EA2BF6495100BDF80E /* UpdateProductVC.swift in Sources */,
 				046693022B3F415E000DED64 /* CustomImageView.swift in Sources */,
 				0466998A2B50825A0053C1BD /* GetAllMainDish.swift in Sources */,
 				046692FC2B3F021A000DED64 /* MainPageViewModel.swift in Sources */,

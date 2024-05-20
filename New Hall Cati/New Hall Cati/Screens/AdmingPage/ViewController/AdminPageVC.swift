@@ -1,178 +1,144 @@
 import UIKit
 
+
 protocol AdminPageProtocol: AnyObject {
-    
-    var selectedMainMenu: Set<Product> { get }
-    var selectedSnackMenu: Set<Product> { get }
-    var selectedDessertMenu: Set<Product> { get }
-    var showingList: [Product] { get }
-    var items: [String] { get }
-    
-    func configureSegmentedController()
-    func configureTableView()
-    func configureAddButton()
     func fetchDish(product: [Product])
+    
+    
 }
 
-final class AdminPageVC: UIViewController, AdminPageProtocol {
+final class AdminPageVC: UIViewController {
     
-    
-    private var viewModel = AdminPageViewModel()
-
-//    MARK: - UI Elements
-    private var segmentedController = UISegmentedControl(frame: .zero)
-    private var tableView: UITableView!
-    private var addButton: UIButton!
-        
-    var items: [String] = Constant.segmentedItems
-    
-    var selectedMainMenu: Set<Product> = []
-    var selectedSnackMenu: Set<Product> = []
-    var selectedDessertMenu: Set<Product> = []
-    var showingList: [Product] = []
+    private var allMainDishButton: UIButton!
+    private var allDrinkButton: UIButton!
+    private var allSnackButton: UIButton!
+    private var allDessertButton: UIButton!
+    private var addNewProductButton: UIButton!
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        viewModel.delegate = self
-        
-        getDataFromFirestore()
-        configureSegmentedController()
-        view.backgroundColor = .systemBackground
-        
-        configureTableView()
-        configureAddButton()
+        view.backgroundColor = .black
+        configureAddNewProductButton()
+        createUI()
     }
     
-    func getDataFromFirestore() {
-        viewModel.getAllMainDish()
-        viewModel.getAllDessert()
-        viewModel.getAllDrink()
-        viewModel.getAllSnack()
+    func configureAddNewProductButton() {
+        addNewProductButton = UIButton()
+        addNewProductButton.setTitle("+ Add New Product", for: .normal)
+        addNewProductButton.layer.cornerRadius = 10
+        addNewProductButton.backgroundColor = .systemGreen
+        
+        view.addSubview(addNewProductButton)
+        addNewProductButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            addNewProductButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            addNewProductButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            addNewProductButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            addNewProductButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.06),
+            addNewProductButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -80)
+        ])
+        
+        addNewProductButton.addTarget(self, action: #selector(clickedAddNewProductButton), for: .touchUpInside)
+        
     }
     
-    func configureSegmentedController() {
-        segmentedController = UISegmentedControl(items: items)
-        segmentedController.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(segmentedController)
-        segmentedController.selectedSegmentIndex = 0
-        segmentedController.translatesAutoresizingMaskIntoConstraints = false
-        segmentedController.addTarget(self, action: #selector(changedSegmentedControl), for: .valueChanged)
+    private func createUI() {
+        
+        // MARK: - Main Dish Button
+        allMainDishButton = UIButton()
+        allMainDishButton.setTitle("Ana Yemek", for: .normal)
+        allMainDishButton.backgroundColor = .systemOrange
+        allMainDishButton.layer.cornerRadius = 15
+        
+        view.addSubview(allMainDishButton)
+        allMainDishButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            allMainDishButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100),
+            allMainDishButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
+            allMainDishButton.heightAnchor.constraint(equalToConstant: 120),
+            allMainDishButton.widthAnchor.constraint(equalToConstant: 120)
+        ])
+        
+        allMainDishButton.addTarget(self, action: #selector(sendUpdateVC(_:)), for: .touchUpInside)
+        
+        allSnackButton = UIButton()
+        allSnackButton.setTitle("Mezeler", for: .normal)
+        allSnackButton.backgroundColor = .white.withAlphaComponent(0.7)
+        allSnackButton.layer.cornerRadius = 15
+        
+        view.addSubview(allSnackButton)
+        allSnackButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            allSnackButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100),
+            allSnackButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
+            allSnackButton.heightAnchor.constraint(equalToConstant: 120),
+            allSnackButton.widthAnchor.constraint(equalToConstant: 120)
+        ])
+        
+        allSnackButton.addTarget(self, action: #selector(sendUpdateVC(_:)), for: .touchUpInside)
+        
+        allDessertButton = UIButton()
+        allDessertButton.setTitle("Tatlılar", for: .normal)
+        allDessertButton.backgroundColor = .systemPurple
+        allDessertButton.layer.cornerRadius = 15
+        
+        view.addSubview(allDessertButton)
+        allDessertButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            allDessertButton.topAnchor.constraint(equalTo: allSnackButton.bottomAnchor, constant: 100),
+            allDessertButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
+            allDessertButton.heightAnchor.constraint(equalToConstant: 120),
+            allDessertButton.widthAnchor.constraint(equalToConstant: 120)
+        ])
+        
+        allDessertButton.addTarget(self, action: #selector(sendUpdateVC(_:)), for: .touchUpInside)
+        
+        allDrinkButton = UIButton()
+        allDrinkButton.setTitle("İçecekler", for: .normal)
+        allDrinkButton.backgroundColor = .systemBlue
+        allDrinkButton.layer.cornerRadius = 15
+        
+        view.addSubview(allDrinkButton)
+        allDrinkButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            allDrinkButton.topAnchor.constraint(equalTo: allMainDishButton.bottomAnchor, constant: 100),
+            allDrinkButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
+            allDrinkButton.heightAnchor.constraint(equalToConstant: 120),
+            allDrinkButton.widthAnchor.constraint(equalToConstant: 120)
+        ])
+        
+        allDrinkButton.addTarget(self, action: #selector(sendUpdateVC(_:)), for: .touchUpInside)
+    }
     
-    NSLayoutConstraint.activate([
-        segmentedController.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 5),
-        segmentedController.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5),
-        segmentedController.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5)
-    ])
-}
+    @objc private func clickedAddNewProductButton() {
+        let newProductVC = NewProductViewController()
+        self.navigationController?.pushViewController(newProductVC, animated: true)
+    }
     
-    @objc func changedSegmentedControl() {
-        showingList.removeAll()
-        switch segmentedController.selectedSegmentIndex {
-        case 0:
-            showingList = viewModel.allMainDish
-            tableView.reloadData()
-        case 1:
+    @objc private func sendUpdateVC(_ sender: UIButton) {
+        
+        let updateProductVC = UpdateProductVC()
+        
+        switch sender {
+        case allMainDishButton:
+            print("All M")
+            updateProductVC.selectedProduct = "AllMainDish"
+        case allSnackButton:
+            updateProductVC.selectedProduct = "AllSnack"
+        case allDrinkButton:
+            updateProductVC.selectedProduct = "AllHotDrink"
+        case allDessertButton:
+            updateProductVC.selectedProduct = "AllDessert"
             
-            showingList = viewModel.allSnack
-            tableView.reloadData()
-        case 2:
-            
-            showingList = viewModel.allDessert
-            tableView.reloadData()
         default:
-            
-            showingList = viewModel.allDrink
-            tableView.reloadData()
+            break
         }
-    }
-    
-    func configureTableView() {
-        tableView = UITableView()
-        tableView.register(CellView.self, forCellReuseIdentifier: CellView.identifier)
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.allowsSelection = true
         
-        view.addSubview(tableView)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-
-        NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: segmentedController.bottomAnchor, constant: 10),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -80)
-        ])
-    }
-    
-    @objc func saveNewMenu() {
-        #warning("Update daily menu")
-    }
-    
-    func configureAddButton() {
-        addButton = UIButton()
-        view.addSubview(addButton)
-        addButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        addButton.setTitle("Kaydet", for: .normal)
-        addButton.setTitleColor(.black, for: .normal)
-        addButton.backgroundColor = .white
-        addButton.layer.cornerRadius = 10
-        
-        NSLayoutConstraint.activate([
-            addButton.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 5),
-            addButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            addButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            addButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.045)
-        ])
-        
-        addButton.addTarget(self, action: #selector(saveNewMenu), for: .touchUpInside)
-    }
-    
-    func fetchDish(product: [Product]) {
-        showingList = product
-        tableView.reloadData()
+        self.navigationController?.pushViewController(updateProductVC, animated: true)
     }
 }
 
-extension AdminPageVC: UITableViewDelegate, UITableViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return showingList.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: CellView.identifier, for: indexPath) as? CellView else {
-            fatalError("Could not dequeue cell with identifier: \(CellView.identifier)")
-        }
-
-        cell.set(with: showingList[indexPath.row])
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 65
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-        let cell = tableView.cellForRow(at: indexPath)
-        let selectedItem = showingList[indexPath.row]
-        
-        if cell?.accessoryType == .checkmark {
-            cell?.accessoryType = .none
-            #warning("Remove from menu")
-            
-//            if selectedMenu.contains(selectedItem) {
-//                selectedMenu.remove(selectedItem)
-//            }
-        } else {
-            cell?.accessoryType = .checkmark
-//            selectedMenu.insert(showingList[indexPath.row])
-            #warning("Add menu with control")
-        }
-    }
-}
