@@ -52,9 +52,10 @@ final class NewOnboardingVC: UIViewController {
         studentLoginButton.configuration = .filled()
         studentLoginButton.configuration?.title = "Öğrenci Girişi"
         studentLoginButton.configuration?.attributedTitle?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        studentLoginButton.configuration?.image = UIImage(systemName: "arrow.forward")
-        studentLoginButton.configuration?.imagePlacement = .trailing
-        studentLoginButton.configuration?.imagePadding = 5
+        studentLoginButton.configuration?.titleAlignment = .center
+//        studentLoginButton.configuration?.image = UIImage(systemName: "arrow.forward")
+//        studentLoginButton.configuration?.imagePlacement = .trailing
+//        studentLoginButton.configuration?.imagePadding = 30
         studentLoginButton.configuration?.cornerStyle = .large
         studentLoginButton.configuration?.baseBackgroundColor = .systemOrange
         studentLoginButton.configuration?.baseForegroundColor = .black
