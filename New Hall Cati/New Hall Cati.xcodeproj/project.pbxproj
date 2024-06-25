@@ -68,6 +68,9 @@
 		04B269212B3DA07D0096CB0C /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B269202B3DA07D0096CB0C /* UIFont+Extension.swift */; };
 		04EC24E72BF5F3DF00BDF80E /* NewProductVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EC24E62BF5F3DF00BDF80E /* NewProductVC.swift */; };
 		04EC24EA2BF6495100BDF80E /* UpdateProductVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EC24E92BF6495100BDF80E /* UpdateProductVC.swift */; };
+		F93BCB9E2C16250D00189523 /* NewOnboardingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93BCB9D2C16250D00189523 /* NewOnboardingVC.swift */; };
+		F93BCBA02C16256E00189523 /* NewOnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93BCB9F2C16256E00189523 /* NewOnboardingViewModel.swift */; };
+		F93BCBA22C1659D000189523 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93BCBA12C1659D000189523 /* UILabel+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -130,6 +133,9 @@
 		04B269202B3DA07D0096CB0C /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		04EC24E62BF5F3DF00BDF80E /* NewProductVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProductVC.swift; sourceTree = "<group>"; };
 		04EC24E92BF6495100BDF80E /* UpdateProductVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProductVC.swift; sourceTree = "<group>"; };
+		F93BCB9D2C16250D00189523 /* NewOnboardingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewOnboardingVC.swift; sourceTree = "<group>"; };
+		F93BCB9F2C16256E00189523 /* NewOnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewOnboardingViewModel.swift; sourceTree = "<group>"; };
+		F93BCBA12C1659D000189523 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -400,6 +406,7 @@
 		04B269162B3D849C0096CB0C /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				F93BCB9A2C16247000189523 /* NewOnboarding */,
 				04EC24E82BF6494100BDF80E /* UpdateProductPage */,
 				04EC24E52BF5F3C600BDF80E /* NewProductPage */,
 				046693162B454B53000DED64 /* AdmingPage */,
@@ -431,6 +438,7 @@
 			children = (
 				04B269202B3DA07D0096CB0C /* UIFont+Extension.swift */,
 				047EA7F92B59A53600B3DDC7 /* UIViewController+Extension.swift */,
+				F93BCBA12C1659D000189523 /* UILabel+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -450,6 +458,31 @@
 				04A143752BFC79A00034441B /* UpdateProductViewModel.swift */,
 			);
 			path = UpdateProductPage;
+			sourceTree = "<group>";
+		};
+		F93BCB9A2C16247000189523 /* NewOnboarding */ = {
+			isa = PBXGroup;
+			children = (
+				F93BCB9B2C1624A700189523 /* ViewController */,
+				F93BCB9C2C1624AE00189523 /* ViewModel */,
+			);
+			path = NewOnboarding;
+			sourceTree = "<group>";
+		};
+		F93BCB9B2C1624A700189523 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F93BCB9D2C16250D00189523 /* NewOnboardingVC.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		F93BCB9C2C1624AE00189523 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				F93BCB9F2C16256E00189523 /* NewOnboardingViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -624,11 +657,13 @@
 				04B268E62B3D7DAD0096CB0C /* OnboardingVC.swift in Sources */,
 				04B268E22B3D7DAD0096CB0C /* AppDelegate.swift in Sources */,
 				046699622B4E98CD0053C1BD /* GetDailyDessert.swift in Sources */,
+				F93BCBA22C1659D000189523 /* UILabel+Extension.swift in Sources */,
 				0466998E2B5082700053C1BD /* GetAllSnack.swift in Sources */,
 				0466998C2B5082660053C1BD /* GetAllDessert.swift in Sources */,
 				04B269212B3DA07D0096CB0C /* UIFont+Extension.swift in Sources */,
 				0466996B2B4EC0170053C1BD /* User.swift in Sources */,
 				04EC24EA2BF6495100BDF80E /* UpdateProductVC.swift in Sources */,
+				F93BCBA02C16256E00189523 /* NewOnboardingViewModel.swift in Sources */,
 				046693022B3F415E000DED64 /* CustomImageView.swift in Sources */,
 				0466998A2B50825A0053C1BD /* GetAllMainDish.swift in Sources */,
 				046692FC2B3F021A000DED64 /* MainPageViewModel.swift in Sources */,
@@ -641,6 +676,7 @@
 				04B268E42B3D7DAD0096CB0C /* SceneDelegate.swift in Sources */,
 				04A143762BFC79A00034441B /* UpdateProductViewModel.swift in Sources */,
 				0466931A2B454BAF000DED64 /* AdminPageViewModel.swift in Sources */,
+				F93BCB9E2C16250D00189523 /* NewOnboardingVC.swift in Sources */,
 				046699602B4DF6CB0053C1BD /* FirebaseConstants.swift in Sources */,
 				046699902B50827A0053C1BD /* GetDailySnack.swift in Sources */,
 				0466931F2B45748A000DED64 /* CellView.swift in Sources */,
