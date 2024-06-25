@@ -9,6 +9,8 @@ import UIKit
 
 final class NewOnboardingVC: UIViewController {
     
+    
+    // MARK: - UI Elements
     private var mainBackgroundImageView: UIImageView!
     private var mainTitleLabel: UILabel!
     private var studentLoginButton: UIButton!
@@ -16,26 +18,33 @@ final class NewOnboardingVC: UIViewController {
     private var adminLoginLabel: UILabel!
     private var studentLoginLabel: UILabel!
     
+    
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         setupGestureRecognizers()
     }
     
+    
+    // MARK: - Prepare UI
     private func setupUI() {
-        // MARK: - Background Image Configuration
+        
+        // Background Image Configuration
         mainBackgroundImageView = UIImageView()
         mainBackgroundImageView.image = UIImage(named: "OnboardingBackground")
         
         view.addSubview(mainBackgroundImageView)
         mainBackgroundImageView.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint.activate([mainBackgroundImageView.topAnchor.constraint(equalTo: view.topAnchor),
-                                     mainBackgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-                                     mainBackgroundImageView.leftAnchor.constraint(equalTo: view.leftAnchor),
-                                     mainBackgroundImageView.rightAnchor.constraint(equalTo: view.rightAnchor)])
+        NSLayoutConstraint.activate([
+            mainBackgroundImageView.topAnchor.constraint(equalTo: view.topAnchor),
+            mainBackgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            mainBackgroundImageView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            mainBackgroundImageView.rightAnchor.constraint(equalTo: view.rightAnchor)]
+        )
         
-        // MARK: - Main Title Configuration
+        // Main Title Configuration
         mainTitleLabel = UILabel()
         mainTitleLabel.text = "New Hall Çatı"
         mainTitleLabel.font = UIFont.pacificoRegular(size: 30)
@@ -44,18 +53,17 @@ final class NewOnboardingVC: UIViewController {
         view.addSubview(mainTitleLabel)
         mainTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint.activate([mainTitleLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -150),
-                                     mainTitleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)])
+        NSLayoutConstraint.activate([
+            mainTitleLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -150),
+            mainTitleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
         
-        // MARK: - Student Login Button Configuration
+        //  Student Login Button Configuration
         studentLoginButton = UIButton()
         studentLoginButton.configuration = .filled()
         studentLoginButton.configuration?.title = "Öğrenci Girişi"
         studentLoginButton.configuration?.attributedTitle?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         studentLoginButton.configuration?.titleAlignment = .center
-//        studentLoginButton.configuration?.image = UIImage(systemName: "arrow.forward")
-//        studentLoginButton.configuration?.imagePlacement = .trailing
-//        studentLoginButton.configuration?.imagePadding = 30
         studentLoginButton.configuration?.cornerStyle = .large
         studentLoginButton.configuration?.baseBackgroundColor = .systemOrange
         studentLoginButton.configuration?.baseForegroundColor = .black
@@ -64,18 +72,21 @@ final class NewOnboardingVC: UIViewController {
         view.addSubview(studentLoginButton)
         studentLoginButton.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint.activate([studentLoginButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.045),
-                                     studentLoginButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
-                                     studentLoginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                                     studentLoginButton.topAnchor.constraint(equalTo: mainTitleLabel.bottomAnchor, constant: 30)])
+        NSLayoutConstraint.activate([
+            studentLoginButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.045),
+            studentLoginButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
+            studentLoginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            studentLoginButton.topAnchor.constraint(equalTo: mainTitleLabel.bottomAnchor, constant: 30)
+        ])
         
-        // MARK: - Admin Number Text Field Configuration
+        // Admin Number Text Field Configuration
         adminNumberTextField = UITextField()
         adminNumberTextField.placeholder = "Üye Numarası"
         adminNumberTextField.borderStyle = .roundedRect
         adminNumberTextField.autocorrectionType = .no
         adminNumberTextField.keyboardType = .numberPad
         adminNumberTextField.backgroundColor = .systemGray5
+        adminNumberTextField.delegate = self
         
         let placeholderText = "Üye Numarası"
         let placeholderAttributes: [NSAttributedString.Key: Any] = [
@@ -88,10 +99,12 @@ final class NewOnboardingVC: UIViewController {
         adminNumberTextField.translatesAutoresizingMaskIntoConstraints = false
         adminNumberTextField.isHidden = true
         
-        NSLayoutConstraint.activate([adminNumberTextField.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.045),
-                                     adminNumberTextField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
-                                     adminNumberTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                                     adminNumberTextField.topAnchor.constraint(equalTo: mainTitleLabel.bottomAnchor, constant: 30)])
+        NSLayoutConstraint.activate([
+            adminNumberTextField.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.045),
+            adminNumberTextField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
+            adminNumberTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            adminNumberTextField.topAnchor.constraint(equalTo: mainTitleLabel.bottomAnchor, constant: 30)]
+        )
         
         // MARK: - Admin Login Label Configuration
         adminLoginLabel = UILabel()
@@ -103,13 +116,15 @@ final class NewOnboardingVC: UIViewController {
         adminLoginLabel.translatesAutoresizingMaskIntoConstraints = false
         adminLoginLabel.isUserInteractionEnabled = true
         
-        NSLayoutConstraint.activate([adminLoginLabel.topAnchor.constraint(equalTo: studentLoginButton.bottomAnchor, constant: 30),
-                                     adminLoginLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)])
+        NSLayoutConstraint.activate([
+            adminLoginLabel.topAnchor.constraint(equalTo: studentLoginButton.bottomAnchor, constant: 30),
+            adminLoginLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
         
-        // MARK: - Student Login Label Configuration
+        // Student Login Label Configuration
         studentLoginLabel = UILabel()
         studentLoginLabel.setUnderlinedText("Öğrenci olarak devam et")
-        studentLoginLabel.font = UIFont.systemFont(ofSize: 14, weight: .bold)
+        studentLoginLabel.font = UIFont.systemFont(ofSize: 14, weight: .medium)
         studentLoginLabel.textColor = .white
         
         view.addSubview(studentLoginLabel)
@@ -117,8 +132,10 @@ final class NewOnboardingVC: UIViewController {
         studentLoginLabel.isUserInteractionEnabled = true
         studentLoginLabel.isHidden = true
         
-        NSLayoutConstraint.activate([studentLoginLabel.topAnchor.constraint(equalTo: studentLoginButton.bottomAnchor, constant: 30),
-                                     studentLoginLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)])
+        NSLayoutConstraint.activate([
+            studentLoginLabel.topAnchor.constraint(equalTo: studentLoginButton.bottomAnchor, constant: 30),
+            studentLoginLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
     }
     // MARK: - Gesture Recognizers Functions
     private func setupGestureRecognizers() {
@@ -128,6 +145,7 @@ final class NewOnboardingVC: UIViewController {
         let studentLoginTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleStudentLoginTap))
         studentLoginLabel.addGestureRecognizer(studentLoginTapGesture)
     }
+    
     
     @objc private func handleAdminLoginTap() {
         UIView.animate(withDuration: 0.3) {
@@ -162,4 +180,17 @@ final class NewOnboardingVC: UIViewController {
             }
         }
     }
+}
+
+extension NewOnboardingVC: UITextFieldDelegate {
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
+        
+    }
+    
+    
 }

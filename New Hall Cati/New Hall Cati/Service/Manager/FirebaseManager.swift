@@ -80,4 +80,30 @@ final class FirebaseManager: FirebaseManagerProtocol {
     func saveMenu(product: Product) {
          
     }
+    
+    func loginAdmin(adminPassword: String, completion: @escaping (Bool) -> Void) {
+        
+        database.collection("Admin").document("Access").getDocument { snapshot, error in
+            guard error == nil else {
+                completion(false)
+                return
+            }
+            
+            guard let snapshot = snapshot else {
+                completion(false)
+                return
+            }
+            
+            if let data = snapshot["id"] as? String {
+                switch data {
+                case adminPassword:
+                    completion(true)
+                default:
+                    completion(false)
+                }
+            }
+
+            return
+        }
+    }
 }
