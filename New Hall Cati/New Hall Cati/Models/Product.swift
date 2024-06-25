@@ -1,10 +1,10 @@
-
 import UIKit
 
 
-struct Product: Hashable, Identifiable, Codable {
-    let id = UUID()
-    let name: String
-    let price: String
-    let image: String
+// This struct represent all food. Ex. (Main Dish, Dessert, Drink, Snack)
+struct Product: Hashable, Codable {
+    var prodID: String
+    var name: String
+    var price: String
+    var image: String
 }

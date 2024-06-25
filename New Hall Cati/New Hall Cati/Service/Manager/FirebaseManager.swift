@@ -5,12 +5,13 @@ import FirebaseFirestore
 protocol FirebaseManagerProtocol {
     func createAnonymousUser(completion: @escaping ((Result<User, NetworkError>) -> Void))
     func getData<T: Codable>(child: String, completion: @escaping ((Result<[T], NetworkError>) -> Void))
+    func saveMenu(product: Product)
 }
-
 
 final class FirebaseManager: FirebaseManagerProtocol {
     
     static let shared = FirebaseManager()
+    private let database = Firestore.firestore()
     
     private init() {}
     
@@ -33,7 +34,7 @@ final class FirebaseManager: FirebaseManagerProtocol {
     
     func getData<T: Codable>(child: String, completion: @escaping ((Result<[T], NetworkError>) -> Void)) {
         
-        let database = Firestore.firestore()
+        
         database.collection(child).addSnapshotListener { snapshot, error in
             guard error == nil else {
                 print("Data error")
@@ -52,13 +53,31 @@ final class FirebaseManager: FirebaseManagerProtocol {
                     let product = try document.data(as: T.self)
                     products.append(product)
                 }
-                catch {
-                    print("decode error")
-                    completion(.failure(.decodeError))
-                    return
+                
+                catch let DecodingError.dataCorrupted(context) {
+                    print(context)
+                }catch let DecodingError.keyNotFound(key, context) {
+                    print("Key '\(key)' not found:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                } catch let DecodingError.valueNotFound(value, context) {
+                    print("Value '\(value)' not found:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                } catch let DecodingError.typeMismatch(type, context)  {
+                    print("Type '\(type)' mismatch:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                } catch {
+                    print("error: ", error)
                 }
             }
             completion(.success(products))
         }
+    }
+    
+    func updateProduct(product: Product) {
+        
+    }
+    
+    func saveMenu(product: Product) {
+         
     }
 }

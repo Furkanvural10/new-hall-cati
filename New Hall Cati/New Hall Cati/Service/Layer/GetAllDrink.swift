@@ -9,13 +9,13 @@ import Foundation
 
 protocol GetAllDrinkProtocol {
     func getAllDrink(child: String, completion: @escaping (Result<[Product], NetworkError>) -> Void)
+    
                                     
 }
 
 struct GetAllDrink: GetAllDrinkProtocol {
     
     static let shared = GetAllDrink()
-    
     private init() {}
     
     func getAllDrink(child: String, completion: @escaping (Result<[Product], NetworkError>) -> Void) {

@@ -31,6 +31,7 @@ extension AdminPageViewModel: AdminPageViewModelProtocol {
     
     func saveNewMenu() {
 //        TODO: save db admin adding new daily menu
+//        FirebaseManager.shared.
     }
     
     

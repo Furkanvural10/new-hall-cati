@@ -14,8 +14,8 @@
             filePath = "New Hall Cati/Screens/AdmingPage/ViewModel/AdminPageViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
             landmarkName = "getAllMainDish(product:)"
             landmarkType = "7">
             <Locations>
@@ -78,6 +78,54 @@
                   startingLineNumber = "39"
                   endingLineNumber = "39"
                   offsetFromSymbolStart = "96">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A76B924B-8881-4B52-AB02-B389F34D3373"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "New Hall Cati/Screens/UpdateProductPage/UpdateProductVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
+            landmarkName = "clickedRightBarButton()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "A76B924B-8881-4B52-AB02-B389F34D3373 - b244ac806095070c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "New_Hall_Cati.UpdateProductVC.clickedRightBarButton() -&gt; ()"
+                  moduleName = "New Hall Cati"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/furkanvural/Desktop/NHR/new-hall-cati/New%20Hall%20Cati/New%20Hall%20Cati/Screens/UpdateProductPage/UpdateProductVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "93"
+                  endingLineNumber = "93"
+                  offsetFromSymbolStart = "124">
+               </Location>
+               <Location
+                  uuid = "A76B924B-8881-4B52-AB02-B389F34D3373 - 18a9b4c816917c7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (New_Hall_Cati.Product) -&gt; Swift.String in New_Hall_Cati.UpdateProductVC.clickedRightBarButton() -&gt; ()"
+                  moduleName = "New Hall Cati"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/furkanvural/Desktop/NHR/new-hall-cati/New%20Hall%20Cati/New%20Hall%20Cati/Screens/UpdateProductPage/UpdateProductVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "93"
+                  endingLineNumber = "93"
+                  offsetFromSymbolStart = "48">
                </Location>
             </Locations>
          </BreakpointContent>

@@ -10,27 +10,32 @@ import UIKit
 final class UpdateProductVC: UIViewController {
     
     
-    
-    
-    var selectedProduct: String?
     private var tableView: UITableView!
-    var showingList: [Product] = []
-    private var viewModel = AdminPageViewModel()
-    
+    private var barButton: UIBarButtonItem!
+    private var addNewProductButton: UIButton!
 
+    
+    
+    private var showingList: [Product] = []
+    private var productSavedList: Set<Product> = []
+    private var viewModel = AdminPageViewModel()
+    var selectedProduct: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
         viewModel.delegate = self
         configureRightBarButtonItem()
+        configureAddNewProductButton()
         getProduct()
         configureTableView()
+        
         
     }
     
     private func configureRightBarButtonItem() {
-        let barButton = UIBarButtonItem(title: "Kaydet", style: .plain, target: self, action: #selector(clickedRightBarButton))
+        barButton = UIBarButtonItem(title: "Kaydet", style: .plain, target: self, action: #selector(clickedRightBarButton))
+        barButton.isEnabled = false
         self.navigationItem.rightBarButtonItem = barButton
     }
     
@@ -48,8 +53,35 @@ final class UpdateProductVC: UIViewController {
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            tableView.bottomAnchor.constraint(equalTo: addNewProductButton.topAnchor, constant: -10)
         ])
+    }
+    
+    func configureAddNewProductButton() {
+        
+        addNewProductButton = UIButton()
+        addNewProductButton.setTitle("+ Yeni Ürün Ekle", for: .normal)
+        addNewProductButton.layer.cornerRadius = 10
+        addNewProductButton.backgroundColor = .systemGreen
+        
+        view.addSubview(addNewProductButton)
+        addNewProductButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            addNewProductButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            addNewProductButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            addNewProductButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            addNewProductButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.06),
+            addNewProductButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10)
+        ])
+        
+        addNewProductButton.addTarget(self, action: #selector(sendNewProductVC), for: .touchUpInside)
+        
+    }
+    
+    @objc private func sendNewProductVC() {
+        let destinationVC = NewProductViewController()
+        self.navigationController?.pushViewController(destinationVC, animated: true)
     }
     
     private func getProduct() {
@@ -58,11 +90,9 @@ final class UpdateProductVC: UIViewController {
     }
     
     @objc private func clickedRightBarButton() {
-        print("Kaydet")
+        print("Kaydet: \(productSavedList.map({ $0.image }))")
+        viewModel.saveNewMenu()
     }
-    
-    
-    
     
 }
 
@@ -90,6 +120,59 @@ extension UpdateProductVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 65
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let cell = tableView.cellForRow(at: indexPath)
+        let selectedItem = showingList[indexPath.row]
+        
+        if cell?.accessoryType == .checkmark {
+            cell?.accessoryType = .none
+            print("Silincek ürün: \(selectedItem.name)")
+            productSavedList.remove(selectedItem)
+            
+        } else {
+            cell?.accessoryType = .checkmark
+            print("Eklencek Ürün: \(selectedItem.name)")
+            productSavedList.insert(selectedItem)
+            
+        }
+        
+        barButton.isEnabled = productSavedList.count > 0 ? true: false
+    }
+    
+    
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let update = UIContextualAction(style: .normal, title: "Güncelle") { (action, view, success) in
+            view.backgroundColor = .systemOrange
+            print("Güncellenecek eleman: \(self.showingList[indexPath.row].name)")
+            self.showAlertMessage(product: self.showingList[indexPath.row])
+        }
+        
+        let swipeActions = UISwipeActionsConfiguration(actions: [update])
+        return swipeActions
+    }
+    
+    private func showAlertMessage(product: Product) {
+        let alertMessage = UIAlertController(title: "Ürün güncelle", message: nil, preferredStyle: .alert)
+        alertMessage.addTextField { textField in
+            textField.text = product.price
+        }
+        
+        let cancelButton = UIAlertAction(title: "İptal", style: .destructive)
+        let saveButton = UIAlertAction(title: "Kaydet", style: .default) { _ in
+            print(product.name)
+        }
+        
+        alertMessage.addAction(cancelButton)
+        alertMessage.addAction(saveButton)
+        
+        self.present(alertMessage, animated: true)
+        
+    }
+    
+    
+    
 }
 
 extension UpdateProductVC: AdminPageProtocol {

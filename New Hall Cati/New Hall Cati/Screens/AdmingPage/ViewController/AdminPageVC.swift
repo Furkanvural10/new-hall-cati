@@ -23,7 +23,7 @@ final class AdminPageVC: UIViewController {
     
     func configureAddNewProductButton() {
         addNewProductButton = UIButton()
-        addNewProductButton.setTitle("+ Add New Product", for: .normal)
+        addNewProductButton.setTitle("+ Yeni Ürün Ekle", for: .normal)
         addNewProductButton.layer.cornerRadius = 10
         addNewProductButton.backgroundColor = .systemGreen
         

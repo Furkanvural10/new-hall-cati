@@ -31,6 +31,7 @@ final class NewProductViewController: UIViewController {
         setupTextFieldDelegation()
         configureUploadImageButton()
         configureSaveProductButton()
+        configureTypeOfDishOption()
     }
     
 
@@ -121,6 +122,10 @@ extension NewProductViewController: NewProductProtocol {
     func configureSaveProductButton() {
         let barButton = UIBarButtonItem(title: "Kaydet", style: .plain, target: self, action: #selector(clickedRightBarButton))
         self.navigationItem.rightBarButtonItem = barButton
+    }
+    
+    private func configureTypeOfDishOption() {
+        
     }
     
     @objc private func clickedRightBarButton() {

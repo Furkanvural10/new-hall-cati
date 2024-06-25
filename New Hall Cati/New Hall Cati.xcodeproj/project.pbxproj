@@ -52,6 +52,7 @@
 		047EA7F62B552EB000B3DDC7 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 047EA7F52B552EB000B3DDC7 /* SDWebImage */; };
 		047EA7F82B59A01000B3DDC7 /* CustomWorkingHourView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047EA7F72B59A01000B3DDC7 /* CustomWorkingHourView.swift */; };
 		047EA7FA2B59A53600B3DDC7 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047EA7F92B59A53600B3DDC7 /* UIViewController+Extension.swift */; };
+		04A143762BFC79A00034441B /* UpdateProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A143752BFC79A00034441B /* UpdateProductViewModel.swift */; };
 		04B268E22B3D7DAD0096CB0C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B268E12B3D7DAD0096CB0C /* AppDelegate.swift */; };
 		04B268E42B3D7DAD0096CB0C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B268E32B3D7DAD0096CB0C /* SceneDelegate.swift */; };
 		04B268E62B3D7DAD0096CB0C /* OnboardingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B268E52B3D7DAD0096CB0C /* OnboardingVC.swift */; };
@@ -109,6 +110,7 @@
 		0466998F2B50827A0053C1BD /* GetDailySnack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetDailySnack.swift; sourceTree = "<group>"; };
 		047EA7F72B59A01000B3DDC7 /* CustomWorkingHourView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomWorkingHourView.swift; sourceTree = "<group>"; };
 		047EA7F92B59A53600B3DDC7 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		04A143752BFC79A00034441B /* UpdateProductViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProductViewModel.swift; sourceTree = "<group>"; };
 		04B268DE2B3D7DAD0096CB0C /* New Hall Cati.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "New Hall Cati.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		04B268E12B3D7DAD0096CB0C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04B268E32B3D7DAD0096CB0C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -445,6 +447,7 @@
 			isa = PBXGroup;
 			children = (
 				04EC24E92BF6495100BDF80E /* UpdateProductVC.swift */,
+				04A143752BFC79A00034441B /* UpdateProductViewModel.swift */,
 			);
 			path = UpdateProductPage;
 			sourceTree = "<group>";
@@ -636,6 +639,7 @@
 				046699562B4C80180053C1BD /* FirebaseManager.swift in Sources */,
 				047EA7F82B59A01000B3DDC7 /* CustomWorkingHourView.swift in Sources */,
 				04B268E42B3D7DAD0096CB0C /* SceneDelegate.swift in Sources */,
+				04A143762BFC79A00034441B /* UpdateProductViewModel.swift in Sources */,
 				0466931A2B454BAF000DED64 /* AdminPageViewModel.swift in Sources */,
 				046699602B4DF6CB0053C1BD /* FirebaseConstants.swift in Sources */,
 				046699902B50827A0053C1BD /* GetDailySnack.swift in Sources */,
