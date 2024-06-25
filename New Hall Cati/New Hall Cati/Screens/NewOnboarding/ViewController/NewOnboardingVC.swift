@@ -17,11 +17,15 @@ final class NewOnboardingVC: UIViewController {
     private var adminNumberTextField: UITextField!
     private var adminLoginLabel: UILabel!
     private var studentLoginLabel: UILabel!
+    private var loadingView: UIActivityIndicatorView!
+    
+    private let viewModel = NewOnboardingViewModel()
     
     
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.delegate = self
         setupUI()
         setupGestureRecognizers()
     }
@@ -78,6 +82,8 @@ final class NewOnboardingVC: UIViewController {
             studentLoginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             studentLoginButton.topAnchor.constraint(equalTo: mainTitleLabel.bottomAnchor, constant: 30)
         ])
+        
+        studentLoginButton.addTarget(self, action: #selector(login), for: .touchUpInside)
         
         // Admin Number Text Field Configuration
         adminNumberTextField = UITextField()
@@ -136,6 +142,20 @@ final class NewOnboardingVC: UIViewController {
             studentLoginLabel.topAnchor.constraint(equalTo: studentLoginButton.bottomAnchor, constant: 30),
             studentLoginLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
+        
+        
+        // MARK: - Loading View
+        loadingView = UIActivityIndicatorView(style: .large)
+
+        view.addSubview(loadingView)
+        loadingView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            loadingView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            loadingView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+        
+        
     }
     // MARK: - Gesture Recognizers Functions
     private func setupGestureRecognizers() {
@@ -180,6 +200,24 @@ final class NewOnboardingVC: UIViewController {
             }
         }
     }
+    
+    @objc private func login() {
+        startLoadingView()
+        viewModel.loginAnonymousUser()
+        
+    }
+    
+    private func startLoadingView() {
+        DispatchQueue.main.async {
+            self.loadingView.startAnimating()
+        }
+    }
+    
+    private func stopLoadingView() {
+        DispatchQueue.main.async {
+            self.loadingView.stopAnimating()
+        }
+    }
 }
 
 extension NewOnboardingVC: UITextFieldDelegate {
@@ -190,6 +228,27 @@ extension NewOnboardingVC: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
         
+    }
+    
+    
+}
+
+extension NewOnboardingVC: NewOnboardingViewControllable {
+    
+    func didRequestUserLogin() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            self.stopLoadingView()
+            let mainPage = MainPageVC()
+            self.navigationController?.viewControllers = [mainPage]
+        }
+    }
+    
+    func didRequestAdminLogin() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            self.stopLoadingView()
+            let mainPage = MainPageVC()
+            self.navigationController?.viewControllers = [mainPage]
+        }
     }
     
     

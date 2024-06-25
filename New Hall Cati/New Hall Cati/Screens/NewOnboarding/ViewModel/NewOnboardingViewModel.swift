@@ -35,7 +35,8 @@ extension NewOnboardingViewModel: NewOnboardingVMProtocol {
             case .success(let success):
                 self.delegate?.didRequestUserLogin()
             case .failure(let failure):
-                self.delegate?.didRequestAdminLogin()
+                // Hata mesajı göster
+                break
             }
         }   
     }
@@ -47,6 +48,7 @@ extension NewOnboardingViewModel: NewOnboardingVMProtocol {
             case true:
                 self.delegate?.didRequestUserLogin()
             case false:
+                // Hata mesajı göster
                 break
             }
         }
