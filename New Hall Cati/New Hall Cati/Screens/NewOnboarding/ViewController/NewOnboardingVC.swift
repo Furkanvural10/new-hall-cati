@@ -92,6 +92,7 @@ final class NewOnboardingVC: UIViewController {
         adminNumberTextField.autocorrectionType = .no
         adminNumberTextField.keyboardType = .numberPad
         adminNumberTextField.backgroundColor = .systemGray5
+        adminNumberTextField.returnKeyType = .continue
         adminNumberTextField.delegate = self
         
         let placeholderText = "Üye Numarası"
@@ -146,7 +147,7 @@ final class NewOnboardingVC: UIViewController {
         
         // MARK: - Loading View
         loadingView = UIActivityIndicatorView(style: .large)
-
+        
         view.addSubview(loadingView)
         loadingView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -222,15 +223,23 @@ final class NewOnboardingVC: UIViewController {
 
 extension NewOnboardingVC: UITextFieldDelegate {
     
-    func textFieldDidChangeSelection(_ textField: UITextField) {
-        
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if textField == adminNumberTextField {
+            UIView.animate(withDuration: 0.3) {
+                self.view.frame.origin.y = -300
+            }
+        }
+        return true
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
-        
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        if textField == adminNumberTextField {
+            UIView.animate(withDuration: 0.3) {
+                self.view.frame.origin.y = 0
+            }
+        }
+        return true
     }
-    
-    
 }
 
 extension NewOnboardingVC: NewOnboardingViewControllable {
