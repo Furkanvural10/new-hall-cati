@@ -90,14 +90,13 @@ final class NewOnboardingVC: UIViewController {
         adminNumberTextField.placeholder = "Üye Numarası"
         adminNumberTextField.borderStyle = .roundedRect
         adminNumberTextField.autocorrectionType = .no
-        adminNumberTextField.keyboardType = .numberPad
         adminNumberTextField.backgroundColor = .systemGray5
         adminNumberTextField.returnKeyType = .continue
         adminNumberTextField.delegate = self
         
         let placeholderText = "Üye Numarası"
         let placeholderAttributes: [NSAttributedString.Key: Any] = [
-            .foregroundColor: UIColor.white,
+            .foregroundColor: UIColor.white.withAlphaComponent(0.5),
             .font: UIFont.systemFont(ofSize: 12, weight: .bold)
         ]
         adminNumberTextField.attributedPlaceholder = NSAttributedString(string: placeholderText, attributes: placeholderAttributes)
@@ -203,8 +202,11 @@ final class NewOnboardingVC: UIViewController {
     }
     
     @objc private func login() {
+        mainBackgroundImageView.alpha = 0.3
+
         startLoadingView()
         viewModel.loginAnonymousUser()
+        
         
     }
     
@@ -222,6 +224,14 @@ final class NewOnboardingVC: UIViewController {
 }
 
 extension NewOnboardingVC: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        guard let password = textField.text, password.count > 5 else { return false }
+        textField.resignFirstResponder()
+        viewModel.loginAdmin(password)
+        return true
+    }
+    
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if textField == adminNumberTextField {
@@ -243,6 +253,8 @@ extension NewOnboardingVC: UITextFieldDelegate {
 }
 
 extension NewOnboardingVC: NewOnboardingViewControllable {
+   
+    
     
     func didRequestUserLogin() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
@@ -258,6 +270,10 @@ extension NewOnboardingVC: NewOnboardingViewControllable {
             let mainPage = MainPageVC()
             self.navigationController?.viewControllers = [mainPage]
         }
+    }
+    
+    func didCatchError() {
+        
     }
     
     

@@ -102,7 +102,6 @@ final class FirebaseManager: FirebaseManagerProtocol {
                     completion(false)
                 }
             }
-
             return
         }
     }

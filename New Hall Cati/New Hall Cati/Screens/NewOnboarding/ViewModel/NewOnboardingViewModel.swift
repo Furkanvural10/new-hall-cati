@@ -11,12 +11,14 @@ import Firebase
 protocol NewOnboardingViewControllable: AnyObject {
     func didRequestUserLogin()
     func didRequestAdminLogin()
+    func didCatchError()
+    
 }
 
 
 protocol NewOnboardingVMProtocol {
     func loginAnonymousUser()
-    func loginAdmin()
+    func loginAdmin(_ adminPassword: String)
 }
 
 final class NewOnboardingViewModel {
@@ -38,19 +40,19 @@ extension NewOnboardingViewModel: NewOnboardingVMProtocol {
                 // Hata mesajı göster
                 break
             }
-        }   
+        }
     }
-    
-    func loginAdmin() {
-        
-        firebaseManager.loginAdmin(adminPassword: "123456") { result in
+    func loginAdmin(_ adminPassword: String) {
+        firebaseManager.loginAdmin(adminPassword: adminPassword) { result in
             switch result {
             case true:
                 self.delegate?.didRequestUserLogin()
             case false:
                 // Hata mesajı göster
+                self.delegate?.didCatchError()
                 break
             }
         }
     }
+    
 }
