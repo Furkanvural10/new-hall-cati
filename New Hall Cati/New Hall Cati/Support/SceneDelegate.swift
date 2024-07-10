@@ -17,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        window?.rootViewController = createNewOnboardingVC()
+        window?.rootViewController = createSplashVC()
         window?.makeKeyAndVisible()
     }
     
@@ -26,13 +26,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         return UINavigationController(rootViewController: mainPageVC)
     }
     
-    func createOnboardingVC() -> UIViewController {
-        let onboardingVC = OnboardingVC()
-        return UINavigationController(rootViewController: onboardingVC)
+    func createSplashVC() -> UIViewController {
+        let splashVC = SplashVC()
+        return UINavigationController(rootViewController: splashVC)
     }
     
     func createNewOnboardingVC() -> UIViewController {
-        let newOnboardingVC = NewOnboardingVC()
+        let newOnboardingVC = OnboardingVC()
         return UINavigationController(rootViewController: newOnboardingVC)
     }
     

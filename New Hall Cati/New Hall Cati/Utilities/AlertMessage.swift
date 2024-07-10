@@ -2,7 +2,7 @@
 //  AlertMessage.swift
 //  New Hall Cati
 //
-//  Created by furkan vural on 1.07.2024.
+//  Created by furkan vural on 9.07.2024.
 //
 
 import Foundation

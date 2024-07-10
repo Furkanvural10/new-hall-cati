@@ -1,5 +1,6 @@
 import UIKit
 import FirebaseFirestore
+import Foundation
 #warning("Dont forget functions order")
 
 
@@ -15,15 +16,13 @@ protocol MainPageProtocol {
     func configureSegmentedController()
     
     var viewModel: MainPageViewModel { get }
+    var isUserAdmin: Bool { get }
 
 }
 
-
-import Foundation
-
 final class MainPageVC: UIViewController {
-
     
+    // MARK: - Properties
     var dailyMainDish: [Product] = []
     var dailyDessert: [Product] = []
     var dailySnack: [Product] = []
@@ -40,6 +39,7 @@ final class MainPageVC: UIViewController {
         case drink = "Tatlılar"
         case dessert = "İçecekler"
     }
+    
     private var productTitleList: [ProductType] = [.dish, .drink, .dessert]
     
     private var dateTitleLabel: UILabel!
@@ -59,9 +59,9 @@ final class MainPageVC: UIViewController {
         getDataFromFirestore()
         configureBackground()
         configureNavigationBar()
-//        configureWorkingLabel()
-//        configureHourLabel()
-//        configureWorkingDetailVi ew()
+        configureWorkingLabel()
+        configureHourLabel()
+        configureWorkingDetailView()
         configureSegmentedController()
         configureCollectionView()
         configureDataSource()
@@ -113,8 +113,6 @@ final class MainPageVC: UIViewController {
             cell.set(product: self.showingData[indexPath.row])
             return cell
         })
-        
-
     }
     
     func updateData() {
@@ -162,6 +160,10 @@ extension MainPageVC: MainPageViewModelProtocol {
 }
 
 extension MainPageVC: MainPageProtocol {
+    
+    var isUserAdmin: Bool {
+        UserDefaultsManager.shared.getUserTypeData()
+    }
     
     func configureBackground() {
         view.backgroundColor = .black
@@ -230,6 +232,7 @@ extension MainPageVC: MainPageProtocol {
         self.navigationItem.titleView = titleLabel
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Admin", style: .done, target: self, action: #selector(openAdminPage))
+        self.navigationItem.rightBarButtonItem?.isHidden = !isUserAdmin
     }
     
     @objc private func openAdminPage() {
@@ -264,16 +267,13 @@ extension MainPageVC: MainPageProtocol {
         
         let unselectedAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.9)]
         segmentedController.setTitleTextAttributes(unselectedAttributes, for: .normal)
-        
-        
-        
+
         segmentedController.addTarget(self, action: #selector(changedSegmentedControl), for: .valueChanged)
         
         NSLayoutConstraint.activate([
             segmentedController.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 80),
             segmentedController.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             segmentedController.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            
         ])
     }
     

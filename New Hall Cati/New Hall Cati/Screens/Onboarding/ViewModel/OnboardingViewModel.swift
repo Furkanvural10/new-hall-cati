@@ -1,51 +1,64 @@
 //
-//  OnboardingViewModel.swift
+//  NewOnboardingViewModel.swift
 //  New Hall Cati
 //
-//  Created by furkan vural on 28.12.2023.
+//  Created by Emirhan İpek on 9.06.2024.
 //
 
 import Foundation
-import UIKit
+import Firebase
 
-protocol OnboardingViewModelDelegate: AnyObject {
-    func welcomeTextDidChanged(to newText: String)
-    func nextPage()
-    func showAlertMessage()
+protocol OnboardingViewControllable: AnyObject {
+    func didRequestLogin()
+    func didCatchError()
 }
 
-struct OnboardingViewModel {
+
+protocol OnboardingVMProtocol {
+    func loginAnonymousUser()
+    func loginAdmin(_ adminPassword: String)
+    func saveOnboardingSeenData()
+}
+
+final class OnboardingViewModel {
+    weak var delegate: OnboardingViewControllable?
+    private var firebaseManager: FirebaseManager = .shared
+}
+
+extension OnboardingViewModel: OnboardingVMProtocol {
     
-    weak var delegate: OnboardingViewModelDelegate?
-    let welcomeText = Constant.welcomeText
-    
-    func startAnimation(for label: UILabel) {
-        UIView.animate(withDuration: 1, delay: 0, options: .curveEaseOut) {
-            label.textColor = .white
-            label.alpha = 0
-        } completion: { _ in
-            self.delegate?.welcomeTextDidChanged(to: self.welcomeText)
-            UIView.animate(withDuration: 2, delay: 0, options: .curveEaseOut) {
-                label.alpha = 1
-            } completion: { _ in
-                createUser()
-                
-            }
-        }
-    }
-    
-    func createUser() {
-        FirebaseManager.shared.createAnonymousUser { result in
+    func loginAnonymousUser() {
+        
+        firebaseManager.createAnonymousUser { result in
             switch result {
-            case .success(let success):
-                self.delegate?.nextPage()
-            case .failure(let failure):
-                self.delegate?.showAlertMessage()
+            case .success(_):
+                self.saveAdminValue(value: false)
+                self.delegate?.didRequestLogin()
+            case .failure(_):
+                self.delegate?.didCatchError()
+                break
+            }
+        }
+    }
+    func loginAdmin(_ adminPassword: String) {
+        firebaseManager.loginAdmin(adminPassword: adminPassword) { result in
+            switch result {
+            case true:
+                self.saveAdminValue(value: true)
+                self.delegate?.didRequestLogin()
+            case false:
+                self.delegate?.didCatchError()
+                break
             }
         }
     }
     
+    private func saveAdminValue(value: Bool) {
+        UserDefaultsManager.shared.saveAUserTypeData(value: value)
+    }
     
-    
+    func saveOnboardingSeenData() {
+        UserDefaultsManager.shared.saveOnboardingSeenData(value: true)
+    }
     
 }
