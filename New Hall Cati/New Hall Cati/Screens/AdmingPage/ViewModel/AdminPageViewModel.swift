@@ -9,11 +9,12 @@ import Foundation
 
 protocol AdminPageViewModelProtocol: AnyObject {
     
-    func saveNewMenu()
+    func saveNewMenu(productList: Set<Product>, selectedProduct: String)
     func getAllMainDish(product: String)
     func getAllDessert()
     func getAllDrink()
     func getAllSnack()
+    func updateProduct(product: Product, selectedProduct: String, newValue: Int)
 }
 
 class AdminPageViewModel {
@@ -28,10 +29,18 @@ class AdminPageViewModel {
 extension AdminPageViewModel: AdminPageViewModelProtocol {
     
     
-    
-    func saveNewMenu() {
-//        TODO: save db admin adding new daily menu
-//        FirebaseManager.shared.
+    func saveNewMenu(productList: Set<Product>, selectedProduct: String) {
+        print(productList.map({ $0.name }))
+        FirebaseManager.shared.deleteAllDocuments(selectedProduct: selectedProduct, batchSize: 20) { error in
+            guard error == nil else {
+                return
+            }
+   
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            productList.forEach { FirebaseManager.shared.saveMenu(product: $0, selectedProduct: selectedProduct) }
+        }
+        
     }
     
     
@@ -77,6 +86,18 @@ extension AdminPageViewModel: AdminPageViewModelProtocol {
                 self.allSnack = success
             case .failure(let failure):
                 print("failure all snack \(failure)")
+            }
+        }
+    }
+    
+    func updateProduct(product: Product, selectedProduct: String, newValue: Int) {
+        
+        FirebaseManager.shared.updateProduct(product: product, selectedProduct: selectedProduct, newValue: newValue) { result in
+            switch result {
+            case true:
+                break
+            case false:
+                break
             }
         }
     }

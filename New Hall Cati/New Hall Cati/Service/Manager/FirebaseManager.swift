@@ -5,13 +5,14 @@ import FirebaseFirestore
 protocol FirebaseManagerProtocol {
     func createAnonymousUser(completion: @escaping ((Result<User, NetworkError>) -> Void))
     func getData<T: Codable>(child: String, completion: @escaping ((Result<[T], NetworkError>) -> Void))
-    func saveMenu(product: Product)
+    func saveMenu(product: Product, selectedProduct: String)
 }
 
 final class FirebaseManager: FirebaseManagerProtocol {
     
     static let shared = FirebaseManager()
     private let database = Firestore.firestore()
+    
     
     private init() {}
     
@@ -73,12 +74,97 @@ final class FirebaseManager: FirebaseManagerProtocol {
         }
     }
     
-    func updateProduct(product: Product) {
-        
+    func updateProduct(product: Product, selectedProduct: String, newValue: Int, completion: @escaping ((Bool)) -> Void) {
+        let updateData = [ "price" : "\(newValue) ₺" ]
+        database.collection(selectedProduct).document(product.prodID).updateData(updateData) { error in
+            guard error == nil else {
+                completion(false)
+                return
+            }
+            completion(true)
+        }
     }
     
-    func saveMenu(product: Product) {
-         
+    func saveMenu(product: Product, selectedProduct: String) {
+        
+        
+        
+        let id = UUID().uuidString
+        
+        let newData = [
+            "name" : product.name,
+            "price" : product.price,
+            "image": product.image,
+            "prodID" : product.prodID
+        ]
+        
+        let today = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let todayString = dateFormatter.string(from: today)
+        
+        var dishType = ""
+        
+        switch selectedProduct {
+        case "AllMainDish":
+            dishType = "DailyMainDish"
+        case "AllDessert":
+            dishType = "DailyDessert"
+        case "AllSnack":
+            dishType = "DailySnack"
+        default:
+            break
+        }
+        
+        database.collection(dishType).document(product.prodID).setData(newData) { error in
+            guard error == nil else { return }
+            
+            
+        }
+    }
+    
+    
+    
+    
+    func deleteAllDocuments(selectedProduct: String, batchSize: Int = 50, completion: @escaping (Error?) -> Void) {
+        
+        
+        var dishType = ""
+        
+        switch selectedProduct {
+        case "AllMainDish":
+            dishType = "DailyMainDish"
+        case "AllDessert":
+            dishType = "DailyDessert"
+        case "AllSnack":
+            dishType = "DailySnack"
+        default:
+            break
+        }
+        
+        let collectionRef = database.collection(dishType)
+        
+        collectionRef.limit(to: batchSize).getDocuments { (querySnapshot, error) in
+            guard let documents = querySnapshot?.documents else {
+                completion(error)
+                return
+            }
+            
+//            guard !documents.isEmpty else {
+//                completion(nil)
+//                return
+//            }
+            
+            let batch = collectionRef.firestore.batch()
+            
+            documents.forEach { batch.deleteDocument($0.reference) }
+            
+            batch.commit { batchError in
+                if let batchError = batchError {
+                    completion(batchError)
+                }
+            }
+        }
     }
     
     func loginAdmin(adminPassword: String, completion: @escaping (Bool) -> Void) {

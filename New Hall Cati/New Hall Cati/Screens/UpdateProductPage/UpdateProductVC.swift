@@ -13,13 +13,11 @@ final class UpdateProductVC: UIViewController {
     private var tableView: UITableView!
     private var barButton: UIBarButtonItem!
     private var addNewProductButton: UIButton!
-
-    
-    
     private var showingList: [Product] = []
     private var productSavedList: Set<Product> = []
     private var viewModel = AdminPageViewModel()
     var selectedProduct: String?
+    lazy var newValue: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,8 +88,8 @@ final class UpdateProductVC: UIViewController {
     }
     
     @objc private func clickedRightBarButton() {
-        print("Kaydet: \(productSavedList.map({ $0.image }))")
-        viewModel.saveNewMenu()
+        
+        viewModel.saveNewMenu(productList: productSavedList, selectedProduct: selectedProduct!)
     }
     
 }
@@ -154,25 +152,32 @@ extension UpdateProductVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     private func showAlertMessage(product: Product) {
+        
+        
         let alertMessage = UIAlertController(title: "Ürün güncelle", message: nil, preferredStyle: .alert)
         alertMessage.addTextField { textField in
-            textField.text = product.price
+            textField.keyboardType = .numberPad
+            textField.placeholder = "\(product.name) (₺)"
+            textField.delegate = self
         }
         
         let cancelButton = UIAlertAction(title: "İptal", style: .destructive)
         let saveButton = UIAlertAction(title: "Kaydet", style: .default) { _ in
-            print(product.name)
+            self.viewModel.updateProduct(product: product, selectedProduct: self.selectedProduct!, newValue: Int(self.newValue)! )
         }
         
         alertMessage.addAction(cancelButton)
         alertMessage.addAction(saveButton)
-        
         self.present(alertMessage, animated: true)
-        
     }
+
+}
+
+extension UpdateProductVC: UITextFieldDelegate {
     
-    
-    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        newValue = textField.text!
+    }
 }
 
 extension UpdateProductVC: AdminPageProtocol {
