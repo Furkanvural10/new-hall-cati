@@ -9,15 +9,16 @@ protocol MainPageProtocol {
     func configureBackground()
     func configureNavigationBar()
     func configureDateTitle()
-    func configureWorkingLabel()
-    func configureHourLabel()
-    func configureWorkingDetailView()
+//    func configureWorkingLabel()
+//    func configureHourLabel()
+//    func configureWorkingDetailView()
     func configureCollectionView()
     func configureSegmentedController()
+    func configureBlurView()
     
     var viewModel: MainPageViewModel { get }
     var isUserAdmin: Bool { get }
-
+    var isBlurViewOn: Bool { get }
 }
 
 final class MainPageVC: UIViewController {
@@ -43,9 +44,9 @@ final class MainPageVC: UIViewController {
     private var productTitleList: [ProductType] = [.dish, .drink, .dessert]
     
     private var dateTitleLabel: UILabel!
-    private var workingTitleLabel: UILabel!
-    private var workingHourLabel: UILabel!
-    private var workingDetailView: UIView!
+//    private var workingTitleLabel: UILabel!
+//    private var workingHourLabel: UILabel!
+//    private var workingDetailView: UIView!
     private var segmentedController: UISegmentedControl!
     var collectionView: UICollectionView!
     var dataSource: UICollectionViewDiffableDataSource<Section, Product>!
@@ -59,13 +60,14 @@ final class MainPageVC: UIViewController {
         getDataFromFirestore()
         configureBackground()
         configureNavigationBar()
-        configureWorkingLabel()
-        configureHourLabel()
-        configureWorkingDetailView()
+//        configureWorkingLabel()
+//        configureHourLabel()
+//        configureWorkingDetailView()
         configureSegmentedController()
         configureCollectionView()
         configureDataSource()
         configureDateTitle()
+        configureBlurView()
     }
     
     func getDataFromFirestore() {
@@ -76,20 +78,20 @@ final class MainPageVC: UIViewController {
         viewModel.getAllSnack()
     }
     
-    func configureHourLabel() {
-        workingHourLabel = UILabel()
-        workingHourLabel.font = UIFont.systemFont(ofSize: 13)
-        workingHourLabel.textColor = .white
-        workingHourLabel.text = "09:00 - 15:00"
-        
-        view.addSubview(workingHourLabel)
-        workingHourLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            workingHourLabel.topAnchor.constraint(equalTo: workingTitleLabel.bottomAnchor, constant: 4),
-            workingHourLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
-        ])
-    }
+//    func configureHourLabel() {
+//        workingHourLabel = UILabel()
+//        workingHourLabel.font = UIFont.systemFont(ofSize: 13)
+//        workingHourLabel.textColor = .white
+//        workingHourLabel.text = "09:00 - 15:00"
+//        
+//        view.addSubview(workingHourLabel)
+//        workingHourLabel.translatesAutoresizingMaskIntoConstraints = false
+//        
+//        NSLayoutConstraint.activate([
+//            workingHourLabel.topAnchor.constraint(equalTo: workingTitleLabel.bottomAnchor, constant: 4),
+//            workingHourLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
+//        ])
+//    }
     
 
     func createThreeColumnFlowLayout() -> UICollectionViewFlowLayout {
@@ -165,6 +167,18 @@ extension MainPageVC: MainPageProtocol {
         UserDefaultsManager.shared.getUserTypeData()
     }
     
+    var isBlurViewOn: Bool {
+        return true
+    }
+    
+    func configureBlurView() {
+        let blur = UIBlurEffect(style: .dark)
+        let blurView = UIVisualEffectView(effect: blur)
+        blurView.frame = view.bounds
+        blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        view.addSubview(blurView)
+    }
+    
     func configureBackground() {
         view.backgroundColor = .black
     }
@@ -182,40 +196,40 @@ extension MainPageVC: MainPageProtocol {
         viewModel.setTitle()
     }
     
-    func configureWorkingLabel() {
-        workingTitleLabel = UILabel()
-        workingTitleLabel.font = UIFont.boldSystemFont(ofSize: 13)
-        workingTitleLabel.text = Constant.openClosedText
-        workingTitleLabel.textColor = .white
-        
-        view.addSubview(workingTitleLabel)
-        workingTitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            workingTitleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15),
-            workingTitleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
-        ])
-    }
-    
-    func configureWorkingDetailView() {
-        workingDetailView = UIView()
-        view.addSubview(workingDetailView)
-        workingDetailView.backgroundColor = .white.withAlphaComponent(0.2)
-        workingDetailView.layer.cornerRadius = 8
-        workingDetailView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            workingDetailView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 5),
-            workingDetailView.leadingAnchor.constraint(equalTo: workingTitleLabel.leadingAnchor, constant: -5),
-            workingDetailView.trailingAnchor.constraint(equalTo: workingTitleLabel.trailingAnchor, constant: 5),
-            workingDetailView.heightAnchor.constraint(equalToConstant: 50)
-        ])
-        
-        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(editWorkingHour))
-        workingDetailView.addGestureRecognizer(gestureRecognizer)
-        
-        
-    }
+//    func configureWorkingLabel() {
+//        workingTitleLabel = UILabel()
+//        workingTitleLabel.font = UIFont.boldSystemFont(ofSize: 13)
+//        workingTitleLabel.text = Constant.openClosedText
+//        workingTitleLabel.textColor = .white
+//        
+//        view.addSubview(workingTitleLabel)
+//        workingTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+//        
+//        NSLayoutConstraint.activate([
+//            workingTitleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15),
+//            workingTitleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
+//        ])
+//    }
+//    
+//    func configureWorkingDetailView() {
+//        workingDetailView = UIView()
+//        view.addSubview(workingDetailView)
+//        workingDetailView.backgroundColor = .white.withAlphaComponent(0.2)
+//        workingDetailView.layer.cornerRadius = 8
+//        workingDetailView.translatesAutoresizingMaskIntoConstraints = false
+//        
+//        NSLayoutConstraint.activate([
+//            workingDetailView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 5),
+//            workingDetailView.leadingAnchor.constraint(equalTo: workingTitleLabel.leadingAnchor, constant: -5),
+//            workingDetailView.trailingAnchor.constraint(equalTo: workingTitleLabel.trailingAnchor, constant: 5),
+//            workingDetailView.heightAnchor.constraint(equalToConstant: 50)
+//        ])
+//        
+//        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(editWorkingHour))
+//        workingDetailView.addGestureRecognizer(gestureRecognizer)
+//        
+//        
+//    }
     
     @objc private func editWorkingHour() {
         presentDatePickerViewOnMainThread()
