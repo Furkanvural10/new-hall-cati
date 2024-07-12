@@ -20,4 +20,6 @@ final class GetMainDish: GetMainDishProtocol {
         FirebaseManager.shared.getData(child: child, completion: completion)
     }
     
+    
+    
 }

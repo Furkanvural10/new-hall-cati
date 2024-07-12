@@ -101,4 +101,8 @@ extension AdminPageViewModel: AdminPageViewModelProtocol {
             }
         }
     }
+    
+    func saveRestaurantStatus(status: Bool) {
+        FirebaseManager.shared.saveRestaurantStatus(status: status)
+    }
 }

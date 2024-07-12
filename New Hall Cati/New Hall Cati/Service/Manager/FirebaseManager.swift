@@ -1,17 +1,21 @@
 import Foundation
 import FirebaseAuth
 import FirebaseFirestore
+import FirebaseStorage
 
 protocol FirebaseManagerProtocol {
     func createAnonymousUser(completion: @escaping ((Result<User, NetworkError>) -> Void))
     func getData<T: Codable>(child: String, completion: @escaping ((Result<[T], NetworkError>) -> Void))
     func saveMenu(product: Product, selectedProduct: String)
+    func saveRestaurantStatus(status: Bool)
 }
 
 final class FirebaseManager: FirebaseManagerProtocol {
     
     static let shared = FirebaseManager()
     private let database = Firestore.firestore()
+    private let storage = Storage.storage()
+    
     
     
     private init() {}
@@ -150,13 +154,7 @@ final class FirebaseManager: FirebaseManagerProtocol {
                 return
             }
             
-//            guard !documents.isEmpty else {
-//                completion(nil)
-//                return
-//            }
-            
             let batch = collectionRef.firestore.batch()
-            
             documents.forEach { batch.deleteDocument($0.reference) }
             
             batch.commit { batchError in
@@ -191,4 +189,64 @@ final class FirebaseManager: FirebaseManagerProtocol {
             return
         }
     }
+    
+    func addNewProduct(newProduct: Product, dishType: String, completion: @escaping (Error?) -> Void) {
+        
+        let id = UUID().uuidString
+        
+        let data = [
+            "id" : id,
+            "prodID" : id,
+            "price" : newProduct.price,
+            "name" : newProduct.name,
+            "image" : newProduct.image
+        ]
+        
+        
+        database.collection(dishType).document(id).setData(data) { error in
+            guard error == nil else { return }
+            
+        }
+    }
+    
+    func uploadImage(imageName: String, imageData: Data, child: String, completion: @escaping (Result<String, Error>) -> Void) {
+        
+        let storageRef = storage.reference()
+        let mediaFolder = storageRef.child(child)
+        let id = UUID().uuidString
+        let imageReference = mediaFolder.child("\(imageName)\(id.prefix(3)).jpg")
+        
+        let uploadTask = imageReference.putData(imageData, metadata: nil) { metaData, error in
+            if error != nil {
+                completion(.failure(error!))
+            } else {
+                imageReference.downloadURL { url, error in
+                    if error == nil {
+                        let imageUrl = url?.absoluteString
+                        completion(.success(imageUrl!))
+                    } else {
+                        completion(.failure(error!))
+                    }
+                }
+            }
+        }
+        
+        uploadTask.observe(.progress) { snapshot in
+            let percentComplete = 100.0 * Double(snapshot.progress!.completedUnitCount) / Double(snapshot.progress!.totalUnitCount)
+            print("Yükleme yüzdesi: \(percentComplete)%")
+        }
+        
+        uploadTask.observe(.success) { snapshot in
+            print("Yükleme başarıyla tamamlandı. ✅")
+        }
+    }
+    
+    
+    func saveRestaurantStatus(status: Bool) {
+        let newData = [ "status" : status ]
+        database.collection("Status").document("RestaurantStatus").setData(newData) { error in
+            guard error == nil else { return }
+        }
+    }
+    
 }

@@ -9,7 +9,6 @@ import UIKit
 
 final class UpdateProductVC: UIViewController {
     
-    
     private var tableView: UITableView!
     private var barButton: UIBarButtonItem!
     private var addNewProductButton: UIButton!
@@ -27,14 +26,15 @@ final class UpdateProductVC: UIViewController {
         configureAddNewProductButton()
         getProduct()
         configureTableView()
-        
-        
     }
     
     private func configureRightBarButtonItem() {
-        barButton = UIBarButtonItem(title: "Kaydet", style: .plain, target: self, action: #selector(clickedRightBarButton))
-        barButton.isEnabled = false
-        self.navigationItem.rightBarButtonItem = barButton
+        if selectedProduct != "AllDrink" && selectedProduct != "AllHotDrink" {
+            barButton = UIBarButtonItem(title: "Kaydet", style: .plain, target: self, action: #selector(clickedRightBarButton))
+            barButton.isEnabled = false
+            self.navigationItem.rightBarButtonItem = barButton
+        }
+        
     }
     
     private func configureTableView() {
@@ -79,6 +79,7 @@ final class UpdateProductVC: UIViewController {
     
     @objc private func sendNewProductVC() {
         let destinationVC = NewProductViewController()
+        destinationVC.dishType = selectedProduct
         self.navigationController?.pushViewController(destinationVC, animated: true)
     }
     
@@ -88,7 +89,6 @@ final class UpdateProductVC: UIViewController {
     }
     
     @objc private func clickedRightBarButton() {
-        
         viewModel.saveNewMenu(productList: productSavedList, selectedProduct: selectedProduct!)
     }
     
@@ -120,6 +120,10 @@ extension UpdateProductVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if selectedProduct == "AllDrink" || selectedProduct == "AllHotDrink" {
+            return
+        }
         
         let cell = tableView.cellForRow(at: indexPath)
         let selectedItem = showingList[indexPath.row]

@@ -23,6 +23,10 @@ final class NewProductViewController: UIViewController {
     private var uploadImageButton: UIButton!
     private var saveProductButton: UIButton!
     
+    var dishType: String?
+    let viewModel = NewProductViewModel()
+    var imageData: Data?
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,6 +73,13 @@ extension NewProductViewController: NewProductProtocol {
         // TODO: - 1) Validation
         // TODO: - 2) Save DB
         // TODO: - 3) Dismiss
+        
+        print("Dish Type: \(dishType)")
+        let prodID = UUID().uuidString
+        let product = Product(prodID: prodID, name: productNameTextField.text!, price: productPriceTextField.text!, image: "")
+        guard let imageData else { return }
+        viewModel.saveNewProduct(product: product, dishType: dishType!, imageData: imageData)
+        
     }
     
     @objc private func openImageGallery() {
@@ -106,6 +117,7 @@ extension NewProductViewController: NewProductProtocol {
         productPriceTextField.keyboardType = .numberPad
         productPriceTextField.backgroundColor = .white.withAlphaComponent(0.1)
         productPriceTextField.layer.cornerRadius = 10
+        
         
         
         view.addSubview(productPriceTextField)
@@ -154,6 +166,9 @@ extension NewProductViewController: UIImagePickerControllerDelegate, UINavigatio
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         uploadImageButton.setImage(info[.originalImage] as? UIImage, for: .normal)
+        if let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            imageData = selectedImage.jpegData(compressionQuality: 50)
+        }
         self.dismiss(animated: true)
     }
     
