@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0460F5E12C5E544900253784 /* RestaurantStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0460F5E02C5E544900253784 /* RestaurantStatus.swift */; };
+		0460F5E42C5E6D9400253784 /* splashAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 0460F5E32C5E6D9400253784 /* splashAnimation.json */; };
+		0460F5E72C5E707100253784 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 0460F5E62C5E707100253784 /* Lottie */; };
 		046692FA2B3EF2CA000DED64 /* MainPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046692F92B3EF2CA000DED64 /* MainPageVC.swift */; };
 		046692FC2B3F021A000DED64 /* MainPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046692FB2B3F021A000DED64 /* MainPageViewModel.swift */; };
 		046692FF2B3F3BF5000DED64 /* DishCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046692FE2B3F3BF5000DED64 /* DishCell.swift */; };
@@ -94,6 +97,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0460F5E02C5E544900253784 /* RestaurantStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantStatus.swift; sourceTree = "<group>"; };
+		0460F5E32C5E6D9400253784 /* splashAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = splashAnimation.json; sourceTree = "<group>"; };
 		046692F92B3EF2CA000DED64 /* MainPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageVC.swift; sourceTree = "<group>"; };
 		046692FB2B3F021A000DED64 /* MainPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewModel.swift; sourceTree = "<group>"; };
 		046692FE2B3F3BF5000DED64 /* DishCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishCell.swift; sourceTree = "<group>"; };
@@ -172,6 +177,7 @@
 				0466935E2B4AC5A5000DED64 /* FirebaseStorage in Frameworks */,
 				0466934A2B4AC5A5000DED64 /* FirebaseDynamicLinks in Frameworks */,
 				0466935A2B4AC5A5000DED64 /* FirebaseRemoteConfig in Frameworks */,
+				0460F5E72C5E707100253784 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,6 +198,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0460F5E22C5E6D7100253784 /* Lottie */ = {
+			isa = PBXGroup;
+			children = (
+				0460F5E32C5E6D9400253784 /* splashAnimation.json */,
+			);
+			path = Lottie;
+			sourceTree = "<group>";
+		};
 		046692F82B3EF2A2000DED64 /* MainPage */ = {
 			isa = PBXGroup;
 			children = (
@@ -224,6 +238,7 @@
 			children = (
 				046693042B3F50EA000DED64 /* Product.swift */,
 				0466996A2B4EC0170053C1BD /* User.swift */,
+				0460F5E02C5E544900253784 /* RestaurantStatus.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -382,6 +397,7 @@
 		04B268E02B3D7DAD0096CB0C /* New Hall Cati */ = {
 			isa = PBXGroup;
 			children = (
+				0460F5E22C5E6D7100253784 /* Lottie */,
 				046699542B4C7FF50053C1BD /* Service */,
 				046693032B3F50D3000DED64 /* Models */,
 				046693002B3F4127000DED64 /* CustomView */,
@@ -558,6 +574,7 @@
 				0466935D2B4AC5A5000DED64 /* FirebaseStorage */,
 				046699662B4EA0920053C1BD /* FirebaseAppCheck */,
 				047EA7F52B552EB000B3DDC7 /* SDWebImage */,
+				0460F5E62C5E707100253784 /* Lottie */,
 			);
 			productName = "New Hall Cati";
 			productReference = 04B268DE2B3D7DAD0096CB0C /* New Hall Cati.app */;
@@ -634,6 +651,7 @@
 			packageReferences = (
 				046693322B4AC5A5000DED64 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				047EA7F42B552EB000B3DDC7 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				0460F5E52C5E707100253784 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = 04B268DF2B3D7DAD0096CB0C /* Products */;
 			projectDirPath = "";
@@ -654,6 +672,7 @@
 				04B2691E2B3D9FE60096CB0C /* Pacifico-Regular.ttf in Resources */,
 				04B268F12B3D7DAE0096CB0C /* LaunchScreen.storyboard in Resources */,
 				046693312B4AC32F000DED64 /* GoogleService-Info.plist in Resources */,
+				0460F5E42C5E6D9400253784 /* splashAnimation.json in Resources */,
 				04B268EE2B3D7DAE0096CB0C /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -711,6 +730,7 @@
 				04B268E42B3D7DAD0096CB0C /* SceneDelegate.swift in Sources */,
 				04A143762BFC79A00034441B /* UpdateProductViewModel.swift in Sources */,
 				047828CA2C412C22000F8B8E /* NewProductViewModel.swift in Sources */,
+				0460F5E12C5E544900253784 /* RestaurantStatus.swift in Sources */,
 				0466931A2B454BAF000DED64 /* AdminPageViewModel.swift in Sources */,
 				F93BCB9E2C16250D00189523 /* OnboardingVC.swift in Sources */,
 				046699602B4DF6CB0053C1BD /* FirebaseConstants.swift in Sources */,
@@ -1057,6 +1077,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		0460F5E52C5E707100253784 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.0;
+			};
+		};
 		046693322B4AC5A5000DED64 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -1076,6 +1104,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0460F5E62C5E707100253784 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0460F5E52C5E707100253784 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
 		046693332B4AC5A5000DED64 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 046693322B4AC5A5000DED64 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

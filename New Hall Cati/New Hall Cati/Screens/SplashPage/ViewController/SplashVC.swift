@@ -1,10 +1,16 @@
 import UIKit
+import Lottie
 
 final class SplashVC: UIViewController {
     
-    private var viewModel = SplashViewModel()
     
-    var welcomeTextLabel: UILabel!
+    // MARK: - UI Elements
+    private var welcomeTextLabel: UILabel!
+    private var animation: LottieAnimationView!
+    
+    
+    // MARK: - Properties
+    private var viewModel = SplashViewModel()
     private let padding: CGFloat = 20
     private let fontSize: CGFloat = 35
     private let minimumScaleFactor: Double = 0.7
@@ -15,10 +21,12 @@ final class SplashVC: UIViewController {
         viewModel.delegate = self
         setupUI()
         configureWelcomeTextLabel()
-        viewModel.startAnimation(for: welcomeTextLabel)
+        viewModel.startAnimation(for: welcomeTextLabel, animation: animation)
     }
     
-    private func setupUI() { view.backgroundColor = .black }
+    private func setupUI() {
+        view.backgroundColor = .black
+    }
     
     private func configureWelcomeTextLabel() {
         
@@ -36,6 +44,23 @@ final class SplashVC: UIViewController {
             welcomeTextLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             welcomeTextLabel.heightAnchor.constraint(equalToConstant: textLabelHeight),
         ])
+        
+        
+        // MARK: - Lottie Animation
+        animation = LottieAnimationView(name: "splashAnimation")
+
+        view.addSubview(animation)
+        animation.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            animation.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            animation.topAnchor.constraint(equalTo: welcomeTextLabel.bottomAnchor, constant: -40),
+            animation.heightAnchor.constraint(equalToConstant: 200),
+            animation.widthAnchor.constraint(equalToConstant: 200)
+        ])
+        
+        
+    
     }
 }
 
@@ -43,14 +68,17 @@ extension SplashVC: SplashViewModelDelegate {
     
     func welcomeTextDidChanged(to newText: String) {
         welcomeTextLabel.text = newText
+        animation.play()
     }
     
     func nextMainPage() {
+        animation.stop()
         let mainPage = MainPageVC()
         navigationController?.viewControllers = [mainPage]
     }
     
     func nextOnboardingPage() {
+        animation.stop()
         let onboardingVC = OnboardingVC()
         navigationController?.pushViewController(onboardingVC, animated: true)
     }

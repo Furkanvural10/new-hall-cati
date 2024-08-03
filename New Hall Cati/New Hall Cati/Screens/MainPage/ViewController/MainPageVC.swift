@@ -15,21 +15,15 @@ protocol MainPageProtocol {
     func configureCollectionView()
     func configureSegmentedController()
     func configureBlurView()
+    func checkRestaurantStatus()
     
     var viewModel: MainPageViewModel { get }
     var isUserAdmin: Bool { get }
-    var isBlurViewOn: Bool { get }
+    var isBlurViewOn: Bool? { get }
 }
 
 final class MainPageVC: UIViewController {
     
-    // MARK: - Properties
-    var dailyMainDish: [Product] = []
-    var dailyDessert: [Product] = []
-    var dailySnack: [Product] = []
-    var allColdDrink: [Product] = []
-    var allHotDrink: [Product] = []
-    var showingData: Array<Product>!
     
     enum Section {
         case main
@@ -41,17 +35,26 @@ final class MainPageVC: UIViewController {
         case dessert = "İçecekler"
     }
     
+    // MARK: - Properties
+    var dailyMainDish: [Product] = []
+    var dailyDessert: [Product] = []
+    var dailySnack: [Product] = []
+    var allColdDrink: [Product] = []
+    var allHotDrink: [Product] = []
+    var showingData: Array<Product>!
+    var viewModel = MainPageViewModel()
     private var productTitleList: [ProductType] = [.dish, .drink, .dessert]
     
+
+    // MARK: - UI Elements
     private var dateTitleLabel: UILabel!
-//    private var workingTitleLabel: UILabel!
-//    private var workingHourLabel: UILabel!
-//    private var workingDetailView: UIView!
     private var segmentedController: UISegmentedControl!
-    var collectionView: UICollectionView!
-    var dataSource: UICollectionViewDiffableDataSource<Section, Product>!
+    private var collectionView: UICollectionView!
+    private var dataSource: UICollectionViewDiffableDataSource<Section, Product>!
+    private var blurView: UIVisualEffectView!
+
     
-    var viewModel = MainPageViewModel()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,14 +63,11 @@ final class MainPageVC: UIViewController {
         getDataFromFirestore()
         configureBackground()
         configureNavigationBar()
-//        configureWorkingLabel()
-//        configureHourLabel()
-//        configureWorkingDetailView()
         configureSegmentedController()
         configureCollectionView()
         configureDataSource()
         configureDateTitle()
-        configureBlurView()
+        checkRestaurantStatus()
     }
     
     func getDataFromFirestore() {
@@ -77,24 +77,8 @@ final class MainPageVC: UIViewController {
         viewModel.getAllHotDrink()
         viewModel.getAllSnack()
     }
-    
-//    func configureHourLabel() {
-//        workingHourLabel = UILabel()
-//        workingHourLabel.font = UIFont.systemFont(ofSize: 13)
-//        workingHourLabel.textColor = .white
-//        workingHourLabel.text = "09:00 - 15:00"
-//        
-//        view.addSubview(workingHourLabel)
-//        workingHourLabel.translatesAutoresizingMaskIntoConstraints = false
-//        
-//        NSLayoutConstraint.activate([
-//            workingHourLabel.topAnchor.constraint(equalTo: workingTitleLabel.bottomAnchor, constant: 4),
-//            workingHourLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
-//        ])
-//    }
-    
 
-    func createThreeColumnFlowLayout() -> UICollectionViewFlowLayout {
+    private func createThreeColumnFlowLayout() -> UICollectionViewFlowLayout {
      
         let width = view.bounds.width
         let padding: CGFloat = 12
@@ -109,7 +93,7 @@ final class MainPageVC: UIViewController {
         return flowLayout
     }
     
-    func configureDataSource() {
+    private func configureDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Section, Product>(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DishCell.reusedID, for: indexPath) as! DishCell
             cell.set(product: self.showingData[indexPath.row])
@@ -117,7 +101,7 @@ final class MainPageVC: UIViewController {
         })
     }
     
-    func updateData() {
+    private func updateData() {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Product>()
         snapshot.appendSections([.main])
         snapshot.appendItems(showingData)
@@ -126,38 +110,10 @@ final class MainPageVC: UIViewController {
         }
         
     }
-}   
-
-
-extension MainPageVC: MainPageViewModelProtocol {
     
-    func setTitle(dateString: String) {
-        dateTitleLabel.text = dateString
-        dateTitleLabel.font = .systemFont(ofSize: 25)
-        dateTitleLabel.textColor = .white
-    }
-    
-    
-    func getDailyMainDish(dish: [Product]) {
-        dailyMainDish = dish
-        self.showingData = dailyMainDish
-        self.updateData()
-    }
-    
-    func getDailyDessert(dessert: [Product]) {
-        self.dailyDessert = dessert
-    }
-    
-    func getColdDrink(coldDrink: [Product]) {
-        self.allColdDrink = coldDrink
-    }
-    
-    func getHotDrink(hotDrink: [Product]) {
-        self.allHotDrink = hotDrink
-    }
-    
-    func getDailySnack(snack: [Product]) {
-        self.dailySnack = snack
+    private func removeBlurView() {
+        blurView?.removeFromSuperview()
+        blurView = nil
     }
 }
 
@@ -167,13 +123,18 @@ extension MainPageVC: MainPageProtocol {
         UserDefaultsManager.shared.getUserTypeData()
     }
     
-    var isBlurViewOn: Bool {
-        return true
+    var isBlurViewOn: Bool? {
+        return nil
+    }
+    
+    func checkRestaurantStatus() {
+        viewModel.getRestaurantStatus()
     }
     
     func configureBlurView() {
         let blur = UIBlurEffect(style: .dark)
-        let blurView = UIVisualEffectView(effect: blur)
+        blurView = UIVisualEffectView(effect: blur)
+        
         blurView.frame = view.bounds
         blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.addSubview(blurView)
@@ -184,52 +145,21 @@ extension MainPageVC: MainPageProtocol {
     }
     
     func configureDateTitle() {
+        
         dateTitleLabel = UILabel()
+        dateTitleLabel.textColor = .white
+        
         view.addSubview(dateTitleLabel)
         dateTitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        dateTitleLabel.textColor = .white
         
         NSLayoutConstraint.activate([
             dateTitleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15),
             dateTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5)
         ])
+        
         viewModel.setTitle()
     }
-    
-//    func configureWorkingLabel() {
-//        workingTitleLabel = UILabel()
-//        workingTitleLabel.font = UIFont.boldSystemFont(ofSize: 13)
-//        workingTitleLabel.text = Constant.openClosedText
-//        workingTitleLabel.textColor = .white
-//        
-//        view.addSubview(workingTitleLabel)
-//        workingTitleLabel.translatesAutoresizingMaskIntoConstraints = false
-//        
-//        NSLayoutConstraint.activate([
-//            workingTitleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15),
-//            workingTitleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
-//        ])
-//    }
-//    
-//    func configureWorkingDetailView() {
-//        workingDetailView = UIView()
-//        view.addSubview(workingDetailView)
-//        workingDetailView.backgroundColor = .white.withAlphaComponent(0.2)
-//        workingDetailView.layer.cornerRadius = 8
-//        workingDetailView.translatesAutoresizingMaskIntoConstraints = false
-//        
-//        NSLayoutConstraint.activate([
-//            workingDetailView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 5),
-//            workingDetailView.leadingAnchor.constraint(equalTo: workingTitleLabel.leadingAnchor, constant: -5),
-//            workingDetailView.trailingAnchor.constraint(equalTo: workingTitleLabel.trailingAnchor, constant: 5),
-//            workingDetailView.heightAnchor.constraint(equalToConstant: 50)
-//        ])
-//        
-//        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(editWorkingHour))
-//        workingDetailView.addGestureRecognizer(gestureRecognizer)
-//        
-//        
-//    }
+
     
     @objc private func editWorkingHour() {
         presentDatePickerViewOnMainThread()
@@ -254,12 +184,14 @@ extension MainPageVC: MainPageProtocol {
     }
     
     func configureCollectionView() {
+        
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createThreeColumnFlowLayout())
-        view.addSubview(collectionView)
         collectionView.register(DishCell.self, forCellWithReuseIdentifier: DishCell.reusedID)
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.backgroundColor = .black
         
+        
+        view.addSubview(collectionView)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: segmentedController.bottomAnchor, constant: 8),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
@@ -269,6 +201,7 @@ extension MainPageVC: MainPageProtocol {
     }
     
     func configureSegmentedController() {
+        
         segmentedController = UISegmentedControl(items: Constant.segmentedItems)
         self.view.addSubview(segmentedController)
         segmentedController.translatesAutoresizingMaskIntoConstraints = false
@@ -334,3 +267,47 @@ extension MainPageVC: MainPageProtocol {
         self.present(controller, animated: true)
     }
 }
+
+
+extension MainPageVC: MainPageViewModelProtocol {
+    
+    func updateRestaurantStatusIsOn() {
+        configureBlurView()
+    }
+    
+    func updateRestaurantStatusIsOff() {
+        removeBlurView()
+    }
+    
+    
+    func setTitle(dateString: String) {
+        dateTitleLabel.text = dateString
+        dateTitleLabel.font = .systemFont(ofSize: 25)
+        dateTitleLabel.textColor = .white
+    }
+    
+    
+    func getDailyMainDish(dish: [Product]) {
+        dailyMainDish = dish
+        self.showingData = dailyMainDish
+        self.updateData()
+    }
+    
+    func getDailyDessert(dessert: [Product]) {
+        self.dailyDessert = dessert
+    }
+    
+    func getColdDrink(coldDrink: [Product]) {
+        self.allColdDrink = coldDrink
+    }
+    
+    func getHotDrink(hotDrink: [Product]) {
+        self.allHotDrink = hotDrink
+    }
+    
+    func getDailySnack(snack: [Product]) {
+        self.dailySnack = snack
+    }
+}
+
+

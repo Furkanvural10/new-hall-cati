@@ -8,6 +8,7 @@ protocol FirebaseManagerProtocol {
     func getData<T: Codable>(child: String, completion: @escaping ((Result<[T], NetworkError>) -> Void))
     func saveMenu(product: Product, selectedProduct: String)
     func saveRestaurantStatus(status: Bool)
+    func getRestaurantStatus(completion: @escaping (Result<RestaurantStatus, Error>) -> Void)
 }
 
 final class FirebaseManager: FirebaseManagerProtocol {
@@ -246,6 +247,36 @@ final class FirebaseManager: FirebaseManagerProtocol {
         let newData = [ "status" : status ]
         database.collection("Status").document("RestaurantStatus").setData(newData) { error in
             guard error == nil else { return }
+        }
+    }
+    
+    func getRestaurantStatus(completion: @escaping (Result<RestaurantStatus, Error>) -> Void) {
+        
+        database.collection("Status").document("RestaurantStatus").addSnapshotListener { snapshot, error in
+            
+            guard error == nil else {
+                completion(.failure(error!))
+                return
+            }
+            
+            guard let snapshot = snapshot else {
+                let error = NSError(domain: "Error", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to get snapshot"])
+                completion(.failure(error))
+                return
+            }
+            
+            
+            if let status = snapshot["status"] as? Bool {
+                let restaurantModel = RestaurantStatus(status: status)
+                completion(.success(restaurantModel))
+                return
+            }
+            else {
+                let error = NSError(domain: "Error", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to get status"])
+                completion(.failure(error))
+                return
+            }
+            
         }
     }
     

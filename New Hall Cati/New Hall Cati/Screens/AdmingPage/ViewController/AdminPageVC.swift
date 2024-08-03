@@ -17,36 +17,23 @@ final class AdminPageVC: UIViewController {
     private var addNewProductButton: UIButton!
     private var openButton: UIButton!
     private var closeButton: UIButton!
-    private var isRestaurantOpen = true
+    private var isRestaurantOpen: Bool?
     
     private var viewModel = AdminPageViewModel()
     
     override func viewDidLoad() {
         view.backgroundColor = .black
-//        configureAddNewProductButton()
         createUI()
+        getRestaurantStatusFromLocal()
+        changeRestaurantStatus()
     }
     
-//    func configureAddNewProductButton() {
-//        addNewProductButton = UIButton()
-//        addNewProductButton.setTitle("+ Yeni Ürün Ekle", for: .normal)
-//        addNewProductButton.layer.cornerRadius = 10
-//        addNewProductButton.backgroundColor = .systemGreen
-//        
-//        view.addSubview(addNewProductButton)
-//        addNewProductButton.translatesAutoresizingMaskIntoConstraints = false
-//        
-//        NSLayoutConstraint.activate([
-//            addNewProductButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-//            addNewProductButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-//            addNewProductButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            addNewProductButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.06),
-//            addNewProductButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
-//        ])
-//        
-//        addNewProductButton.addTarget(self, action: #selector(clickedAddNewProductButton), for: .touchUpInside)
-//        
-//    }
+    
+    private func getRestaurantStatusFromLocal() {
+        isRestaurantOpen = UserDefaultsManager.shared.getRestaurantStatus()
+    }
+    
+
     
     private func createUI() {
         
@@ -210,6 +197,7 @@ final class AdminPageVC: UIViewController {
         isRestaurantOpen = true
         changeRestaurantStatus()
         viewModel.saveRestaurantStatus(status: true)
+        UserDefaultsManager.shared.saveRestaurantStatus(status: isRestaurantOpen!)
         
     }
     
@@ -217,11 +205,12 @@ final class AdminPageVC: UIViewController {
         isRestaurantOpen = false
         viewModel.saveRestaurantStatus(status: false)
         changeRestaurantStatus()
+        UserDefaultsManager.shared.saveRestaurantStatus(status: isRestaurantOpen!)
     }
     
     private func changeRestaurantStatus() {
         DispatchQueue.main.async {
-            if self.isRestaurantOpen {
+            if self.isRestaurantOpen! {
                 self.openButton.backgroundColor = .systemGreen
                 self.closeButton.backgroundColor = .white.withAlphaComponent(0.15)
                 self.openButton.setTitleColor(.black, for: .normal)

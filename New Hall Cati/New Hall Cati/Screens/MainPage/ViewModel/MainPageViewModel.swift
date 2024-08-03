@@ -7,9 +7,11 @@ protocol MainPageViewModelProtocol: AnyObject {
     func getColdDrink(coldDrink: [Product])
     func getHotDrink(hotDrink: [Product])
     func getDailySnack(snack: [Product])
+    func updateRestaurantStatusIsOn()
+    func updateRestaurantStatusIsOff()
 }
 
-class MainPageViewModel {
+final class MainPageViewModel {
     
     weak var delegate: MainPageViewModelProtocol?
     
@@ -79,11 +81,22 @@ class MainPageViewModel {
         }
     }
     
-    func saveWorkingHour(openingTime: String, closingTime: String) {
-        // Save to db
-        print("Database kaydet")
+    func getRestaurantStatus() {
+        FirebaseManager.shared.getRestaurantStatus { result in
+            switch result {
+            case .success(let success):
+                if success.status {
+                    self.delegate?.updateRestaurantStatusIsOff()
+                } else {
+                    self.delegate?.updateRestaurantStatusIsOn()
+                }
+                
+            case .failure(_):
+                break
+            }
+        }
     }
     
     
-    
 }
+

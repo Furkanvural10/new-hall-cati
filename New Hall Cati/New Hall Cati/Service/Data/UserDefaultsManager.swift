@@ -17,31 +17,43 @@ protocol UserDefaultsManageable {
 final class UserDefaultsManager {
 
     static let shared: UserDefaultsManager = .init()
+    private let userDefaults = UserDefaults.standard
     private init() {}
 
 }
 
 extension UserDefaultsManager: UserDefaultsManageable {
     
+    #warning("Order GET - SET funcstion")
+    
     
     // MARK: - Checking user type (Admin or Student)
     func saveAUserTypeData(value: Bool) {
-        UserDefaults.standard.set(value, forKey: "isAdmin")
+        userDefaults.set(value, forKey: "isAdmin")
     }
     
     func getUserTypeData() -> Bool {
-        guard let userType = UserDefaults.standard.value(forKey: "isAdmin") as? Bool else { return false }
+        guard let userType = userDefaults.value(forKey: "isAdmin") as? Bool else { return false }
         return userType
     }
     
     // MARK: - Checking onboarding seen
     func getOnboardingSeenData() -> Bool {
-        guard let isOnboardingSeen = UserDefaults.standard.value(forKey: "isOnboardingSeen") as? Bool else { return false }
+        guard let isOnboardingSeen = userDefaults.value(forKey: "isOnboardingSeen") as? Bool else { return false }
         return isOnboardingSeen
     }
     
     func saveOnboardingSeenData(value: Bool) {
-        UserDefaults.standard.set(value, forKey: "isOnboardingSeen")
+        userDefaults.set(value, forKey: "isOnboardingSeen")
+    }
+    
+    func saveRestaurantStatus(status: Bool) {
+        userDefaults.set(status, forKey: "restaurantStatus")
+    }
+    
+    func getRestaurantStatus() -> Bool {
+        guard let restaurantStatus = userDefaults.value(forKey: "restaurantStatus") as? Bool else { return true }
+        return restaurantStatus
     }
     
     
