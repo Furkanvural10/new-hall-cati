@@ -18,10 +18,13 @@ protocol NewProductProtocol {
 
 final class NewProductViewController: UIViewController {
     
+    // MARK: - UI Elements
     private var productNameTextField: UITextField!
     private var productPriceTextField: UITextField!
     private var uploadImageButton: UIButton!
     private var saveProductButton: UIButton!
+    private var uploadingProcessView: UIActivityIndicatorView!
+    private var barButton: UIBarButtonItem!
     
     var dishType: String?
     let viewModel = NewProductViewModel()
@@ -36,6 +39,7 @@ final class NewProductViewController: UIViewController {
         configureUploadImageButton()
         configureSaveProductButton()
         configureTypeOfDishOption()
+        configureUploadingProcess()
     }
     
 
@@ -67,18 +71,43 @@ extension NewProductViewController: NewProductProtocol {
         
         uploadImageButton.addTarget(self, action: #selector(openImageGallery), for: .touchUpInside)
     }
+    
+    
+    private func configureUploadingProcess() {
+        
+        uploadingProcessView = UIActivityIndicatorView()
+        uploadingProcessView.style = .large
+        
+        view.addSubview(uploadingProcessView)
+        uploadingProcessView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            uploadingProcessView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            uploadingProcessView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+        
+    }
 
     
     func saveNewProduct() {
         // TODO: - 1) Validation
         // TODO: - 2) Save DB
         // TODO: - 3) Dismiss
+        barButton.isEnabled = false
+        productNameTextField.isEnabled = false
+        productPriceTextField.isEnabled = false
+        uploadImageButton.isEnabled = false
+        uploadingProcessView.startAnimating()
         
-        print("Dish Type: \(dishType)")
-        let prodID = UUID().uuidString
-        let product = Product(prodID: prodID, name: productNameTextField.text!, price: productPriceTextField.text!, image: "")
-        guard let imageData else { return }
-        viewModel.saveNewProduct(product: product, dishType: dishType!, imageData: imageData)
+//        print("Dish Type: \(dishType)")
+//        let prodID = UUID().uuidString
+//        let product = Product(prodID: prodID, name: productNameTextField.text!, price: productPriceTextField.text!, image: "")
+//        guard let imageData else {
+//            return
+//        }
+//        viewModel.saveNewProduct(product: product, dishType: dishType!, imageData: imageData)
+//        
+//        uploadingProcessView.stopAnimating()
         
     }
     
@@ -132,7 +161,8 @@ extension NewProductViewController: NewProductProtocol {
     }
     
     func configureSaveProductButton() {
-        let barButton = UIBarButtonItem(title: "Kaydet", style: .plain, target: self, action: #selector(clickedRightBarButton))
+        barButton = UIBarButtonItem(title: "Kaydet", style: .plain, target: self, action: #selector(clickedRightBarButton))
+        
         self.navigationItem.rightBarButtonItem = barButton
     }
     
@@ -143,6 +173,9 @@ extension NewProductViewController: NewProductProtocol {
     @objc private func clickedRightBarButton() {
         saveNewProduct()
     }
+    
+    
+    
 
 }
 
