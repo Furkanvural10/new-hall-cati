@@ -138,6 +138,19 @@ extension MainPageVC: MainPageProtocol {
         blurView.frame = view.bounds
         blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.addSubview(blurView)
+        
+        let label = UILabel()
+        label.text = "New Hall Çatı Kapalı 🔴"
+        label.textColor = .white
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        blurView.contentView.addSubview(label)
+        
+        NSLayoutConstraint.activate([
+            label.centerXAnchor.constraint(equalTo: blurView.contentView.centerXAnchor),
+            label.centerYAnchor.constraint(equalTo: blurView.contentView.centerYAnchor)
+        ])
     }
     
     func configureBackground() {
