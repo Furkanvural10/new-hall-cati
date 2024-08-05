@@ -110,8 +110,17 @@ extension UpdateProductVC: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CellView.identifier, for: indexPath) as? CellView else {
             fatalError("Could not dequeue cell with identifier: \(CellView.identifier)")
         }
+        // Hücrenin içeriğini ayarla
+            let item = showingList[indexPath.row]
+            cell.set(with: item)
+            
+            // Hücrenin seçili olup olmadığını kontrol et ve işaretle
+            if productSavedList.contains(item) {
+                cell.accessoryType = .checkmark
+            } else {
+                cell.accessoryType = .none
+            }
         
-        cell.set(with: showingList[indexPath.row])
         return cell
     }
     
@@ -126,16 +135,17 @@ extension UpdateProductVC: UITableViewDelegate, UITableViewDataSource {
         }
         
         let cell = tableView.cellForRow(at: indexPath)
+        
         let selectedItem = showingList[indexPath.row]
         
         if cell?.accessoryType == .checkmark {
             cell?.accessoryType = .none
-            print("Silincek ürün: \(selectedItem.name)")
             productSavedList.remove(selectedItem)
             
         } else {
             cell?.accessoryType = .checkmark
-            print("Eklencek Ürün: \(selectedItem.name)")
+            print("Index: \(indexPath.row)")
+            
             productSavedList.insert(selectedItem)
             
         }
