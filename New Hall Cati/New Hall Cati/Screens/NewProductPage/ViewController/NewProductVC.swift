@@ -34,6 +34,7 @@ final class NewProductViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
+        viewModel.delegate = self
         configureTextFields()
         setupTextFieldDelegation()
         configureUploadImageButton()
@@ -90,24 +91,23 @@ extension NewProductViewController: NewProductProtocol {
 
     
     func saveNewProduct() {
-        // TODO: - 1) Validation
-        // TODO: - 2) Save DB
-        // TODO: - 3) Dismiss
+        
         barButton.isEnabled = false
         productNameTextField.isEnabled = false
         productPriceTextField.isEnabled = false
         uploadImageButton.isEnabled = false
+        view.isUserInteractionEnabled = false
         uploadingProcessView.startAnimating()
         
-//        print("Dish Type: \(dishType)")
-//        let prodID = UUID().uuidString
-//        let product = Product(prodID: prodID, name: productNameTextField.text!, price: productPriceTextField.text!, image: "")
-//        guard let imageData else {
-//            return
-//        }
-//        viewModel.saveNewProduct(product: product, dishType: dishType!, imageData: imageData)
-//        
-//        uploadingProcessView.stopAnimating()
+        let prodID = UUID().uuidString
+        let product = Product(prodID: prodID, name: productNameTextField.text!, price: productPriceTextField.text!, image: "")
+        guard let imageData else {
+            return
+        }
+        
+        viewModel.saveNewProduct(product: product, dishType: dishType!, imageData: imageData)
+        
+        
         
     }
     
@@ -174,6 +174,19 @@ extension NewProductViewController: NewProductProtocol {
         saveNewProduct()
     }
     
+    private func showMessage() {
+        
+        DispatchQueue.main.async {
+            let alertController = UIAlertController(title: "Başarılı", message: "Yeni ürün başarılı şekilde eklendi", preferredStyle: .alert)
+            let okButton = UIAlertAction(title: "Tamam", style: .default) { _ in
+                self.navigationController?.popViewController(animated: true)
+            }
+            alertController.addAction(okButton)
+            
+            self.present(alertController, animated: true)
+        }
+    }
+    
     
     
 
@@ -203,6 +216,17 @@ extension NewProductViewController: UIImagePickerControllerDelegate, UINavigatio
             imageData = selectedImage.jpegData(compressionQuality: 50)
         }
         self.dismiss(animated: true)
+    }
+    
+    
+}
+
+
+extension NewProductViewController: NewProductVCDelegate {
+    func stopAnimationView() {
+        uploadingProcessView.stopAnimating()
+        showMessage()
+        
     }
     
     

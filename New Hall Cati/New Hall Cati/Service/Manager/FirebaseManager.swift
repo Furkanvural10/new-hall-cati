@@ -206,7 +206,7 @@ final class FirebaseManager: FirebaseManagerProtocol {
         
         database.collection(dishType).document(id).setData(data) { error in
             guard error == nil else { return }
-            
+            completion(nil)
         }
     }
     

@@ -7,6 +7,11 @@
 
 import Foundation
 
+
+protocol NewProductVCDelegate: AnyObject {
+    func stopAnimationView()
+}
+
 protocol NewProductVMProtocol {
     func saveNewProduct(product: Product, dishType: String, imageData: Data)
 }
@@ -14,6 +19,7 @@ protocol NewProductVMProtocol {
 
 final class NewProductViewModel {
     
+    weak var delegate: NewProductVCDelegate?
     
 }
 
@@ -23,11 +29,16 @@ extension NewProductViewModel: NewProductVMProtocol {
         FirebaseManager.shared.uploadImage(imageName: product.name, imageData: imageData, child: dishType) { result in
             switch result {
             case .success(let success):
-                let product = Product(prodID: product.prodID, name: product.name, price: product.price, image: success)
+                let product = Product(prodID: product.prodID, name: product.name, price: "\(product.price) ₺", image: success)
                 FirebaseManager.shared.addNewProduct(newProduct: product , dishType: dishType) { error in
-                    guard error == nil else { return }
+                    guard error == nil else {
+                        self.delegate?.stopAnimationView()
+                        return
+                    }
+                    self.delegate?.stopAnimationView()
                 }
-            case .failure(let failure):
+            case .failure(_):
+                self.delegate?.stopAnimationView()
                 break
             }
         }

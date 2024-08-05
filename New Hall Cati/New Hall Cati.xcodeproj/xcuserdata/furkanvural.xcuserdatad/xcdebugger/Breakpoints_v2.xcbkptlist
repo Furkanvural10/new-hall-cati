@@ -7,32 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "7EA4BCFE-2C77-406D-8C79-0C84518C15B0"
+            uuid = "AB51D681-2CA1-472B-85C4-0E8C5D9F43CB"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "New Hall Cati/Screens/NewProductPage/ViewModel/NewProductViewModel.swift"
+            filePath = "New Hall Cati/Screens/NewProductPage/ViewController/NewProductVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "31"
-            endingLineNumber = "31"
-            landmarkName = "saveNewProduct(product:dishType:imageData:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "2B39B2C7-34B7-4344-BB80-408C54FC99F1"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "New Hall Cati/Screens/NewProductPage/ViewModel/NewProductViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "26"
-            endingLineNumber = "26"
-            landmarkName = "saveNewProduct(product:dishType:imageData:)"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
+            landmarkName = "saveNewProduct()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
