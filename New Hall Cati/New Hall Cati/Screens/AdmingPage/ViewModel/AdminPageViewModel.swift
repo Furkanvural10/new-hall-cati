@@ -15,9 +15,10 @@ protocol AdminPageViewModelProtocol: AnyObject {
     func getAllDrink()
     func getAllSnack()
     func updateProduct(product: Product, selectedProduct: String, newValue: Int)
+    
 }
 
-class AdminPageViewModel {
+final class AdminPageViewModel {
     var allMainDish: [Product]!
     var allDrink: [Product]!
     var allSnack: [Product]!
@@ -38,7 +39,9 @@ extension AdminPageViewModel: AdminPageViewModelProtocol {
    
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            productList.forEach { FirebaseManager.shared.saveMenu(product: $0, selectedProduct: selectedProduct) }
+            productList.forEach {
+                FirebaseManager.shared.saveMenu(product: $0, selectedProduct: selectedProduct)
+            }
         }
         
     }
@@ -95,7 +98,7 @@ extension AdminPageViewModel: AdminPageViewModelProtocol {
         FirebaseManager.shared.updateProduct(product: product, selectedProduct: selectedProduct, newValue: newValue) { result in
             switch result {
             case true:
-                break
+                self.delegate?.didUpdateSuccessfully()
             case false:
                 break
             }

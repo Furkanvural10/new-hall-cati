@@ -3,8 +3,7 @@ import UIKit
 
 protocol AdminPageProtocol: AnyObject {
     func fetchDish(product: [Product])
-    
-    
+    func didUpdateSuccessfully()
 }
 
 final class AdminPageVC: UIViewController {
@@ -222,5 +221,28 @@ final class AdminPageVC: UIViewController {
             }
         }
     }
+    
+    private func showMessage() {
+        
+        DispatchQueue.main.async {
+            let alertController = UIAlertController(title: "Başarılı", message: "Ürün güncellendi", preferredStyle: .alert)
+            let okButton = UIAlertAction(title: "Tamam", style: .default)
+            alertController.addAction(okButton)
+            
+            self.present(alertController, animated: true)
+        }
+    }
 }
 
+extension AdminPageVC: AdminPageProtocol {
+    func fetchDish(product: [Product]) {
+        
+    }
+    
+    
+    func didUpdateSuccessfully() {
+        showMessage()
+    }
+    
+    
+}

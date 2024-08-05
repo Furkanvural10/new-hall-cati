@@ -12,6 +12,8 @@ final class UpdateProductVC: UIViewController {
     private var tableView: UITableView!
     private var barButton: UIBarButtonItem!
     private var addNewProductButton: UIButton!
+    private var uploadingProcessView: UIActivityIndicatorView!
+    
     private var showingList: [Product] = []
     private var productSavedList: Set<Product> = []
     private var viewModel = AdminPageViewModel()
@@ -26,6 +28,7 @@ final class UpdateProductVC: UIViewController {
         configureAddNewProductButton()
         getProduct()
         configureTableView()
+        configureUploadingProcess()
     }
     
     private func configureRightBarButtonItem() {
@@ -89,7 +92,43 @@ final class UpdateProductVC: UIViewController {
     }
     
     @objc private func clickedRightBarButton() {
+        view.isUserInteractionEnabled = false
+        uploadingProcessView.startAnimating()
         viewModel.saveNewMenu(productList: productSavedList, selectedProduct: selectedProduct!)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 7) {
+            self.uploadingProcessView.stopAnimating()
+            self.showMessage()
+            
+        }
+    }
+    
+    private func showMessage() {
+        
+        DispatchQueue.main.async {
+            let alertController = UIAlertController(title: "Başarılı 👋", message: "İşlem başarıyla tamamlandı 😊", preferredStyle: .alert)
+            let okButton = UIAlertAction(title: "Tamam", style: .default) { _ in
+                self.navigationController?.popViewController(animated: true)
+            }
+            alertController.addAction(okButton)
+            
+            self.present(alertController, animated: true)
+        }
+    }
+    
+    private func configureUploadingProcess() {
+        
+        uploadingProcessView = UIActivityIndicatorView()
+        uploadingProcessView.style = .large
+        
+        view.addSubview(uploadingProcessView)
+        uploadingProcessView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            uploadingProcessView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            uploadingProcessView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+        
     }
     
 }
@@ -195,6 +234,10 @@ extension UpdateProductVC: UITextFieldDelegate {
 }
 
 extension UpdateProductVC: AdminPageProtocol {
+    func didUpdateSuccessfully() {
+        showMessage()
+    }
+    
     func fetchDish(product: [Product]) {
         showingList = product
         tableView.reloadData()
