@@ -92,10 +92,6 @@ extension NewProductViewController: NewProductProtocol {
     
     func saveNewProduct() {
         
-//        barButton.isEnabled = false
-//        productNameTextField.isEnabled = false
-//        productPriceTextField.isEnabled = false
-//        uploadImageButton.isEnabled = false
         view.isUserInteractionEnabled = false
         uploadingProcessView.startAnimating()
         

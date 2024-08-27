@@ -9,6 +9,7 @@ protocol FirebaseManagerProtocol {
     func saveMenu(product: Product, selectedProduct: String)
     func saveRestaurantStatus(status: Bool)
     func getRestaurantStatus(completion: @escaping (Result<RestaurantStatus, Error>) -> Void)
+    func deleteSelectedItem(productType: String, product: Product)
 }
 
 final class FirebaseManager: FirebaseManagerProtocol {
@@ -277,6 +278,15 @@ final class FirebaseManager: FirebaseManagerProtocol {
                 return
             }
             
+        }
+    }
+    
+    func deleteSelectedItem(productType: String, product: Product) {
+        
+        database.collection(productType).document(product.prodID).delete { error in
+            guard let error else {
+                return
+            }
         }
     }
     

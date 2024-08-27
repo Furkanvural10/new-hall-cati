@@ -1,7 +1,8 @@
 import UIKit
 import FirebaseFirestore
 import Foundation
-#warning("Dont forget functions order")
+import AVFoundation
+
 
 
 protocol MainPageProtocol {
@@ -9,13 +10,12 @@ protocol MainPageProtocol {
     func configureBackground()
     func configureNavigationBar()
     func configureDateTitle()
-//    func configureWorkingLabel()
-//    func configureHourLabel()
-//    func configureWorkingDetailView()
+    func configureVideoPlayer()
     func configureCollectionView()
     func configureSegmentedController()
     func configureBlurView()
     func checkRestaurantStatus()
+    
     
     var viewModel: MainPageViewModel { get }
     var isUserAdmin: Bool { get }
@@ -43,31 +43,43 @@ final class MainPageVC: UIViewController {
     var allHotDrink: [Product] = []
     var showingData: Array<Product>!
     var viewModel = MainPageViewModel()
+    var player: AVPlayer?
+    
     private var productTitleList: [ProductType] = [.dish, .drink, .dessert]
     
-
+    
     // MARK: - UI Elements
     private var dateTitleLabel: UILabel!
     private var segmentedController: UISegmentedControl!
     private var collectionView: UICollectionView!
     private var dataSource: UICollectionViewDiffableDataSource<Section, Product>!
     private var blurView: UIVisualEffectView!
-
+    private var playerLayer: AVPlayerLayer!
+    private var videoContainerView: UIView!
     
     
-
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         showingData = [Product]()
         viewModel.delegate = self
         getDataFromFirestore()
+        configureDateTitle()
         configureBackground()
         configureNavigationBar()
+        configureVideoPlayer()
         configureSegmentedController()
         configureCollectionView()
         configureDataSource()
-        configureDateTitle()
         checkRestaurantStatus()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        
+        playerLayer?.frame = videoContainerView.bounds
     }
     
     func getDataFromFirestore() {
@@ -77,9 +89,9 @@ final class MainPageVC: UIViewController {
         viewModel.getAllHotDrink()
         viewModel.getAllSnack()
     }
-
+    
     private func createThreeColumnFlowLayout() -> UICollectionViewFlowLayout {
-     
+        
         let width = view.bounds.width
         let padding: CGFloat = 12
         let minimumItemSpacing: CGFloat = 10
@@ -172,7 +184,7 @@ extension MainPageVC: MainPageProtocol {
         
         viewModel.setTitle()
     }
-
+    
     
     @objc private func editWorkingHour() {
         presentDatePickerViewOnMainThread()
@@ -227,11 +239,11 @@ extension MainPageVC: MainPageProtocol {
         
         let unselectedAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.9)]
         segmentedController.setTitleTextAttributes(unselectedAttributes, for: .normal)
-
+        
         segmentedController.addTarget(self, action: #selector(changedSegmentedControl), for: .valueChanged)
         
         NSLayoutConstraint.activate([
-            segmentedController.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 80),
+            segmentedController.topAnchor.constraint(equalTo: videoContainerView.bottomAnchor, constant: 20),
             segmentedController.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             segmentedController.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
         ])
@@ -278,6 +290,40 @@ extension MainPageVC: MainPageProtocol {
         controller.addAction(hotDrinkOption)
         controller.addAction(cancel)
         self.present(controller, animated: true)
+    }
+    
+    func configureVideoPlayer() {
+        
+//        let videoURL = URL(string: "https://storage.googleapis.com/1019uploads/4ecd691b-22af-4779-afca-d177ff783d6f.mp4")!
+        guard let fileURL = Bundle.main.url(forResource: "example", withExtension: "mp4") else { return }
+
+        player = AVPlayer(url: fileURL)
+        
+        playerLayer = AVPlayerLayer(player: player)
+        playerLayer.videoGravity = .resizeAspectFill
+        
+        
+        videoContainerView = UIView()
+        videoContainerView.layer.cornerRadius = 10
+        videoContainerView.clipsToBounds = true
+        
+        videoContainerView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(videoContainerView)
+        
+        NSLayoutConstraint.activate([
+            videoContainerView.topAnchor.constraint(equalTo: dateTitleLabel.bottomAnchor, constant: 10),
+            videoContainerView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 1),
+            videoContainerView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 1),
+            videoContainerView.heightAnchor.constraint(equalToConstant: 150)
+        ])
+        
+        if let playerLayer = playerLayer {
+            videoContainerView.layer.addSublayer(playerLayer)
+            playerLayer.frame = videoContainerView.bounds
+        }
+        
+        videoContainerView.layoutIfNeeded()
+        player?.play()
     }
 }
 

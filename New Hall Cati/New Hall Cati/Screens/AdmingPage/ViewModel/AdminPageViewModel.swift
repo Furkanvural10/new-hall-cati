@@ -108,4 +108,10 @@ extension AdminPageViewModel: AdminPageViewModelProtocol {
     func saveRestaurantStatus(status: Bool) {
         FirebaseManager.shared.saveRestaurantStatus(status: status)
     }
+    
+    func deleteSelectedFood(productType: String, product: Product) {
+        FirebaseManager.shared.deleteSelectedItem(productType: productType, product: product)
+    }
+    
+    
 }

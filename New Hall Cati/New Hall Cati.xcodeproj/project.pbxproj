@@ -74,6 +74,8 @@
 		04B269212B3DA07D0096CB0C /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B269202B3DA07D0096CB0C /* UIFont+Extension.swift */; };
 		04EC24E72BF5F3DF00BDF80E /* NewProductVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EC24E62BF5F3DF00BDF80E /* NewProductVC.swift */; };
 		04EC24EA2BF6495100BDF80E /* UpdateProductVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EC24E92BF6495100BDF80E /* UpdateProductVC.swift */; };
+		04ED265F2C7D143500C5BCEF /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ED265E2C7D143500C5BCEF /* UIView+Extension.swift */; };
+		04ED26612C7DA5F100C5BCEF /* example.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 04ED26602C7DA5F100C5BCEF /* example.mp4 */; };
 		F93BCB9E2C16250D00189523 /* OnboardingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93BCB9D2C16250D00189523 /* OnboardingVC.swift */; };
 		F93BCBA02C16256E00189523 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93BCB9F2C16256E00189523 /* OnboardingViewModel.swift */; };
 		F93BCBA22C1659D000189523 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93BCBA12C1659D000189523 /* UILabel+Extension.swift */; };
@@ -144,6 +146,8 @@
 		04B269202B3DA07D0096CB0C /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		04EC24E62BF5F3DF00BDF80E /* NewProductVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProductVC.swift; sourceTree = "<group>"; };
 		04EC24E92BF6495100BDF80E /* UpdateProductVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProductVC.swift; sourceTree = "<group>"; };
+		04ED265E2C7D143500C5BCEF /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		04ED26602C7DA5F100C5BCEF /* example.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = example.mp4; sourceTree = "<group>"; };
 		F93BCB9D2C16250D00189523 /* OnboardingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingVC.swift; sourceTree = "<group>"; };
 		F93BCB9F2C16256E00189523 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		F93BCBA12C1659D000189523 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
@@ -376,6 +380,7 @@
 		04B268D52B3D7DAD0096CB0C = {
 			isa = PBXGroup;
 			children = (
+				04ED26602C7DA5F100C5BCEF /* example.mp4 */,
 				04B268E02B3D7DAD0096CB0C /* New Hall Cati */,
 				04B268FA2B3D7DAE0096CB0C /* New Hall CatiTests */,
 				04B269042B3D7DAE0096CB0C /* New Hall CatiUITests */,
@@ -487,6 +492,7 @@
 				04B269202B3DA07D0096CB0C /* UIFont+Extension.swift */,
 				047EA7F92B59A53600B3DDC7 /* UIViewController+Extension.swift */,
 				F93BCBA12C1659D000189523 /* UILabel+Extension.swift */,
+				04ED265E2C7D143500C5BCEF /* UIView+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -669,6 +675,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04ED26612C7DA5F100C5BCEF /* example.mp4 in Resources */,
 				04B2691E2B3D9FE60096CB0C /* Pacifico-Regular.ttf in Resources */,
 				04B268F12B3D7DAE0096CB0C /* LaunchScreen.storyboard in Resources */,
 				046693312B4AC32F000DED64 /* GoogleService-Info.plist in Resources */,
@@ -725,6 +732,7 @@
 				046693052B3F50EA000DED64 /* Product.swift in Sources */,
 				046692FA2B3EF2CA000DED64 /* MainPageVC.swift in Sources */,
 				046699692B4EAF4F0053C1BD /* GetAllDrink.swift in Sources */,
+				04ED265F2C7D143500C5BCEF /* UIView+Extension.swift in Sources */,
 				046699562B4C80180053C1BD /* FirebaseManager.swift in Sources */,
 				047EA7F82B59A01000B3DDC7 /* CustomWorkingHourView.swift in Sources */,
 				04B268E42B3D7DAD0096CB0C /* SceneDelegate.swift in Sources */,

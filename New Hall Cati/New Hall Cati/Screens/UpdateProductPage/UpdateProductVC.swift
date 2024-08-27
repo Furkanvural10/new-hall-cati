@@ -149,11 +149,11 @@ extension UpdateProductVC: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CellView.identifier, for: indexPath) as? CellView else {
             fatalError("Could not dequeue cell with identifier: \(CellView.identifier)")
         }
-        // Hücrenin içeriğini ayarla
+        
             let item = showingList[indexPath.row]
             cell.set(with: item)
             
-            // Hücrenin seçili olup olmadığını kontrol et ve işaretle
+            
             if productSavedList.contains(item) {
                 cell.accessoryType = .checkmark
             } else {
@@ -194,13 +194,40 @@ extension UpdateProductVC: UITableViewDelegate, UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
         let update = UIContextualAction(style: .normal, title: "Güncelle") { (action, view, success) in
             view.backgroundColor = .systemOrange
             print("Güncellenecek eleman: \(self.showingList[indexPath.row].name)")
             self.showAlertMessage(product: self.showingList[indexPath.row])
         }
         
+        
+        
         let swipeActions = UISwipeActionsConfiguration(actions: [update])
+        return swipeActions
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let delete = UIContextualAction(style: .destructive, title: "Sil") { action, view, success in
+            action.backgroundColor = .red
+            view.isUserInteractionEnabled = false
+            
+            DispatchQueue.main.async {
+                self.uploadingProcessView.startAnimating()
+                
+            }
+            
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                self.viewModel.deleteSelectedFood(productType: self.selectedProduct!, product: self.showingList[indexPath.row])
+                self.uploadingProcessView.stopAnimating()
+            }
+            
+            
+        }
+        
+        let swipeActions = UISwipeActionsConfiguration(actions: [delete])
         return swipeActions
     }
     
