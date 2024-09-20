@@ -7,4 +7,5 @@ struct Product: Hashable, Codable {
     var name: String
     var price: String
     var image: String
+    var like: Int
 }

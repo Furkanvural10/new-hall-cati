@@ -10,7 +10,7 @@ protocol MainPageProtocol {
     func configureBackground()
     func configureNavigationBar()
     func configureDateTitle()
-    func configureVideoPlayer()
+    func configureVideoPlayer(videoURL: String?)
     func configureCollectionView()
     func configureSegmentedController()
     func configureBlurView()
@@ -24,15 +24,14 @@ protocol MainPageProtocol {
 
 final class MainPageVC: UIViewController {
     
-    
     enum Section {
         case main
     }
     
     private enum ProductType: String, CaseIterable {
-        case dish = "Ana Yemek"
-        case drink = "Tatlılar"
-        case dessert = "İçecekler"
+        case dish = "AllMainDish"
+        case allDessert = "AllDessert"
+        case snack = "AllSnack"
     }
     
     // MARK: - Properties
@@ -44,21 +43,22 @@ final class MainPageVC: UIViewController {
     var showingData: Array<Product>!
     var viewModel = MainPageViewModel()
     var player: AVPlayer?
+    var playerLooper: AVPlayerLooper!
+    var queuePlayer: AVQueuePlayer!
     
-    private var productTitleList: [ProductType] = [.dish, .drink, .dessert]
-    
+    private var productTitleList: ProductType = .dish
     
     // MARK: - UI Elements
     private var dateTitleLabel: UILabel!
+    private var dateTitleView: UIView!
     private var segmentedController: UISegmentedControl!
     private var collectionView: UICollectionView!
     private var dataSource: UICollectionViewDiffableDataSource<Section, Product>!
     private var blurView: UIVisualEffectView!
     private var playerLayer: AVPlayerLayer!
     private var videoContainerView: UIView!
-    
-    
-    
+    private var videoTitleView: UIView!
+    private var videoTitleLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,10 +75,20 @@ final class MainPageVC: UIViewController {
         checkRestaurantStatus()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        self.queuePlayer.play()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.queuePlayer.pause()
+    }
+    
+    deinit {
+        print("MainPageVC deinit")
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
-        
         playerLayer?.frame = videoContainerView.bounds
     }
     
@@ -88,6 +98,7 @@ final class MainPageVC: UIViewController {
         viewModel.getAllColdDrink()
         viewModel.getAllHotDrink()
         viewModel.getAllSnack()
+        viewModel.getDailyVideoURL()
     }
     
     private func createThreeColumnFlowLayout() -> UICollectionViewFlowLayout {
@@ -120,7 +131,6 @@ final class MainPageVC: UIViewController {
         DispatchQueue.main.async {
             self.dataSource.apply(snapshot, animatingDifferences: true)
         }
-        
     }
     
     private func removeBlurView() {
@@ -170,26 +180,26 @@ extension MainPageVC: MainPageProtocol {
     }
     
     func configureDateTitle() {
-        
         dateTitleLabel = UILabel()
         dateTitleLabel.textColor = .white
+        dateTitleLabel.font = .systemFont(ofSize: 20)
         
-        view.addSubview(dateTitleLabel)
         dateTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(dateTitleLabel)
         
         NSLayoutConstraint.activate([
             dateTitleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 15),
-            dateTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5)
+            dateTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
+            dateTitleLabel.heightAnchor.constraint(equalToConstant: 31),
+            dateTitleLabel.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor, constant: -24)
         ])
         
         viewModel.setTitle()
     }
     
-    
     @objc private func editWorkingHour() {
         presentDatePickerViewOnMainThread()
     }
-    
     
     func configureNavigationBar() {
         
@@ -209,16 +219,17 @@ extension MainPageVC: MainPageProtocol {
     }
     
     func configureCollectionView() {
-        
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createThreeColumnFlowLayout())
         collectionView.register(DishCell.self, forCellWithReuseIdentifier: DishCell.reusedID)
         collectionView.backgroundColor = .black
+        
+        collectionView.delegate = self
         
         
         view.addSubview(collectionView)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: segmentedController.bottomAnchor, constant: 8),
+            collectionView.topAnchor.constraint(equalTo: segmentedController.bottomAnchor, constant: 1),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -226,7 +237,6 @@ extension MainPageVC: MainPageProtocol {
     }
     
     func configureSegmentedController() {
-        
         segmentedController = UISegmentedControl(items: Constant.segmentedItems)
         self.view.addSubview(segmentedController)
         segmentedController.translatesAutoresizingMaskIntoConstraints = false
@@ -243,9 +253,9 @@ extension MainPageVC: MainPageProtocol {
         segmentedController.addTarget(self, action: #selector(changedSegmentedControl), for: .valueChanged)
         
         NSLayoutConstraint.activate([
-            segmentedController.topAnchor.constraint(equalTo: videoContainerView.bottomAnchor, constant: 20),
-            segmentedController.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            segmentedController.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            segmentedController.topAnchor.constraint(equalTo: videoContainerView.bottomAnchor, constant: 28),
+            segmentedController.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
+            segmentedController.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
         ])
     }
     
@@ -253,12 +263,15 @@ extension MainPageVC: MainPageProtocol {
         switch segmentedController.selectedSegmentIndex {
         case 0:
             showingData = dailyMainDish
+            productTitleList = .dish
             self.updateData()
         case 1:
             showingData = dailySnack
+            productTitleList = .snack
             self.updateData()
         case 2:
             showingData = dailyDessert
+            productTitleList = .allDessert
             self.updateData()
         default:
             showDrinkOptionView()
@@ -292,16 +305,22 @@ extension MainPageVC: MainPageProtocol {
         self.present(controller, animated: true)
     }
     
-    func configureVideoPlayer() {
+    func configureVideoPlayer(videoURL: String? = nil) {
         
-//        let videoURL = URL(string: "https://storage.googleapis.com/1019uploads/4ecd691b-22af-4779-afca-d177ff783d6f.mp4")!
-        guard let fileURL = Bundle.main.url(forResource: "example", withExtension: "mp4") else { return }
-
-        player = AVPlayer(url: fileURL)
-        
-        playerLayer = AVPlayerLayer(player: player)
-        playerLayer.videoGravity = .resizeAspectFill
-        
+        if let videoURL {
+            let asset = AVAsset(url: URL(string: videoURL)!)
+            queuePlayer = AVQueuePlayer()
+            let playerItem = AVPlayerItem(asset: asset)
+            self.queuePlayer = AVQueuePlayer(playerItem: playerItem)
+            
+            self.playerLooper = AVPlayerLooper(player: queuePlayer, templateItem: playerItem)
+            self.playerLayer = AVPlayerLayer(player: queuePlayer)
+            self.playerLayer.videoGravity = .resizeAspectFill
+        } else {
+            queuePlayer = AVQueuePlayer()
+            playerLayer = AVPlayerLayer(player: queuePlayer)
+            playerLayer.videoGravity = .resizeAspectFill
+        }
         
         videoContainerView = UIView()
         videoContainerView.layer.cornerRadius = 10
@@ -312,8 +331,8 @@ extension MainPageVC: MainPageProtocol {
         
         NSLayoutConstraint.activate([
             videoContainerView.topAnchor.constraint(equalTo: dateTitleLabel.bottomAnchor, constant: 10),
-            videoContainerView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 1),
-            videoContainerView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 1),
+            videoContainerView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 24),
+            videoContainerView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -24),
             videoContainerView.heightAnchor.constraint(equalToConstant: 150)
         ])
         
@@ -323,7 +342,7 @@ extension MainPageVC: MainPageProtocol {
         }
         
         videoContainerView.layoutIfNeeded()
-        player?.play()
+        self.queuePlayer.play()
     }
 }
 
@@ -338,13 +357,11 @@ extension MainPageVC: MainPageViewModelProtocol {
         removeBlurView()
     }
     
-    
     func setTitle(dateString: String) {
         dateTitleLabel.text = dateString
-        dateTitleLabel.font = .systemFont(ofSize: 25)
+        dateTitleLabel.font = .systemFont(ofSize: 20)
         dateTitleLabel.textColor = .white
     }
-    
     
     func getDailyMainDish(dish: [Product]) {
         dailyMainDish = dish
@@ -367,6 +384,47 @@ extension MainPageVC: MainPageViewModelProtocol {
     func getDailySnack(snack: [Product]) {
         self.dailySnack = snack
     }
+    
+    func getDailyVideoURL(videoURL: String) {
+        configureVideoPlayer(videoURL: videoURL)
+    }
 }
 
 
+extension MainPageVC: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let selectedItem = showingData[indexPath.row]
+        
+        let action1 = UIAlertAction(title: "Daha fazla olmalı 🔥", style: .default) { [self] action in
+            FirebaseManager.shared.postProductionFeedback(
+                product: selectedItem,
+                selectedProduct: productTitleList.rawValue,
+                prodID: selectedItem.prodID,
+                isLiked: true
+            )
+        }
+        
+        let action2 = UIAlertAction(title: "Tercih etmiyorum 👎", style: .destructive) { [self] action in
+            FirebaseManager.shared.postProductionFeedback(
+                product: selectedItem,
+                selectedProduct: productTitleList.rawValue,
+                prodID: selectedItem.prodID,
+                isLiked: false
+            )
+        }
+        
+        let alertController = UIAlertController(title: "Düşünceniz Önemli", message: "\(selectedItem.name) için fikrinizi belirtebilirsiniz", preferredStyle: .actionSheet)
+        
+        alertController.addAction(action1)
+        alertController.addAction(action2)
+        alertController.addAction(UIAlertAction(title: "İptal", style: .cancel, handler: nil))
+        
+        if let popoverController = alertController.popoverPresentationController {
+            popoverController.sourceView = collectionView.cellForItem(at: indexPath)
+            popoverController.sourceRect = collectionView.cellForItem(at: indexPath)?.bounds ?? CGRect.zero
+        }
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+}

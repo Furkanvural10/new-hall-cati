@@ -10,6 +10,7 @@ protocol FirebaseManagerProtocol {
     func saveRestaurantStatus(status: Bool)
     func getRestaurantStatus(completion: @escaping (Result<RestaurantStatus, Error>) -> Void)
     func deleteSelectedItem(productType: String, product: Product)
+    func uploadVideo(videoName: String, videoData: Data, child: String, completion: @escaping (Result<String, Error>) -> Void)
 }
 
 final class FirebaseManager: FirebaseManagerProtocol {
@@ -17,8 +18,6 @@ final class FirebaseManager: FirebaseManagerProtocol {
     static let shared = FirebaseManager()
     private let database = Firestore.firestore()
     private let storage = Storage.storage()
-    
-    
     
     private init() {}
     
@@ -38,6 +37,8 @@ final class FirebaseManager: FirebaseManagerProtocol {
             completion(.success(user))
         }
     }
+    
+    
     
     func getData<T: Codable>(child: String, completion: @escaping ((Result<[T], NetworkError>) -> Void)) {
         
@@ -92,17 +93,16 @@ final class FirebaseManager: FirebaseManagerProtocol {
     }
     
     func saveMenu(product: Product, selectedProduct: String) {
-        
-        
-        
+
         let id = UUID().uuidString
         
         let newData = [
             "name" : product.name,
             "price" : product.price,
             "image": product.image,
-            "prodID" : product.prodID
-        ]
+            "prodID" : product.prodID,
+            "like" : product.like
+        ] as [String : Any]
         
         let today = Date()
         let dateFormatter = DateFormatter()
@@ -201,8 +201,9 @@ final class FirebaseManager: FirebaseManagerProtocol {
             "prodID" : id,
             "price" : newProduct.price,
             "name" : newProduct.name,
-            "image" : newProduct.image
-        ]
+            "image" : newProduct.image,
+            "like" : newProduct.like,
+        ] as [String : Any]
         
         
         database.collection(dishType).document(id).setData(data) { error in
@@ -275,7 +276,6 @@ final class FirebaseManager: FirebaseManagerProtocol {
             else {
                 let error = NSError(domain: "Error", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to get status"])
                 completion(.failure(error))
-                return
             }
             
         }
@@ -290,4 +290,72 @@ final class FirebaseManager: FirebaseManagerProtocol {
         }
     }
     
+    
+    func postProductionFeedback(product: Product, selectedProduct: String, prodID: String, isLiked: Bool) {
+        database.collection(selectedProduct).document(prodID).updateData([
+            "like" : isLiked ? product.like + 1 : product.like
+        ])
+    }
+    
+    func getAllFavoriteProduct(selectedProduct: String) {
+        
+        // Collectionlar'da Enum raw valueden gelebilir daha sağlıklı olur.
+        database.collection("FavoriteProduct").getDocuments { snapshot, error in
+            
+        }
+    }
+    
+    func uploadVideo(videoName: String, videoData: Data, child: String, completion: @escaping (Result<String, Error>) -> Void) {
+        let storageRef = storage.reference()
+        let mediaFolder = storageRef.child(child)
+        let videoReference = mediaFolder.child("\(videoName).mp4")
+        
+        let uploadTask = videoReference.putData(videoData, metadata: nil) { metaData, error in
+            if error != nil {
+                completion(.failure(error!))
+            } else {
+                videoReference.downloadURL { url, error in
+                    if error == nil {
+                        let videoUrl = url?.absoluteString
+                        self.uploadDailyVideoURL(url: videoUrl!)
+                        completion(.success(videoUrl!))
+                    } else {
+                        completion(.failure(error!))
+                    }
+                }
+            }
+        }
+        
+        uploadTask.observe(.progress) { snapshot in
+            let percentComplete = 100.0 * Double(snapshot.progress!.completedUnitCount) / Double(snapshot.progress!.totalUnitCount)
+            print("Yükleme yüzdesi: \(percentComplete)%")
+        }
+        
+        uploadTask.observe(.success) { snapshot in
+            print("Yükleme başarıyla tamamlandı. ✅")
+        }
+    }
+    
+    func uploadDailyVideoURL(url: String) {
+        database.collection("DailyVideo").document("videoURL").setData(
+            ["videoURL" : url]
+        )
+    }
+    
+    func getDailyVideoURL(completion: @escaping (String) -> Void) {
+        
+        database.collection("DailyVideo").document("videoURL").addSnapshotListener { snapshot, error in
+            guard error == nil else {
+                return
+            }
+            
+            guard let snapshot = snapshot else {
+                return
+            }
+            
+            if let url = snapshot["videoURL"] as? String {
+                completion(url)
+            }
+        }
+    }
 }

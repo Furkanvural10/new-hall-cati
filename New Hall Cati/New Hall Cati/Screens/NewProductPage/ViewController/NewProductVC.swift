@@ -96,7 +96,7 @@ extension NewProductViewController: NewProductProtocol {
         uploadingProcessView.startAnimating()
         
         let prodID = UUID().uuidString
-        let product = Product(prodID: prodID, name: productNameTextField.text!, price: productPriceTextField.text!, image: "")
+        let product = Product(prodID: prodID, name: productNameTextField.text!, price: productPriceTextField.text!, image: "", like: 0)
         guard let imageData else {
             return
         }

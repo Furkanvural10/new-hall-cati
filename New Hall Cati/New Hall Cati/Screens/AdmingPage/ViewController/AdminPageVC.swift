@@ -1,4 +1,5 @@
 import UIKit
+import PhotosUI
 
 
 protocol AdminPageProtocol: AnyObject {
@@ -8,6 +9,7 @@ protocol AdminPageProtocol: AnyObject {
 
 final class AdminPageVC: UIViewController {
     
+    // MARK: - UI Elements
     private var allMainDishButton: UIButton!
     private var allDrinkButton: UIButton!
     private var allColdDrinkButton: UIButton!
@@ -16,13 +18,16 @@ final class AdminPageVC: UIViewController {
     private var addNewProductButton: UIButton!
     private var openButton: UIButton!
     private var closeButton: UIButton!
-    private var isRestaurantOpen: Bool?
+    private var indicator: UIActivityIndicatorView!
     
+    
+    // MARK: - Properties
+    private var isRestaurantOpen: Bool?
     private var viewModel = AdminPageViewModel()
     
     override func viewDidLoad() {
-        view.backgroundColor = .black
         createUI()
+        setupRightBarButton()
         getRestaurantStatusFromLocal()
         changeRestaurantStatus()
     }
@@ -32,9 +37,11 @@ final class AdminPageVC: UIViewController {
         isRestaurantOpen = UserDefaultsManager.shared.getRestaurantStatus()
     }
     
-
+    
     
     private func createUI() {
+        
+        view.backgroundColor = .black
         
         // MARK: - Main Dish Button
         allMainDishButton = UIButton()
@@ -168,6 +175,23 @@ final class AdminPageVC: UIViewController {
         self.navigationController?.pushViewController(newProductVC, animated: true)
     }
     
+    private func setupRightBarButton() {
+        let favoriteImage: UIImage = .init(systemName: "video.circle.fill")!.withTintColor(.systemOrange, renderingMode: .alwaysOriginal)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: favoriteImage, style: .done, target: self, action: #selector(clickedVideoRightBarButtonItem))
+    }
+    
+    @objc
+    private func clickedVideoRightBarButtonItem() {
+        
+        var configuration = PHPickerConfiguration()
+        configuration.selectionLimit = 1
+        configuration.filter = .videos
+        let pickerViewController = PHPickerViewController(configuration: configuration)
+        pickerViewController.delegate = self
+        present(pickerViewController, animated: true)
+        
+    }
+    
     @objc private func sendUpdateVC(_ sender: UIButton) {
         
         let updateProductVC = UpdateProductVC()
@@ -213,7 +237,7 @@ final class AdminPageVC: UIViewController {
                 self.openButton.backgroundColor = .systemGreen
                 self.closeButton.backgroundColor = .white.withAlphaComponent(0.15)
                 self.openButton.setTitleColor(.black, for: .normal)
-
+                
             } else {
                 self.openButton.backgroundColor = .white.withAlphaComponent(0.15)
                 self.closeButton.backgroundColor = .systemRed
@@ -234,15 +258,70 @@ final class AdminPageVC: UIViewController {
     }
 }
 
+extension AdminPageVC: PHPickerViewControllerDelegate {
+    
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        picker.dismiss(animated: true)
+        
+        guard !results.isEmpty else { return }
+        
+        results.forEach { result in
+            result.itemProvider.loadFileRepresentation(forTypeIdentifier: UTType.movie.identifier) { url, error in
+                guard let url = url else { return }
+                
+                do {
+                    self.showLoadingIndicator()
+                    let videoData = try Data(contentsOf: url)
+                    FirebaseManager.shared.uploadVideo(videoName: "Daily", videoData: videoData, child: "DailyMenuVideo") { result in
+                        switch result {
+                        case .success(let success):
+                            self.stopLoadingIndicator()
+                        case .failure(let failure):
+                            print("Failure : \(failure)")
+                            self.stopLoadingIndicator()
+                        }
+                    }
+                } catch {
+                    self.stopLoadingIndicator()
+                    fatalError("Error")
+                }
+            }
+        }
+        
+    }
+    
+    private func showLoadingIndicator() {
+        
+        DispatchQueue.main.async { [self] in
+            view.isUserInteractionEnabled = false
+            
+            indicator = UIActivityIndicatorView(style: .large)
+            
+            view.addSubview(indicator)
+            indicator.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                indicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                indicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            ])
+            indicator.startAnimating()
+        }
+        
+    }
+    
+    private func stopLoadingIndicator() {
+        DispatchQueue.main.async { [self] in
+            indicator.stopAnimating()
+            indicator.removeFromSuperview()
+            view.isUserInteractionEnabled = true
+        }
+    }
+}
+
 extension AdminPageVC: AdminPageProtocol {
     func fetchDish(product: [Product]) {
         
     }
-    
-    
     func didUpdateSuccessfully() {
         showMessage()
     }
-    
-    
 }

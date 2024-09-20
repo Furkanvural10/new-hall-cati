@@ -9,6 +9,7 @@ protocol MainPageViewModelProtocol: AnyObject {
     func getDailySnack(snack: [Product])
     func updateRestaurantStatusIsOn()
     func updateRestaurantStatusIsOff()
+    func getDailyVideoURL(videoURL: String)
 }
 
 final class MainPageViewModel {
@@ -78,6 +79,12 @@ final class MainPageViewModel {
             case .failure(let failure):
                 print("Failure snack")
             }
+        }
+    }
+    
+    func getDailyVideoURL() {
+        FirebaseManager.shared.getDailyVideoURL { result in
+            self.delegate?.getDailyVideoURL(videoURL: result)
         }
     }
     

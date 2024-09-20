@@ -29,7 +29,7 @@ extension NewProductViewModel: NewProductVMProtocol {
         FirebaseManager.shared.uploadImage(imageName: product.name, imageData: imageData, child: dishType) { result in
             switch result {
             case .success(let success):
-                let product = Product(prodID: product.prodID, name: product.name, price: "\(product.price) ₺", image: success)
+                let product = Product(prodID: product.prodID, name: product.name, price: "\(product.price) ₺", image: success, like: 0)
                 FirebaseManager.shared.addNewProduct(newProduct: product , dishType: dishType) { error in
                     guard error == nil else {
                         self.delegate?.stopAnimationView()
