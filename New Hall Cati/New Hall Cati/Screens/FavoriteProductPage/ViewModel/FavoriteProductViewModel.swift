@@ -20,6 +20,6 @@ final class FavoriteProductViewModel {
 extension FavoriteProductViewModel: FavoriteProductViewModelProtocol {
     
     func getFavoriteProductFromFirebase() {
-        FirebaseManager.shared
+        
     }
 }

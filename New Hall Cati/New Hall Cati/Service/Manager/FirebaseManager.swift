@@ -93,8 +93,6 @@ final class FirebaseManager: FirebaseManagerProtocol {
     }
     
     func saveMenu(product: Product, selectedProduct: String) {
-
-        let id = UUID().uuidString
         
         let newData = [
             "name" : product.name,
@@ -107,7 +105,7 @@ final class FirebaseManager: FirebaseManagerProtocol {
         let today = Date()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
-        let todayString = dateFormatter.string(from: today)
+
         
         var dishType = ""
         
@@ -124,13 +122,9 @@ final class FirebaseManager: FirebaseManagerProtocol {
         
         database.collection(dishType).document(product.prodID).setData(newData) { error in
             guard error == nil else { return }
-            
-            
+   
         }
     }
-    
-    
-    
     
     func deleteAllDocuments(selectedProduct: String, batchSize: Int = 50, completion: @escaping (Error?) -> Void) {
         
@@ -284,7 +278,7 @@ final class FirebaseManager: FirebaseManagerProtocol {
     func deleteSelectedItem(productType: String, product: Product) {
         
         database.collection(productType).document(product.prodID).delete { error in
-            guard let error else {
+            guard error != nil else {
                 return
             }
         }

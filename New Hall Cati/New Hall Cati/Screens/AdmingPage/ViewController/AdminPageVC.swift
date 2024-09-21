@@ -274,7 +274,7 @@ extension AdminPageVC: PHPickerViewControllerDelegate {
                     let videoData = try Data(contentsOf: url)
                     FirebaseManager.shared.uploadVideo(videoName: "Daily", videoData: videoData, child: "DailyMenuVideo") { result in
                         switch result {
-                        case .success(let success):
+                        case .success(_):
                             self.stopLoadingIndicator()
                         case .failure(let failure):
                             print("Failure : \(failure)")

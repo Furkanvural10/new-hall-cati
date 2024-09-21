@@ -24,9 +24,7 @@ final class UserDefaultsManager {
 
 extension UserDefaultsManager: UserDefaultsManageable {
     
-    #warning("Order GET - SET funcstion")
-    
-    
+        
     // MARK: - Checking user type (Admin or Student)
     func saveAUserTypeData(value: Bool) {
         userDefaults.set(value, forKey: "isAdmin")
@@ -55,7 +53,4 @@ extension UserDefaultsManager: UserDefaultsManageable {
         guard let restaurantStatus = userDefaults.value(forKey: "restaurantStatus") as? Bool else { return true }
         return restaurantStatus
     }
-    
-    
-    
 }

@@ -96,6 +96,9 @@ final class OnboardingVC: UIViewController {
         adminNumberTextField.autocorrectionType = .no
         adminNumberTextField.backgroundColor = .systemGray5
         adminNumberTextField.returnKeyType = .continue
+        adminNumberTextField.spellCheckingType = .no
+        adminNumberTextField.smartQuotesType = .no
+        adminNumberTextField.smartDashesType = .no
         adminNumberTextField.delegate = self
         
         let placeholderText = "Üye Numarası"
@@ -163,16 +166,26 @@ final class OnboardingVC: UIViewController {
     }
     // MARK: - Gesture Recognizers Functions
     private func setupGestureRecognizers() {
+        
+        handleTextField()
         let adminLoginTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleAdminLoginTap))
         adminLoginLabel.addGestureRecognizer(adminLoginTapGesture)
         
         let studentLoginTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleStudentLoginTap))
         studentLoginLabel.addGestureRecognizer(studentLoginTapGesture)
+        
+        let screenTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleScreenTap))
+        view.addGestureRecognizer(screenTapGesture)
+    }
+    
+    @objc private func handleScreenTap() {
+        view.endEditing(true)
     }
     
     
-    @objc private func handleAdminLoginTap() {
-        UIView.animate(withDuration: 0.3) {
+    @objc 
+    private func handleAdminLoginTap() {
+        UIView.animate(withDuration: 0.5) {
             self.adminLoginLabel.alpha = 0
             self.studentLoginButton.alpha = 0
         } completion: { _ in
@@ -181,15 +194,17 @@ final class OnboardingVC: UIViewController {
             self.adminNumberTextField.isHidden = false
             self.studentLoginLabel.isHidden = false
             
-            UIView.animate(withDuration: 0.3) {
+            UIView.animate(withDuration: 0.5) {
                 self.adminNumberTextField.alpha = 1
                 self.studentLoginLabel.alpha = 1
             }
         }
     }
     
-    @objc private func handleStudentLoginTap() {
-        UIView.animate(withDuration: 0.3) {
+    @objc 
+    private func handleStudentLoginTap() {
+        adminNumberTextField.resignFirstResponder()
+        UIView.animate(withDuration: 0.5) {
             self.adminNumberTextField.alpha = 0
             self.studentLoginLabel.alpha = 0
         } completion: { _ in
@@ -198,14 +213,15 @@ final class OnboardingVC: UIViewController {
             self.adminLoginLabel.isHidden = false
             self.studentLoginButton.isHidden = false
             
-            UIView.animate(withDuration: 0.3) {
+            UIView.animate(withDuration: 0.5) {
                 self.adminLoginLabel.alpha = 1
                 self.studentLoginButton.alpha = 1
             }
         }
     }
     
-    @objc private func login() {
+    @objc 
+    private func login() {
         mainBackgroundImageView.alpha = 0.3
         startLoadingView()
         viewModel.loginAnonymousUser()
@@ -235,7 +251,10 @@ final class OnboardingVC: UIViewController {
 extension OnboardingVC: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        guard let password = textField.text, password.count > 5 else { return false }
+        guard let password = textField.text, password.count > 5 else {
+            textField.resignFirstResponder()
+            return false
+        }
         self.startLoadingView()
         handleTextField()
         
@@ -260,7 +279,7 @@ extension OnboardingVC: UITextFieldDelegate {
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         if textField == adminNumberTextField {
-            UIView.animate(withDuration: 0.3) {
+            UIView.animate(withDuration: 0.5) {
                 self.view.frame.origin.y = 0
             }
         }
@@ -269,7 +288,6 @@ extension OnboardingVC: UITextFieldDelegate {
 }
 
 extension OnboardingVC: OnboardingViewControllable {
-   
     
     func didRequestLogin() {
         viewModel.saveOnboardingSeenData()
@@ -284,6 +302,4 @@ extension OnboardingVC: OnboardingViewControllable {
             viewController: self
         )
     }
-    
-    
 }

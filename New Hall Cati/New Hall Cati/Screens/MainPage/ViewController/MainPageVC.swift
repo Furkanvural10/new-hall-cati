@@ -2,11 +2,9 @@ import UIKit
 import FirebaseFirestore
 import Foundation
 import AVFoundation
-
-
+import os
 
 protocol MainPageProtocol {
-    
     func configureBackground()
     func configureNavigationBar()
     func configureDateTitle()
@@ -15,7 +13,6 @@ protocol MainPageProtocol {
     func configureSegmentedController()
     func configureBlurView()
     func checkRestaurantStatus()
-    
     
     var viewModel: MainPageViewModel { get }
     var isUserAdmin: Bool { get }
@@ -307,6 +304,7 @@ extension MainPageVC: MainPageProtocol {
     
     func configureVideoPlayer(videoURL: String? = nil) {
         
+        #warning("Fix here")
         if let videoURL {
             let asset = AVAsset(url: URL(string: videoURL)!)
             queuePlayer = AVQueuePlayer()
@@ -403,6 +401,9 @@ extension MainPageVC: UICollectionViewDelegate {
                 prodID: selectedItem.prodID,
                 isLiked: true
             )
+            
+            let logger = Logger(subsystem: "com.furkanvural.New-Hall-Cati", category: "network")
+            logger.info("User liked the product")
         }
         
         let action2 = UIAlertAction(title: "Tercih etmiyorum 👎", style: .destructive) { [self] action in

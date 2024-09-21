@@ -43,7 +43,7 @@ final class MainPageViewModel {
             switch result {
             case .success(let success):
                 self.delegate?.getDailyDessert(dessert: success )
-            case .failure(let failure):
+            case .failure(_):
                 print("Failure dessert")
             }
         }
@@ -54,7 +54,7 @@ final class MainPageViewModel {
             switch result {
             case .success(let success):
                 self.delegate?.getColdDrink(coldDrink: success)
-            case .failure(let failure):
+            case .failure(_):
                 print("Failure cold drink")
             }
         }
@@ -65,7 +65,7 @@ final class MainPageViewModel {
             switch result {
             case .success(let success):
                 self.delegate?.getHotDrink(hotDrink: success)
-            case .failure(let failure):
+            case .failure(_):
                 print("Failure hot drink")
             }
         }
@@ -76,7 +76,7 @@ final class MainPageViewModel {
             switch result {
             case .success(let success):
                 self.delegate?.getDailySnack(snack: success)
-            case .failure(let failure):
+            case .failure(_):
                 print("Failure snack")
             }
         }

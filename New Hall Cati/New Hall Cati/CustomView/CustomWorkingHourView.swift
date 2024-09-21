@@ -134,8 +134,7 @@ class CustomWorkingHourView: UIViewController {
             self.dismiss(animated: true)
             return
         }
-        let mainPageViewModel = MainPageViewModel()
-//        mainPageViewModel.saveWorkingHour(openingTime: firstTextField.text!, closingTime: secondTextField.text!)
+
         self.dismiss(animated: true)
     }
     
