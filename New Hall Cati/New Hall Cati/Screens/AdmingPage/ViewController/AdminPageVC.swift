@@ -264,13 +264,13 @@ extension AdminPageVC: PHPickerViewControllerDelegate {
         picker.dismiss(animated: true)
         
         guard !results.isEmpty else { return }
-        
+        self.showLoadingIndicator()
         results.forEach { result in
             result.itemProvider.loadFileRepresentation(forTypeIdentifier: UTType.movie.identifier) { url, error in
                 guard let url = url else { return }
                 
                 do {
-                    self.showLoadingIndicator()
+                    
                     let videoData = try Data(contentsOf: url)
                     FirebaseManager.shared.uploadVideo(videoName: "Daily", videoData: videoData, child: "DailyMenuVideo") { result in
                         switch result {

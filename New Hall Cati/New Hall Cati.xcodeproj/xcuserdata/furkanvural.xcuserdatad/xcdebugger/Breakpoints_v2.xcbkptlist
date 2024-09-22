@@ -49,7 +49,53 @@
                   endingLineNumber = "240"
                   offsetFromSymbolStart = "280">
                </Location>
+               <Location
+                  uuid = "490045A3-CAF1-4369-AF8D-043F81219753 - f4cfed40d21616c9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "New_Hall_Cati.OnboardingVC.textFieldShouldReturn(__C.UITextField) -&gt; Swift.Bool"
+                  moduleName = "New Hall Cati"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/furkanvural/Desktop/NHR/new-hall-cati/New%20Hall%20Cati/New%20Hall%20Cati/Screens/Onboarding/ViewController/OnboardingVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "254"
+                  endingLineNumber = "254"
+                  offsetFromSymbolStart = "84">
+               </Location>
+               <Location
+                  uuid = "490045A3-CAF1-4369-AF8D-043F81219753 - f4cfed40d21616c9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "New_Hall_Cati.OnboardingVC.textFieldShouldReturn(__C.UITextField) -&gt; Swift.Bool"
+                  moduleName = "New Hall Cati"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/furkanvural/Desktop/NHR/new-hall-cati/New%20Hall%20Cati/New%20Hall%20Cati/Screens/Onboarding/ViewController/OnboardingVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "254"
+                  endingLineNumber = "254"
+                  offsetFromSymbolStart = "284">
+               </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "21D2646C-3CB5-4B6E-8960-A555ABD2560A"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "New Hall Cati/Screens/MainPage/ViewController/MainPageVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "327"
+            endingLineNumber = "327"
+            landmarkName = "MainPageVC"
+            landmarkType = "21">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

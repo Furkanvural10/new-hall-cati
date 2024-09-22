@@ -39,9 +39,7 @@ final class MainPageVC: UIViewController {
     var allHotDrink: [Product] = []
     var showingData: Array<Product>!
     var viewModel = MainPageViewModel()
-    var player: AVPlayer?
-    var playerLooper: AVPlayerLooper!
-    var queuePlayer: AVQueuePlayer!
+    var videoPlayer: AVPlayer?
     
     private var productTitleList: ProductType = .dish
     
@@ -56,6 +54,7 @@ final class MainPageVC: UIViewController {
     private var videoContainerView: UIView!
     private var videoTitleView: UIView!
     private var videoTitleLabel: UILabel!
+    private var videoLoadingView: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,23 +64,10 @@ final class MainPageVC: UIViewController {
         configureDateTitle()
         configureBackground()
         configureNavigationBar()
-        configureVideoPlayer()
         configureSegmentedController()
         configureCollectionView()
         configureDataSource()
         checkRestaurantStatus()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        self.queuePlayer.play()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        self.queuePlayer.pause()
-    }
-    
-    deinit {
-        print("MainPageVC deinit")
     }
     
     override func viewDidLayoutSubviews() {
@@ -95,7 +81,6 @@ final class MainPageVC: UIViewController {
         viewModel.getAllColdDrink()
         viewModel.getAllHotDrink()
         viewModel.getAllSnack()
-        viewModel.getDailyVideoURL()
     }
     
     private func createThreeColumnFlowLayout() -> UICollectionViewFlowLayout {
@@ -137,6 +122,8 @@ final class MainPageVC: UIViewController {
 }
 
 extension MainPageVC: MainPageProtocol {
+    
+    func configureVideoPlayer(videoURL: String?) { }
     
     var isUserAdmin: Bool {
         UserDefaultsManager.shared.getUserTypeData()
@@ -194,12 +181,12 @@ extension MainPageVC: MainPageProtocol {
         viewModel.setTitle()
     }
     
-    @objc private func editWorkingHour() {
+    @objc 
+    private func editWorkingHour() {
         presentDatePickerViewOnMainThread()
     }
     
     func configureNavigationBar() {
-        
         let titleLabel = UILabel()
         titleLabel.text = Constant.welcomeText
         titleLabel.font = UIFont.pacificoRegular(size: 20)
@@ -211,7 +198,8 @@ extension MainPageVC: MainPageProtocol {
         self.navigationItem.rightBarButtonItem?.isHidden = !isUserAdmin
     }
     
-    @objc private func openAdminPage() {
+    @objc 
+    private func openAdminPage() {
         self.navigationController?.pushViewController(AdminPageVC(), animated: true)
     }
     
@@ -219,10 +207,8 @@ extension MainPageVC: MainPageProtocol {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createThreeColumnFlowLayout())
         collectionView.register(DishCell.self, forCellWithReuseIdentifier: DishCell.reusedID)
         collectionView.backgroundColor = .black
-        
         collectionView.delegate = self
-        
-        
+
         view.addSubview(collectionView)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -250,13 +236,14 @@ extension MainPageVC: MainPageProtocol {
         segmentedController.addTarget(self, action: #selector(changedSegmentedControl), for: .valueChanged)
         
         NSLayoutConstraint.activate([
-            segmentedController.topAnchor.constraint(equalTo: videoContainerView.bottomAnchor, constant: 28),
+            segmentedController.topAnchor.constraint(equalTo: dateTitleLabel.bottomAnchor, constant: 11),
             segmentedController.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
             segmentedController.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
         ])
     }
     
-    @objc private func changedSegmentedControl() {
+    @objc 
+    private func changedSegmentedControl() {
         switch segmentedController.selectedSegmentIndex {
         case 0:
             showingData = dailyMainDish
@@ -302,45 +289,90 @@ extension MainPageVC: MainPageProtocol {
         self.present(controller, animated: true)
     }
     
-    func configureVideoPlayer(videoURL: String? = nil) {
-        
-        #warning("Fix here")
-        if let videoURL {
-            let asset = AVAsset(url: URL(string: videoURL)!)
-            queuePlayer = AVQueuePlayer()
-            let playerItem = AVPlayerItem(asset: asset)
-            self.queuePlayer = AVQueuePlayer(playerItem: playerItem)
-            
-            self.playerLooper = AVPlayerLooper(player: queuePlayer, templateItem: playerItem)
-            self.playerLayer = AVPlayerLayer(player: queuePlayer)
-            self.playerLayer.videoGravity = .resizeAspectFill
-        } else {
-            queuePlayer = AVQueuePlayer()
-            playerLayer = AVPlayerLayer(player: queuePlayer)
-            playerLayer.videoGravity = .resizeAspectFill
+    // TODO: - Next Version Published
+//    func configureVideoPlayer2() {
+//        
+//        videoContainerView = UIView()
+//        videoContainerView.layer.cornerRadius = 10
+//        videoContainerView.clipsToBounds = true
+//        
+//        videoContainerView.translatesAutoresizingMaskIntoConstraints = false
+//        view.addSubview(videoContainerView)
+//        
+//        NSLayoutConstraint.activate([
+//            videoContainerView.topAnchor.constraint(equalTo: dateTitleLabel.bottomAnchor, constant: 10),
+//            videoContainerView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 24),
+//            videoContainerView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -24),
+//            videoContainerView.heightAnchor.constraint(equalToConstant: 150)
+//        ])
+//        
+//        videoLoadingView = UIActivityIndicatorView(style: .medium)
+//        
+//        videoLoadingView.translatesAutoresizingMaskIntoConstraints = false
+//        videoContainerView.addSubview(videoLoadingView)
+//        
+//        NSLayoutConstraint.activate([
+//            videoLoadingView.centerXAnchor.constraint(equalTo: videoContainerView.centerXAnchor),
+//            videoLoadingView.centerYAnchor.constraint(equalTo: videoContainerView.centerYAnchor)
+//        ])
+//        
+//        videoContainerView.layoutIfNeeded()
+//        
+//        videoLoadingView.startAnimating()
+//    }
+    
+//    private func updateVideoPlayer(videoURL: String) {
+//        
+//        if videoURL.count < 1 {
+//            updateSegmentedControlView(isVideoAvailable: false)
+//            return
+//        }
+//        
+//        updateSegmentedControlView(isVideoAvailable: true)
+//        let url = URL(string: videoURL)!
+//        videoPlayer = AVPlayer(url: url)
+//        
+//        self.playerLayer = AVPlayerLayer(player: videoPlayer)
+//        self.playerLayer.videoGravity = .resizeAspectFill
+//        
+//        videoContainerView.layer.addSublayer(playerLayer)
+//        playerLayer.frame = videoContainerView.bounds
+//        
+//        if let duration = videoPlayer?.currentItem?.asset.duration {
+//            
+//            let endTime = CMTimeGetSeconds(duration)
+//            let time = CMTime(seconds: endTime, preferredTimescale: 1)
+//            let times = [NSValue(time: time)]
+//            
+//            videoPlayer?.addBoundaryTimeObserver(forTimes: times, queue: .main) { [weak self] in
+//                self?.videoDidFinish()
+//            }
+//        }
+//        videoPlayer?.play()
+//    }
+    
+    private func updateSegmentedControlView(isVideoAvailable: Bool) {
+        switch isVideoAvailable {
+        case true:
+            NSLayoutConstraint.activate([
+                segmentedController.topAnchor.constraint(equalTo: videoContainerView.bottomAnchor, constant: 28),
+            ])
+        case false:
+            NSLayoutConstraint.activate([
+                segmentedController.topAnchor.constraint(equalTo: dateTitleLabel.bottomAnchor, constant: 11),
+            ])
         }
-        
-        videoContainerView = UIView()
-        videoContainerView.layer.cornerRadius = 10
-        videoContainerView.clipsToBounds = true
-        
-        videoContainerView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(videoContainerView)
-        
-        NSLayoutConstraint.activate([
-            videoContainerView.topAnchor.constraint(equalTo: dateTitleLabel.bottomAnchor, constant: 10),
-            videoContainerView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 24),
-            videoContainerView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -24),
-            videoContainerView.heightAnchor.constraint(equalToConstant: 150)
-        ])
-        
-        if let playerLayer = playerLayer {
-            videoContainerView.layer.addSublayer(playerLayer)
-            playerLayer.frame = videoContainerView.bounds
-        }
-        
-        videoContainerView.layoutIfNeeded()
-        self.queuePlayer.play()
+    }
+    
+    private func videoDidFinish() {
+        let replayGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(rePlayVideo))
+        videoContainerView.addGestureRecognizer(replayGestureRecognizer)
+    }
+    
+    @objc
+    private func rePlayVideo() {
+        videoPlayer?.seek(to: .zero)
+        videoPlayer?.play()
     }
 }
 
@@ -384,7 +416,7 @@ extension MainPageVC: MainPageViewModelProtocol {
     }
     
     func getDailyVideoURL(videoURL: String) {
-        configureVideoPlayer(videoURL: videoURL)
+        videoLoadingView.stopAnimating()
     }
 }
 
